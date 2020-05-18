@@ -1,0 +1,27 @@
+import * as React from 'react';
+import * as PropTypes from 'prop-types';
+
+import clsx from 'clsx';
+import { Typography } from '@material-ui/core';
+
+import { footerStyle } from './footer.style';
+
+const Footer = (props: any) => {
+  const { className, ...rest } = props;
+
+  const classes = footerStyle();
+
+  return (
+    <div {...rest} className={clsx(classes.root, className)} align='right'>
+      <Typography variant='caption'>
+        {process.env.REACT_APP_NAME}
+      </Typography>
+    </div>
+  );
+};
+
+Footer.propTypes = {
+  className: PropTypes.string,
+};
+
+export default Footer;

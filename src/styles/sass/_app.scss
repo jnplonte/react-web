@@ -1,0 +1,32 @@
+.app {
+  text-align: center;
+
+  .main-container {
+    min-height: calc(100vh - 120px);
+  }
+
+  .minimal-container {
+    min-height: calc(100vh - 120px);
+  }
+}
+
+.app-header {
+  color: $white;
+
+  .title {
+    display: inline-block;
+    padding: 0px 10px;
+    color: $white;
+    position: relative;
+    bottom: 10px;
+  }
+
+  .img {
+    height: 35px;
+    width: 35px;
+  }
+}
+
+.app-notiification {
+  min-width: 300px;
+}
