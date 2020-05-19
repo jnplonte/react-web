@@ -5,7 +5,8 @@ import clsx from 'clsx';
 
 import { SyntheticEvent, useState } from 'react';
 import { useTheme } from '@material-ui/styles';
-import { useMediaQuery } from '@material-ui/core';
+import { useMediaQuery, Zoom, Fab, useScrollTrigger } from '@material-ui/core';
+import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 
 import { mainStyle } from './main.style';
 import { Sidebar, Topbar, Footer } from './components';
@@ -13,6 +14,34 @@ import { Sidebar, Topbar, Footer } from './components';
 import { NotificationComponent } from '../../components';
 
 import { GetAuth } from '../../provider/authentication/authentication.provider';
+
+function ScrollTop(props: any) {
+  const { children, window } = props;
+
+  const trigger = useScrollTrigger({
+    target: window ? window() : undefined,
+    disableHysteresis: true,
+    threshold: 100,
+  });
+
+  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    const anchor = ((event.target as HTMLDivElement).ownerDocument || document).querySelector(
+      '#back-to-top'
+    );
+
+    if (anchor) {
+      anchor.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  };
+
+  return (
+    <Zoom in={trigger}>
+      <div onClick={handleClick} role='presentation' className='backToTop'>
+        {children}
+      </div>
+    </Zoom>
+  );
+}
 
 const Main = (props: any) => {
   const { children } = props;
@@ -53,7 +82,7 @@ const Main = (props: any) => {
       })}
     >
         <NotificationComponent/>
-        <Topbar onSidebarOpen={handleSidebarOpen} onSignOut={handleSignOut}/>
+        <Topbar id='back-to-top' onSidebarOpen={handleSidebarOpen} onSignOut={handleSignOut}/>
         <Sidebar
           onClose={handleSidebarClose}
           open={shouldOpenSidebar}
@@ -62,6 +91,11 @@ const Main = (props: any) => {
         <main className={clsx(classes.content, 'main-container')}>
           {children}
         </main>
+        <ScrollTop {...props}>
+          <Fab color='secondary' size='small' aria-label='scroll to top'>
+            <KeyboardArrowUpIcon />
+          </Fab>
+        </ScrollTop>
         <Footer />
     </div>
   );

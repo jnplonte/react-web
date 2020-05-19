@@ -8,6 +8,9 @@ import {
     SignInView,
     DashboardView,
     NotFoundView,
+    TodoListView,
+    AccountView,
+    UserView
 } from '../views';
 
 const Routes = () => {
@@ -20,9 +23,29 @@ const Routes = () => {
         path='/'
       />
       <AuthenticatedRoute
+        component={AccountView}
+        layout={MainLayout}
+        path='/account'
+      />
+      <AuthenticatedRoute
         component={DashboardView}
         layout={MainLayout}
         path='/dashboard'
+      />
+      <AuthenticatedRoute
+        component={UserView}
+        layout={MainLayout}
+        path='/user'
+      />
+      <AuthenticatedRoute
+        component={UserView}
+        layout={MainLayout}
+        path='/user/:userId'
+      />
+      <AuthenticatedRoute
+        component={TodoListView}
+        layout={MainLayout}
+        path='/todo-list'
       />
       <RouteWithLayout
         component={NotFoundView}

@@ -46,7 +46,7 @@ export const signInStyle = makeStyles((theme: any) => ({
       flexDirection: 'column',
     },
     logoImage: {
-      marginLeft: theme.spacing(4),
+      marginLeft: theme.spacing(3),
     },
     contentBody: {
       flexGrow: 1,

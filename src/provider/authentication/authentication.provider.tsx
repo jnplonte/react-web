@@ -48,7 +48,7 @@ const AuthProvider = (props: any) => {
     const authToken: string = helper.getCookie(process.env.REACT_APP_AUTH_COOKIE);
 
     const [tokenState, setTokenState] = useState(authToken);
-    const [isLoginState, setIsLoginState] = useState(false);
+    const [isLoginState, setIsLoginState] = useState(helper.isNotEmpty(authToken));
     const [authState, setAuthState] = useState({});
 
     const setTokenStateData = (token: string) => {
@@ -62,8 +62,9 @@ const AuthProvider = (props: any) => {
             request.get('REACT_APP_API', 'v1/core/myuser', {})
                 .then((uData: any) => {
                     if (uData.status && uData.status === 'success') {
-                        setTimeout(() => { setIsLoginState(true); }, 1000); // NOTE: intentional 1sec delaay for loading
+                        setTimeout(() => { setIsLoginState(true); }, 500); // NOTE: intentional 0.5sec delaay for loading
                         setAuthState(uData.data);
+
                       } else {
                         setIsLoginState(false);
                         setAuthState({});

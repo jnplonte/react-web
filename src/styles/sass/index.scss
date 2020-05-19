@@ -11,3 +11,9 @@ body {
 .hidden {
   display: none !important;
 }
+
+.backToTop {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+}

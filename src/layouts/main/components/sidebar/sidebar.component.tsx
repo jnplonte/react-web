@@ -5,8 +5,7 @@ import clsx from 'clsx';
 import { Divider, Drawer } from '@material-ui/core';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import PeopleIcon from '@material-ui/icons/People';
-import AccountBoxIcon from '@material-ui/icons/AccountBox';
-import SettingsIcon from '@material-ui/icons/Settings';
+import EventIcon from '@material-ui/icons/Event';
 
 import { Profile, SidebarNav } from './components';
 import { sidebarStyle } from './sidebar.style';
@@ -23,19 +22,14 @@ const Sidebar = (props: any) => {
       icon: <DashboardIcon />,
     },
     {
-      title: 'Users',
-      href: '/users',
+      title: 'User',
+      href: '/user',
       icon: <PeopleIcon />,
     },
     {
-      title: 'Account',
-      href: '/account',
-      icon: <AccountBoxIcon />,
-    },
-    {
-      title: 'Settings',
-      href: '/settings',
-      icon: <SettingsIcon />,
+      title: 'Todo List',
+      href: '/todo-list',
+      icon: <EventIcon />,
     },
   ];
 

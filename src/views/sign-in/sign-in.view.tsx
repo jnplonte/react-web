@@ -59,7 +59,6 @@ const SignIn = (props: any) => {
 
   useEffect(() => {
     const errors = validate(formState.values, schema);
-    console.log('xxx');
     setFormState((state: any) => ({
         ...state,
         isValid: errors ? false : true,
