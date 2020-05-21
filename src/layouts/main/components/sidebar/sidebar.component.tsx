@@ -11,7 +11,7 @@ import { Profile, SidebarNav } from './components';
 import { sidebarStyle } from './sidebar.style';
 
 const Sidebar = (props: any) => {
-  const { open, variant, onClose, className, ...rest } = props;
+  const { open, variant, onClose, className } = props;
 
   const classes = sidebarStyle();
 
@@ -35,7 +35,7 @@ const Sidebar = (props: any) => {
 
   return (
     <Drawer anchor='left' classes={{ paper: classes.drawer }} onClose={onClose} open={open} variant={variant}>
-      <div {...rest} className={clsx(classes.root, className)}>
+      <div className={clsx(classes.root, className)}>
         <Profile />
         <Divider className={classes.divider} />
         <SidebarNav className={classes.nav} pages={pages} />

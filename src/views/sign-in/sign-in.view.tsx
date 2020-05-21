@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 
 import * as validate from 'validate.js';
 import * as md5 from 'md5';
-import { SyntheticEvent, useState, useEffect } from 'react';
+import { ChangeEvent, FormEvent, useState, useEffect } from 'react';
 
 import {
   Grid,
@@ -15,7 +15,7 @@ import {
 import { GetAuth } from '../../provider/authentication/authentication.provider';
 import { GetSiteInformation } from '../../provider/site-information/site-information.provider';
 
-import { Request } from '../../services/request/request.service';
+import { AuthAPI } from '../../api/authenttication.api';
 
 import { signInStyle } from './sign-in.style';
 
@@ -37,7 +37,7 @@ const schema: ISchemaProps = {
   },
 };
 
-const request: Request = new Request();
+const authRequest: AuthAPI = new AuthAPI();
 
 const SignIn = (props: any) => {
   const { history } = props;
@@ -67,7 +67,7 @@ const SignIn = (props: any) => {
     );
   }, [formState.values]);
 
-  const handleChange = (event: SyntheticEvent) => {
+  const handleChange = (event: ChangeEvent) => {
     event.persist();
 
     const target: HTMLInputElement = event.target as HTMLInputElement;
@@ -86,16 +86,16 @@ const SignIn = (props: any) => {
     }));
   };
 
-  const handleSignIn = async (event: SyntheticEvent) => {
-    if (formState.isValid) {
-      event.preventDefault();
+  const handleSignIn = async (event: FormEvent) => {
+    event.preventDefault();
 
-      const requestParm: object = {
+    if (formState.isValid) {
+      const apiData: object = {
         username: formState.values['username'],
         password: md5(formState.values['password']),
       };
 
-      const requestData: any = await request.post('REACT_APP_API', 'v1/auth/login', {}, requestParm);
+      const requestData: any = await authRequest.login({}, apiData);
 
       if (requestData.status && requestData.status === 'success') {
         setNotificationData({type: 'success', message: 'login success'});
@@ -129,7 +129,7 @@ const SignIn = (props: any) => {
         <Grid className={classes.content} item lg={5} xs={12}>
           <div className={classes.content}>
             <div className={classes.contentBody}>
-              <form className={classes.form} onSubmit={handleSignIn}>
+              <form className={classes.form} onSubmit={handleSignIn} noValidate>
                 <Typography align='left' className={classes.title} variant='h4'>
                   Sign In
                 </Typography>

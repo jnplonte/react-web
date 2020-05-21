@@ -6,10 +6,10 @@ import { Link } from 'react-router-dom';
 import { AppBar, Toolbar, Typography, Hidden} from '@material-ui/core';
 
 const Topbar = (props: any) => {
-  const { className, ...rest } = props;
+  const { className } = props;
 
   return (
-    <AppBar {...rest} className={clsx('app-header', className)} color='primary' position='fixed'>
+    <AppBar className={clsx('app-header', className)} color='primary' position='fixed'>
       <Toolbar>
         <Link to='/'>
           <img className='img' alt={process.env.REACT_APP_NAME} title={process.env.REACT_APP_NAME} src={process.env.REACT_APP_LOGO}/>

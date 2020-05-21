@@ -9,7 +9,7 @@ import { GetAuth } from '../../../../../../provider/authentication/authenticatio
 import { profileStyle } from './profile.style';
 
 const Profile = (props: any) => {
-  const { className, ...rest } = props;
+  const { className } = props;
 
   const classes: any = profileStyle();
   const { authData } = GetAuth();
@@ -21,7 +21,7 @@ const Profile = (props: any) => {
   };
 
   return (
-    <div {...rest} className={clsx(classes.root, className)}>
+    <div className={clsx(classes.root, className)}>
       <Avatar alt={user.name} title={user.name} className={classes.avatar} src={user.avatar}/>
       <Typography className={classes.name} variant='h5'>{user.name}</Typography>
       <Typography variant='body2'>{user.email}</Typography>

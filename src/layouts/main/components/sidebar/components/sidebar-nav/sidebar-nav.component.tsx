@@ -8,15 +8,12 @@ import { List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 import { sidebarStyle } from './sidebar-nav.style';
 
 const SidebarNav = (props: any) => {
-  const { pages, className, ...rest } = props;
+  const { pages, className } = props;
 
   const classes = sidebarStyle();
 
   return (
-    <List
-        {...rest}
-        className={clsx(classes.root, className)}
-      >
+    <List className={clsx(classes.root, className)}>
       {pages.map((page: any) => (
         <ListItem button className={classes.item} disableGutters key={page.title} component={Link} to={page.href}>
           <ListItemIcon>

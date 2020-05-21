@@ -3,7 +3,7 @@ import * as PropTypes from 'prop-types';
 
 import clsx from 'clsx';
 
-import { SyntheticEvent, useState } from 'react';
+import { MouseEvent, useState } from 'react';
 import { useTheme } from '@material-ui/styles';
 import { useMediaQuery, Zoom, Fab, useScrollTrigger } from '@material-ui/core';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
@@ -24,8 +24,8 @@ function ScrollTop(props: any) {
     threshold: 100,
   });
 
-  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    const anchor = ((event.target as HTMLDivElement).ownerDocument || document).querySelector(
+  const handleClick = (event: MouseEvent) => {
+    const anchor = ((event.target as HTMLElement).ownerDocument || document).querySelector(
       '#back-to-top'
     );
 
@@ -65,7 +65,7 @@ const Main = (props: any) => {
     setOpenSidebar(false);
   };
 
-  const handleSignOut = (event: SyntheticEvent) => {
+  const handleSignOut = (event: MouseEvent) => {
     event.preventDefault();
 
     setToken('');

@@ -104,6 +104,30 @@
 .app-notiification {
   min-width: 300px; }
 
+.modal {
+  position: absolute;
+  background-color: #FFFFFF;
+  border-radius: 5px;
+  box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 5px 8px 0px rgba(0, 0, 0, 0.14), 0px 1px 14px 0px rgba(0, 0, 0, 0.12);
+  padding: 16px 16px 0px 16px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100% - 64px); }
+  @media (min-width: 767px) {
+    .modal {
+      width: 800px; } }
+  .modal .footer {
+    flex: 0 0 auto;
+    display: flex;
+    padding: 8px;
+    align-items: center;
+    justify-content: flex-end; }
+    .modal .footer .footerText {
+      padding: 16px 8px 8px 8px; }
+  .modal .footer > :not(:first-child) {
+    margin-left: 8px; }
+
 body {
   margin: 0;
   padding: 0;
@@ -112,7 +136,16 @@ body {
 .hidden {
   display: none !important; }
 
+.right-text {
+  text-align: right !important; }
+
 .backToTop {
   position: fixed;
   bottom: 30px;
   right: 30px; }
+
+.green {
+  color: #14AF1B; }
+
+.red {
+  color: #DC3545; }

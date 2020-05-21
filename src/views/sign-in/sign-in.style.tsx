@@ -69,15 +69,6 @@ export const signInStyle = makeStyles((theme: any) => ({
     title: {
       marginTop: theme.spacing(3),
     },
-    socialButtons: {
-      marginTop: theme.spacing(3),
-    },
-    socialIcon: {
-      marginRight: theme.spacing(1),
-    },
-    sugestion: {
-      marginTop: theme.spacing(2),
-    },
     textField: {
       marginTop: theme.spacing(2),
     },

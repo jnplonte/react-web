@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 import { Helper } from '../../services/helper/helper.service';
-import { Request } from '../../services/request/request.service';
+import { UserAPI } from '../../api/user.api';
 
 interface IContextProps {
     token: string;
@@ -56,30 +56,26 @@ const AuthProvider = (props: any) => {
         helper.setCookie(process.env.REACT_APP_AUTH_COOKIE, token);
     };
 
+    const fetchDataAsync = async (uRequest: UserAPI) => {
+        const requestData: any = await uRequest.myuser();
+
+        if (requestData.status && requestData.status === 'success') {
+            setTimeout(() => { setIsLoginState(true); }, 500); // NOTE: intentional 0.5sec delaay for loading
+            setAuthState(requestData.data);
+
+        } else {
+            setIsLoginState(false);
+            setAuthState({});
+
+            helper.deleteCookie(process.env.REACT_APP_AUTH_COOKIE);
+        }
+    };
+
     useEffect(() => {
         if (helper.isNotEmpty(tokenState)) {
-            const request: Request = new Request(true, tokenState);
-            request.get('REACT_APP_API', 'v1/core/myuser', {})
-                .then((uData: any) => {
-                    if (uData.status && uData.status === 'success') {
-                        setTimeout(() => { setIsLoginState(true); }, 500); // NOTE: intentional 0.5sec delaay for loading
-                        setAuthState(uData.data);
+            const userRequest: UserAPI = new UserAPI(tokenState);
 
-                      } else {
-                        setIsLoginState(false);
-                        setAuthState({});
-
-                        helper.deleteCookie(process.env.REACT_APP_AUTH_COOKIE);
-                      }
-                })
-                .catch(
-                    () => {
-                        setIsLoginState(false);
-                        setAuthState({});
-
-                        helper.deleteCookie(process.env.REACT_APP_AUTH_COOKIE);
-                    }
-                );
+            fetchDataAsync(userRequest);
         } else {
             setIsLoginState(false);
             setAuthState({});

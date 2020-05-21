@@ -7,12 +7,12 @@ import { Typography } from '@material-ui/core';
 import { footerStyle } from './footer.style';
 
 const Footer = (props: any) => {
-  const { className, ...rest } = props;
+  const { className } = props;
 
   const classes = footerStyle();
 
   return (
-    <div {...rest} className={clsx(classes.root, className)} align='right'>
+    <div className={clsx(classes.root, className, 'right-text')}>
       <Typography variant='caption'>
         {process.env.REACT_APP_NAME}
       </Typography>

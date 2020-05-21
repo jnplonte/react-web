@@ -35,12 +35,7 @@ const Routes = () => {
       <AuthenticatedRoute
         component={UserView}
         layout={MainLayout}
-        path='/user'
-      />
-      <AuthenticatedRoute
-        component={UserView}
-        layout={MainLayout}
-        path='/user/:userId'
+        path='/user/:userId?'
       />
       <AuthenticatedRoute
         component={TodoListView}

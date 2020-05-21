@@ -52,6 +52,7 @@ export class Request {
     const url: string = process.env[name.toUpperCase()] || '';
     const fullPath: string = (isFullPath) ? path : (this.helper.isNotEmpty(path)) ? `${url}/${path}` : url;
 
+    params = this.helper.removeNullObject(params);
     return this.service.get(fullPath, {params}, {crossDomain : true})
       .then((response: any) => handleResponse(response))
       .catch((error: any) => {
@@ -64,7 +65,8 @@ export class Request {
     const promises: Array<Promise<any> | null> = [];
 
     paths.forEach((dataVal, dataIndx) => {
-      promises.push(this.get('', dataVal || '', (params[dataIndx] || {}), true));
+      const nParams: object = this.helper.removeNullObject(params[dataIndx] || {});
+      promises.push(this.get('', dataVal || '', nParams, true));
     });
 
     return Promise.all(promises)
@@ -81,6 +83,7 @@ export class Request {
     const url: string = process.env[name.toUpperCase()] || '';
     const fullPath: string = (isFullPath) ? path : (this.helper.isNotEmpty(path)) ? `${url}/${path}` : url;
 
+    params = this.helper.removeNullObject(params);
     return this.service.request({
         method: 'POST',
         url: fullPath,
@@ -98,6 +101,7 @@ export class Request {
     const url: string = process.env[name.toUpperCase()] || '';
     const fullPath: string = (isFullPath) ? path : (this.helper.isNotEmpty(path)) ? `${url}/${path}` : url;
 
+    params = this.helper.removeNullObject(params);
     return this.service.request({
         method: 'PUT',
         url: fullPath,
@@ -115,6 +119,7 @@ export class Request {
     const url: string = process.env[name.toUpperCase()] || '';
     const fullPath: string = (isFullPath) ? path : (this.helper.isNotEmpty(path)) ? `${url}/${path}` : url;
 
+    params = this.helper.removeNullObject(params);
     return this.service
       .request({
         method: 'DELETE',

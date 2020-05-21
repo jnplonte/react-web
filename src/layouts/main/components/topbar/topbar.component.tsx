@@ -2,6 +2,8 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 
 import clsx from 'clsx';
+
+import { MouseEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AppBar, Toolbar, Hidden, IconButton, Typography, Menu, MenuItem } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -10,15 +12,16 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import { topbarStyle } from './topbar.style';
 
 const Topbar = (props: any) => {
-  const { className, onSignOut, onSidebarOpen, ...rest } = props;
+  const { className, onSignOut, onSidebarOpen } = props;
 
   const classes = topbarStyle();
 
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
-  const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
+  const handleMenu = (event: MouseEvent) => {
+    const element = (event.currentTarget as HTMLElement);
+    setAnchorEl(element);
   };
 
   const handleClose = () => {
@@ -26,7 +29,7 @@ const Topbar = (props: any) => {
   };
 
   return (
-    <AppBar {...rest} className={clsx('app-header', classes.root, className)} color='primary' position='fixed'>
+    <AppBar className={clsx('app-header', classes.root, className)} color='primary' position='fixed'>
       <Toolbar>
         <Hidden lgUp>
           <IconButton className={classes.menuButton} color='inherit' onClick={onSidebarOpen}>
