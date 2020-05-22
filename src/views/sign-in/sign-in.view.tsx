@@ -15,6 +15,8 @@ import {
 import { GetAuth } from '../../provider/authentication/authentication.provider';
 import { GetSiteInformation } from '../../provider/site-information/site-information.provider';
 
+import { Helper } from '../../services/helper/helper.service';
+
 import { AuthAPI } from '../../api/authenttication.api';
 
 import { signInStyle } from './sign-in.style';
@@ -37,6 +39,7 @@ const schema: ISchemaProps = {
   },
 };
 
+const helper: Helper = new Helper();
 const authRequest: AuthAPI = new AuthAPI();
 
 const SignIn = (props: any) => {
@@ -67,23 +70,11 @@ const SignIn = (props: any) => {
     );
   }, [formState.values]);
 
-  const handleChange = (event: ChangeEvent) => {
+  const handleChange = (event: ChangeEvent<{ name?: string; value: unknown }>) => {
     event.persist();
 
     const target: HTMLInputElement = event.target as HTMLInputElement;
-
-    setFormState((state: any) => ({
-      ...state,
-      values: {
-        ...state.values,
-        [target.name]:
-        target.type === 'checkbox' ? target.checked : target.value,
-      },
-      touched: {
-        ...state.touched,
-        [target.name]: true,
-      },
-    }));
+    setFormState((state: any) => (helper.initFormState(state, target)));
   };
 
   const handleSignIn = async (event: FormEvent) => {
@@ -106,10 +97,6 @@ const SignIn = (props: any) => {
         setNotificationData({type: 'error', message: 'invalid username or password'});
       }
     }
-  };
-
-  const hasError = (field: string) => {
-    return formState.touched[field] && formState.errors[field] ? true : false;
   };
 
   return (
@@ -135,11 +122,9 @@ const SignIn = (props: any) => {
                 </Typography>
                 <TextField
                   className={classes.textField}
-                  error={hasError('username')}
+                  error={ helper.hasFormError(formState, 'username') }
                   fullWidth
-                  helperText={
-                    hasError('username') ? formState.errors['username'][0] : null
-                  }
+                  helperText={ helper.hasFormError(formState, 'username', true) }
                   label='Username'
                   name='username'
                   onChange={handleChange}
@@ -149,11 +134,9 @@ const SignIn = (props: any) => {
                 />
                 <TextField
                   className={classes.textField}
-                  error={hasError('password')}
+                  error={ helper.hasFormError(formState, 'password') }
                   fullWidth
-                  helperText={
-                    hasError('password') ? formState.errors['password'][0] : null
-                  }
+                  helperText={ helper.hasFormError(formState, 'password', true) }
                   label='Password'
                   name='password'
                   onChange={handleChange}
@@ -161,8 +144,8 @@ const SignIn = (props: any) => {
                   value={formState.values['password'] || ''}
                   variant='outlined'
                 />
-                <Button className={classes.signInButton} color='primary'
-                  disabled={!formState.isValid}
+                <Button className={classes.signInButton}
+                  disabled={!formState.isValid} color='primary'
                   fullWidth size='large' type='submit' variant='contained'>
                   Sign In
                 </Button>

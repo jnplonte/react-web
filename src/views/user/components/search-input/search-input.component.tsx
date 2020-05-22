@@ -44,9 +44,7 @@ const SearchInput = (props: any) => {
   return (
     <Paper className={clsx(classes.root, className)}>
       <Input inputRef={inputEl} onKeyDown={keyPress} className={classes.input} disableUnderline placeholder={placeholder}/>
-      <Button onClick={handleSearch} variant='contained' color='secondary' startIcon={<SearchIcon />}>
-        Search
-      </Button>
+      <Button onClick={handleSearch} variant='contained' color='secondary' startIcon={<SearchIcon />}>Search</Button>
     </Paper>
   );
 };

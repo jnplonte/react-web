@@ -84,6 +84,8 @@ const UserTable = (props: any) => {
 
   const handleEditConfirm = async (uData: object = {}) => {
     console.log('edit', uData);
+
+    setEditModal(false);
   };
 
   const handleDeleteOpen = (uId: string = '') => {

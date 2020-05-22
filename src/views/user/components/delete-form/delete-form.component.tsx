@@ -18,9 +18,7 @@ const DeleteForm = (props: any) => {
   return (
     <div className={clsx(classes.root, className)}>
       <DialogContent>
-        <div>
           <p>Are you sure you want to delete this user?</p>
-        </div>
       </DialogContent>
       <DialogActions>
         <Button onClick={onCancel} color='primary'>No</Button>

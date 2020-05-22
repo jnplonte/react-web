@@ -26,6 +26,8 @@ const UserToolbar = (props: any) => {
 
   const handleAddConfirm = async (data: object = {}) => {
     console.log('add', data);
+
+    setAddModal(false);
   };
 
   return (
@@ -37,7 +39,7 @@ const UserToolbar = (props: any) => {
       </Modal>
       <div className={classes.row}>
         <span className={classes.spacer} />
-        <Button color='primary' variant='contained' onClick={handleAddOpen}>Add User</Button>
+        <Button color='primary' variant='contained' onClick={handleAddOpen}>Insert User</Button>
       </div>
     </div>
   );

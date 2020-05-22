@@ -9,6 +9,7 @@
     transform: translate(-50%, -50%);
     width: calc(100% - 64px);
     @include respond-to('small') {
+        top: 40%;
         width: 800px;
     }
 

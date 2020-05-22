@@ -4,7 +4,7 @@ import * as PropTypes from 'prop-types';
 import * as validate from 'validate.js';
 import clsx from 'clsx';
 import { FormEvent, ChangeEvent, useState, useEffect } from 'react';
-import { Grid, Button, TextField } from '@material-ui/core';
+import { Grid, Button, TextField, FormControl, InputLabel, Select, Typography } from '@material-ui/core';
 
 import { userFormStyles } from './user-form.style';
 
@@ -16,6 +16,7 @@ interface ISchemaProps {
   lastName?: object;
   email?: object;
   phone?: object;
+  roleId?: object;
   password?: object;
   confirmPassword?: object;
 }
@@ -33,9 +34,6 @@ const schema: ISchemaProps = {
   email: {
     presence: { allowEmpty: false, message: 'is required' },
     email: { message: 'is invalid' },
-  },
-  phone: {
-    presence: { allowEmpty: false, message: 'is required' },
   },
 };
 
@@ -60,6 +58,7 @@ const UserForm = (props: any) => {
   const classes: any = userFormStyles();
 
   const [confirmText, setConfirmText] = useState('Update');
+  const [confirmHeaderText, setConfirmHeaderText] = useState('Update User');
 
   const [formState, setFormState] = useState({
     isValid: false,
@@ -69,6 +68,7 @@ const UserForm = (props: any) => {
       lastName: '',
       email: '',
       phone: '',
+      roleId: process.env.REACT_APP_DEFAULT_ROLEID,
       password: '',
       confirmPassword: '',
     },
@@ -101,6 +101,7 @@ const UserForm = (props: any) => {
           lastName: data['lastName'] || '',
           email: data['email'] || '',
           phone: data['phone'] || '',
+          roleId: data['roleId'] || process.env.REACT_APP_DEFAULT_ROLEID,
           password: '',
           confirmPassword: '',
         },
@@ -114,15 +115,17 @@ const UserForm = (props: any) => {
     switch (type) {
       case 'insert':
         setConfirmText('Insert');
+        setConfirmHeaderText('Insert User');
         break;
 
       case 'update':
         setConfirmText('Update');
+        setConfirmHeaderText('Update User');
         break;
     }
   }, [type]);
 
-  const handleChange = (event: ChangeEvent) => {
+  const handleChange = (event: ChangeEvent<{ name?: string; value: unknown }>) => {
     event.persist();
 
     const target: HTMLInputElement = event.target as HTMLInputElement;
@@ -137,11 +140,13 @@ const UserForm = (props: any) => {
 
   return (
     <div className={clsx(classes.root, className)}>
+      <Typography variant='h4'>{confirmHeaderText}</Typography>
       <form className={classes.form} onSubmit={handleFormSubmit} noValidate>
         <Grid container spacing={3}>
-          <Grid item xs={12}>
+          <Grid item xs={9}>
             <TextField
               autoComplete='off'
+              disabled={type === 'update'}
               className={classes.textField}
               error={ helper.hasFormError(formState, 'username') }
               fullWidth
@@ -152,6 +157,23 @@ const UserForm = (props: any) => {
               type='text'
               value={formState.values['username'] || ''}
             />
+          </Grid>
+          <Grid item xs={3}>
+            <FormControl
+              disabled={Number(formState.values['roleId']) === 1}
+              className={classes.textField}
+              fullWidth>
+              <InputLabel htmlFor='roleId'>Role</InputLabel>
+              <Select
+                native
+                value={Number(formState.values['roleId'] || process.env.REACT_APP_DEFAULT_ROLEID)}
+                onChange={handleChange}
+                inputProps={{ name: 'roleId', id: 'roleId' }}>
+                <option value={1} disabled>Super Admin</option>
+                <option value={2}>Admin</option>
+                <option value={3}>User</option>
+              </Select>
+            </FormControl>
           </Grid>
         </Grid>
         <Grid container spacing={3}>
