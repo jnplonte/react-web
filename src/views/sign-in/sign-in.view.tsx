@@ -15,29 +15,12 @@ import {
 import { GetAuth } from '../../provider/authentication/authentication.provider';
 import { GetSiteInformation } from '../../provider/site-information/site-information.provider';
 
-import { Helper } from '../../services/helper/helper.service';
-
-import { AuthAPI } from '../../api/authenttication.api';
-
 import { signInStyle } from './sign-in.style';
 
-interface ISchemaProps {
-  username?: object;
-  password?: object;
-}
+import { Helper } from '../../services/helper/helper.service';
+import { AuthAPI } from '../../api/authenttication.api';
 
-const schema: ISchemaProps = {
-  username: {
-    presence: { allowEmpty: false, message: 'is required' },
-  },
-  password: {
-    presence: { allowEmpty: false, message: 'is required' },
-    length: {
-      minimum: 8,
-      message: 'is invalid',
-    },
-  },
-};
+import { IFormProps, schema } from './sign-in.constant';
 
 const helper: Helper = new Helper();
 const authRequest: AuthAPI = new AuthAPI();
@@ -50,7 +33,7 @@ const SignIn = (props: any) => {
   const { setToken } = GetAuth();
   const { setNotificationData } = GetSiteInformation();
 
-  const [formState, setFormState] = useState({
+  const [formState, setFormState] = useState<IFormProps>({
     isValid: false,
     values: {
       username: 'spiderman',

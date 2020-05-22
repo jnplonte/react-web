@@ -49,6 +49,12 @@ const UserTable = (props: any) => {
     if (userId) {
       handleEditOpen(userId);
     }
+
+    return () => {
+      setEditModal(false);
+      setDeleteModal(false);
+      setSelected({});
+    };
   }, []);
 
   const handlePageChange = (event: MouseEvent<HTMLButtonElement>, nPage: number) => {
@@ -100,6 +106,8 @@ const UserTable = (props: any) => {
 
   const handleDeleteConfirm = async (uData: object = {}) => {
     console.log('delete', uData);
+
+    setDeleteModal(false);
   };
 
   return (

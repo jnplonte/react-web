@@ -10,45 +10,7 @@ import { userFormStyles } from './user-form.style';
 
 import { Helper } from '../../../../services/helper/helper.service';
 
-interface ISchemaProps {
-  username?: object;
-  firstName?: object;
-  lastName?: object;
-  email?: object;
-  phone?: object;
-  roleId?: object;
-  password?: object;
-  confirmPassword?: object;
-}
-
-const schema: ISchemaProps = {
-  username: {
-    presence: { allowEmpty: false, message: 'is required' },
-  },
-  firstName: {
-    presence: { allowEmpty: false, message: 'is required' },
-  },
-  lastName: {
-    presence: { allowEmpty: false, message: 'is required' },
-  },
-  email: {
-    presence: { allowEmpty: false, message: 'is required' },
-    email: { message: 'is invalid' },
-  },
-};
-
-const inertSchema: ISchemaProps = {
-  password: {
-    presence: { allowEmpty: false, message: 'is required' },
-    length: {
-      minimum: 8,
-      message: 'is invalid',
-    },
-  },
-  confirmPassword: {
-    equality: 'password',
-  },
-};
+import { ISchemaProps, IFormProps, schema, inertSchema, emptyForm } from '../../user.constant';
 
 const helper: Helper = new Helper();
 
@@ -60,21 +22,14 @@ const UserForm = (props: any) => {
   const [confirmText, setConfirmText] = useState('Update');
   const [confirmHeaderText, setConfirmHeaderText] = useState('Update User');
 
-  const [formState, setFormState] = useState({
-    isValid: false,
-    values: {
-      username: '',
-      firstName: '',
-      lastName: '',
-      email: '',
-      phone: '',
-      roleId: process.env.REACT_APP_DEFAULT_ROLEID,
-      password: '',
-      confirmPassword: '',
-    },
-    touched: {},
-    errors: {},
-  });
+  const [formState, setFormState] = useState<IFormProps>(emptyForm);
+
+  useEffect(() => {
+
+    return () => {
+      setFormState(emptyForm);
+    };
+  }, []);
 
   useEffect(() => {
     let updatedSchema: ISchemaProps = schema;
@@ -92,22 +47,28 @@ const UserForm = (props: any) => {
   }, [formState.values]);
 
   useEffect(() => {
-    if (type === 'update') {
-      setFormState({
-        isValid: !helper.isEmptyObject(data),
-        values: {
-          username: data['username'] || '',
-          firstName: data['firstName'] || '',
-          lastName: data['lastName'] || '',
-          email: data['email'] || '',
-          phone: data['phone'] || '',
-          roleId: data['roleId'] || process.env.REACT_APP_DEFAULT_ROLEID,
-          password: '',
-          confirmPassword: '',
-        },
-        touched: {},
-        errors: {},
-      });
+    switch (type) {
+      case 'insert':
+        setFormState(emptyForm);
+        break;
+
+      case 'update':
+        setFormState({
+          isValid: !helper.isEmptyObject(data),
+          values: {
+            username: data['username'] || '',
+            firstName: data['firstName'] || '',
+            lastName: data['lastName'] || '',
+            email: data['email'] || '',
+            phone: data['phone'] || '',
+            roleId: data['roleId'] || process.env.REACT_APP_DEFAULT_ROLEID,
+            password: '',
+            confirmPassword: '',
+          },
+          touched: {},
+          errors: {},
+        });
+        break;
     }
   }, [data]);
 

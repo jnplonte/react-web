@@ -24,6 +24,12 @@ const User = (props: any) => {
 
   useEffect(() => {
     fetchDataAsync();
+
+    return () => {
+      setUsers([]);
+      setPaginations({});
+      setApiParams({ limit: 10, page: 1, order: null, query: null });
+    };
   }, []);
 
   const fetchDataAsync = async () => {
