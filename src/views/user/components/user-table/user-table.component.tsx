@@ -10,7 +10,6 @@ import {
   Table,
   TableBody,
   TableCell,
-  TableSortLabel,
   TableHead,
   TableRow,
   TablePagination,
@@ -28,6 +27,7 @@ import { userTableStyles } from './user-table.style';
 import { UserForm, DeleteForm } from '../../components';
 
 import { GetAuth } from '../../../../provider/authentication/authentication.provider';
+import { GetSiteInformation } from '../../../../provider/site-information/site-information.provider';
 import { UserAPI } from '../../../../api/user.api';
 
 const UserTable = (props: any) => {
@@ -36,6 +36,7 @@ const UserTable = (props: any) => {
   const classes: any = userTableStyles();
 
   const { token } = GetAuth();
+  const { setNotificationData } = GetSiteInformation();
   const userRequest: UserAPI = new UserAPI(token);
 
   const { userId } = useParams();
@@ -71,8 +72,7 @@ const UserTable = (props: any) => {
 
   const handleEditOpen = async (uId: string = '') => {
     const requestData: any = await userRequest.get({id: uId});
-
-    if (requestData.status && requestData.status === 'success') {
+    if (requestData.data) {
       setEditModal(true);
       setSelected(requestData.data || {});
     } else {
@@ -89,9 +89,19 @@ const UserTable = (props: any) => {
   };
 
   const handleEditConfirm = async (uData: object = {}) => {
-    console.log('edit', uData);
+    const apiData: object = {
+      email: uData['email'],
+      firstName: uData['firstName'],
+      lastName: uData['lastName'],
+      phone: uData['phone'] || '',
+    };
+    const requestData: any = await userRequest.put({id: selected['id']}, apiData);
+    setNotificationData({type: requestData.type, message: requestData.message});
 
-    setEditModal(false);
+    if (requestData.data) {
+      refreshData();
+      setEditModal(false);
+    }
   };
 
   const handleDeleteOpen = (uId: string = '') => {
@@ -105,9 +115,13 @@ const UserTable = (props: any) => {
   };
 
   const handleDeleteConfirm = async (uData: object = {}) => {
-    console.log('delete', uData);
+    const requestData: any = await userRequest.delete({id: selected['id']});
+    setNotificationData({type: requestData.type, message: requestData.message});
 
-    setDeleteModal(false);
+    if (requestData.data) {
+      refreshData();
+      setDeleteModal(false);
+    }
   };
 
   return (
@@ -127,11 +141,7 @@ const UserTable = (props: any) => {
       <Table className={classes.table}>
         <TableHead>
           <TableRow>
-          <TableCell sortDirection={false}>
-              <TableSortLabel active={true} direction={'desc'} onClick={() => console.log('xxx')}>
-                Full Name
-              </TableSortLabel>
-            </TableCell>
+          <TableCell>Full Name</TableCell>
             <TableCell>UserName</TableCell>
             <TableCell>Email Address</TableCell>
             <TableCell>Phone Number</TableCell>

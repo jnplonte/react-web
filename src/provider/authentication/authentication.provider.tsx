@@ -58,11 +58,9 @@ const AuthProvider = (props: any) => {
 
     const fetchDataAsync = async (uRequest: UserAPI) => {
         const requestData: any = await uRequest.myuser();
-
-        if (requestData.status && requestData.status === 'success') {
+        if (requestData.data) {
             setTimeout(() => { setIsLoginState(true); }, 500); // NOTE: intentional 0.5sec delaay for loading
             setAuthState(requestData.data);
-
         } else {
             setIsLoginState(false);
             setAuthState({});

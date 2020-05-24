@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
+import * as md5 from 'md5';
 
 import clsx from 'clsx';
 import { useState } from 'react';
@@ -7,12 +8,21 @@ import { Button, Modal } from '@material-ui/core';
 
 import { userToolbarStyles } from './user-toolbar.style';
 
+import { GetAuth } from '../../../../provider/authentication/authentication.provider';
+import { GetSiteInformation } from '../../../../provider/site-information/site-information.provider';
+import { UserAPI } from '../../../../api/user.api';
+
 import { UserForm } from '../../components';
 
 const UserToolbar = (props: any) => {
-  const { className } = props;
+  const { className, refreshData } = props;
 
   const classes: any = userToolbarStyles();
+
+  const { token } = GetAuth();
+  const { setNotificationData } = GetSiteInformation();
+
+  const userRequest: UserAPI = new UserAPI(token);
 
   const [addModal, setAddModal] = useState(false);
 
@@ -25,9 +35,23 @@ const UserToolbar = (props: any) => {
   };
 
   const handleAddConfirm = async (data: object = {}) => {
-    console.log('add', data);
+    const apiData: object = {
+      username: data['username'],
+      email: data['email'],
+      password: md5(data['password']),
+      roleId: Number(data['roleId']),
+      firstName: data['firstName'],
+      lastName: data['lastName'],
+      phone: data['phone'] || '',
+    };
 
-    setAddModal(false);
+    const requestData: any = await userRequest.post(apiData);
+    setNotificationData({type: requestData.type, message: requestData.message});
+
+    if (requestData.data) {
+      refreshData();
+      setAddModal(false);
+    }
   };
 
   return (
@@ -47,6 +71,7 @@ const UserToolbar = (props: any) => {
 
 UserToolbar.propTypes = {
   className: PropTypes.string,
+  refreshData: PropTypes.func.isRequired,
 };
 
 export default UserToolbar;

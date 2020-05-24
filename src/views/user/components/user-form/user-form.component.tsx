@@ -93,7 +93,7 @@ const UserForm = (props: any) => {
     setFormState((state: any) => (helper.initFormState(state, target)));
   };
 
-  const handleFormSubmit = async (event: FormEvent) => {
+  const handleFormSubmit = (event: FormEvent) => {
     event.preventDefault();
 
     onUpdate(formState.values);

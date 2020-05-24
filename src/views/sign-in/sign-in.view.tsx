@@ -70,14 +70,11 @@ const SignIn = (props: any) => {
       };
 
       const requestData: any = await authRequest.login({}, apiData);
+      setNotificationData({type: requestData.type, message: requestData.message});
 
-      if (requestData.status && requestData.status === 'success') {
-        setNotificationData({type: 'success', message: 'login success'});
-
+      if (requestData.data) {
         setToken(requestData.data || '');
         history.push('/dashboard');
-      } else {
-        setNotificationData({type: 'error', message: 'invalid username or password'});
       }
     }
   };
