@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Redirect, Switch } from 'react-router-dom';
 
-import { RouteWithLayout, AuthenticatedRoute, UnAuthenticatedRoute } from '../components';
+import { LayoutRoute, AuthenticatedRoute, UnAuthenticatedRoute } from '../components';
 import { MainLayout, MinimalLayout } from '../layouts';
 
 import {
@@ -36,7 +36,7 @@ const Routes = () => {
         layout={MainLayout}
         path='/user/:userId?'
       />
-      <RouteWithLayout
+      <LayoutRoute
         component={NotFoundView}
         layout={MinimalLayout}
         path='/not-found'

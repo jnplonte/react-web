@@ -35,7 +35,7 @@ const UserTable = (props: any) => {
 
   const classes: any = userTableStyles();
 
-  const { token } = GetAuth();
+  const { token, authData } = GetAuth();
   const { setNotificationData } = GetSiteInformation();
   const userRequest: UserAPI = new UserAPI(token);
 
@@ -47,7 +47,7 @@ const UserTable = (props: any) => {
   const [selected, setSelected] = useState({});
 
   useEffect(() => {
-    if (userId) {
+    if (userId && (authData['id'] !== userId)) {
       handleEditOpen(userId);
     }
 
@@ -160,11 +160,17 @@ const UserTable = (props: any) => {
               <TableCell align='center'>{(user.active) ? (<CheckIcon className='green'/>) : (<CloseIcon className='red'/>)}</TableCell>
               <TableCell>{user.createdAt}</TableCell>
               <TableCell align='center'>
-              <IconButton aria-label='edit' onClick={() => handleEditOpen(user.id)} component={Link} to={`/user/${user.id}`}>
-                <EditIcon className='green'/>
+              <IconButton disabled={(authData['id'] === user.id)} onClick={() => handleEditOpen(user.id)} component={Link} to={`/user/${user.id}`}>
+                <EditIcon className={clsx({
+                  green: (authData['id'] !== user.id),
+                  grey: (authData['id'] === user.id),
+                })}/>
               </IconButton>
-              <IconButton aria-label='delete' onClick={() => handleDeleteOpen(user.id)}>
-                <DeleteIcon className='red'/>
+              <IconButton disabled={(authData['id'] === user.id)} onClick={() => handleDeleteOpen(user.id)}>
+                <DeleteIcon className={clsx({
+                  red: (authData['id'] !== user.id),
+                  grey: (authData['id'] === user.id),
+                })}/>
               </IconButton>
               </TableCell>
             </TableRow>

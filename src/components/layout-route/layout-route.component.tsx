@@ -3,7 +3,7 @@ import * as PropTypes from 'prop-types';
 
 import { Route } from 'react-router-dom';
 
-const routeWithLayout = (props: any) => {
+const LayoutRoute = (props: any) => {
   const { layout: Layout, component: Component, isExact, ...rest } = props;
   return (
     <Route
@@ -17,11 +17,11 @@ const routeWithLayout = (props: any) => {
   );
 };
 
-routeWithLayout.propTypes = {
+LayoutRoute.propTypes = {
   component: PropTypes.any.isRequired,
   layout: PropTypes.any.isRequired,
   exact: PropTypes.bool,
   path: PropTypes.string,
 };
 
-export default routeWithLayout;
+export default LayoutRoute;
