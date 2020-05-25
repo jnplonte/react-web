@@ -12,6 +12,7 @@ interface IContextProps {
     isLogin: boolean;
     authData: object;
     setToken: any;
+    setAuthData: any;
 }
 
 export const AuthContext = createContext<IContextProps>({
@@ -19,6 +20,7 @@ export const AuthContext = createContext<IContextProps>({
     isLogin: false,
     authData: {},
     setToken: () => {},
+    setAuthData: () => {},
 });
 
 const helper: Helper = new Helper();
@@ -56,8 +58,10 @@ const AuthProvider = (props: any) => {
         helper.setCookie(process.env.REACT_APP_AUTH_COOKIE, token);
     };
 
-    const fetchDataAsync = async (uRequest: UserAPI) => {
-        const requestData: any = await uRequest.myuser();
+    const fetchDataAsync = async () => {
+        const userRequest: UserAPI = new UserAPI(tokenState);
+
+        const requestData: any = await userRequest.myuser();
         if (requestData.data) {
             setTimeout(() => { setIsLoginState(true); }, 500); // NOTE: intentional 0.5sec delaay for loading
             setAuthState(requestData.data);
@@ -71,9 +75,7 @@ const AuthProvider = (props: any) => {
 
     useEffect(() => {
         if (helper.isNotEmpty(tokenState)) {
-            const userRequest: UserAPI = new UserAPI(tokenState);
-
-            fetchDataAsync(userRequest);
+            fetchDataAsync();
         } else {
             setIsLoginState(false);
             setAuthState({});
@@ -88,6 +90,7 @@ const AuthProvider = (props: any) => {
                 isLogin: isLoginState,
                 authData: authState,
                 setToken: setTokenStateData,
+                setAuthData: fetchDataAsync,
             }}>
             {(tokenState) ? <div className={clsx({ [classes.root]: true, hidden: isLoginState })}><CircularProgress size={120} /></div> : ''}
             {children}

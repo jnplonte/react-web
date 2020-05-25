@@ -30,3 +30,9 @@
 .app-notiification {
   min-width: 300px;
 }
+
+.app-side-bar {
+  .active {
+    background-color: $dark-white;
+  }
+}

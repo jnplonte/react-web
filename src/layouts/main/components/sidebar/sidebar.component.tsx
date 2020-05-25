@@ -16,11 +16,13 @@ const Sidebar = (props: any) => {
 
   const pages = [
     {
+      name: 'dashboard',
       title: 'Dashboard',
       href: '/dashboard',
       icon: <DashboardIcon />,
     },
     {
+      name: 'user',
       title: 'User',
       href: '/user',
       icon: <PeopleIcon />,

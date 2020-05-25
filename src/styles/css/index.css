@@ -104,6 +104,9 @@
 .app-notiification {
   min-width: 300px; }
 
+.app-side-bar .active {
+  background-color: #D3D3D3; }
+
 .modal {
   position: absolute;
   background-color: #FFFFFF;

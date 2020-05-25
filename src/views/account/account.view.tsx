@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as md5 from 'md5';
 
 import { ChangeEvent, useState } from 'react';
 import { withRouter } from 'react-router-dom';
@@ -7,6 +8,8 @@ import { Tabs, Tab } from '@material-ui/core';
 import { accountStyle } from './account.style';
 
 import { GetAuth } from '../../provider/authentication/authentication.provider';
+import { GetSiteInformation } from '../../provider/site-information/site-information.provider';
+import { UserAPI } from '../../api/user.api';
 
 import { TabPannelComponent } from '../../components';
 import { Profile, Password } from './components';
@@ -14,7 +17,10 @@ import { Profile, Password } from './components';
 const Account = (props: any) => {
   const classes: any = accountStyle();
 
-  const { authData } = GetAuth();
+  const { token, authData, setAuthData } = GetAuth();
+  const { setNotificationData } = GetSiteInformation();
+
+  const userRequest: UserAPI = new UserAPI(token);
 
   const [value, setValue] = useState(0);
 
@@ -25,11 +31,28 @@ const Account = (props: any) => {
   };
 
   const handleProfileUpdate = async (uData: object = {}) => {
-    console.log(uData);
+    const apiData: object = {
+      email: uData['email'],
+      firstName: uData['firstName'],
+      lastName: uData['lastName'],
+      phone: uData['phone'] || '',
+    };
+
+    const requestData: any = await userRequest.put({id: authData['id']}, apiData);
+    setNotificationData({type: requestData.type, message: requestData.message});
+
+    if (requestData.data) {
+      setAuthData();
+    }
   };
 
   const handlePasswordUpdate = async (uData: object = {}) => {
-    console.log(uData);
+    const apiData: object = {
+      password: md5(uData['password']),
+    };
+
+    const requestData: any = await userRequest.put({id: authData['id']}, apiData);
+    setNotificationData({type: requestData.type, message: requestData.message});
   };
 
   return (

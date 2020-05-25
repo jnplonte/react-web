@@ -2,20 +2,24 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 
 import clsx from 'clsx';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 
 import { sidebarStyle } from './sidebar-nav.style';
 
 const SidebarNav = (props: any) => {
-  const { pages, className } = props;
+  const { pages, location, className } = props;
 
-  const classes = sidebarStyle();
+  const classes: any = sidebarStyle();
+
+  const path: string = location.pathname.split('/')[1];
+
+  console.log(path, '<<<');
 
   return (
-    <List className={clsx(classes.root, className)}>
+    <List className={clsx(classes.root, 'app-side-bar', className)}>
       {pages.map((page: any) => (
-        <ListItem button className={classes.item} disableGutters key={page.title} component={Link} to={page.href}>
+        <ListItem button className={clsx(classes.item,  {active: (path === page.name)})} disableGutters key={page.title} component={Link} to={page.href}>
           <ListItemIcon>
             {page.icon}
           </ListItemIcon>
@@ -31,4 +35,4 @@ SidebarNav.propTypes = {
   pages: PropTypes.array.isRequired,
 };
 
-export default SidebarNav;
+export default withRouter(SidebarNav);
