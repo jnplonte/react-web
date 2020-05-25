@@ -14,8 +14,6 @@ const SidebarNav = (props: any) => {
 
   const path: string = location.pathname.split('/')[1];
 
-  console.log(path, '<<<');
-
   return (
     <List className={clsx(classes.root, 'app-side-bar', className)}>
       {pages.map((page: any) => (
