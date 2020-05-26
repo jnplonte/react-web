@@ -6,8 +6,10 @@ import clsx from 'clsx';
 import { MouseEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AppBar, Toolbar, Hidden, IconButton, Typography, Menu, MenuItem } from '@material-ui/core';
+import { useTranslation } from 'react-i18next';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import GTranslate from '@material-ui/icons/GTranslate';
 
 import { topbarStyle } from './topbar.style';
 
@@ -15,17 +17,38 @@ const Topbar = (props: any) => {
   const { className, onSignOut, onSidebarOpen } = props;
 
   const classes = topbarStyle();
+  const { i18n } = useTranslation();
+
+  const [localeEl, setLocaleEl] = useState<null | HTMLElement>(null);
+  const localeOpen = Boolean(localeEl);
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
+  const anchorOpen = Boolean(anchorEl);
+
+  const handleLocale = (event: MouseEvent) => {
+    const element = (event.currentTarget as HTMLElement);
+    setLocaleEl(element);
+  };
 
   const handleMenu = (event: MouseEvent) => {
     const element = (event.currentTarget as HTMLElement);
     setAnchorEl(element);
   };
 
-  const handleClose = () => {
+  const localeClose = () => {
+    setLocaleEl(null);
+  };
+
+  const anchorClose = () => {
     setAnchorEl(null);
+  };
+
+  const setLocale = (locale: string = 'en') => {
+    const lngKey: string = process.env.REACT_APP_LOCALE || '';
+
+    i18n.changeLanguage(locale);
+    window.localStorage.setItem(lngKey, locale);
+    localeClose();
   };
 
   return (
@@ -44,8 +67,23 @@ const Topbar = (props: any) => {
         </Link>
         <div className={classes.flexGrow} />
         <IconButton
-            aria-label='account'
-            aria-controls='menu-appbar'
+            aria-haspopup='true'
+            onClick={handleLocale}
+            color='inherit'>
+            <GTranslate />
+        </IconButton>
+        <Menu
+            id='locale-appbar'
+            anchorEl={localeEl}
+            anchorOrigin={{vertical: 'top', horizontal: 'right'}}
+            keepMounted
+            transformOrigin={{vertical: 'top', horizontal: 'right'}}
+            open={localeOpen}
+            onClose={localeClose}>
+          <MenuItem onClick={() => setLocale('en')}>ENGLISH</MenuItem>
+          <MenuItem onClick={() => setLocale('tg')}>TAGALOG</MenuItem>
+        </Menu>
+        <IconButton
             aria-haspopup='true'
             onClick={handleMenu}
             color='inherit'>
@@ -57,9 +95,9 @@ const Topbar = (props: any) => {
             anchorOrigin={{vertical: 'top', horizontal: 'right'}}
             keepMounted
             transformOrigin={{vertical: 'top', horizontal: 'right'}}
-            open={open}
-            onClose={handleClose}>
-          <MenuItem onClick={handleClose} component={Link} to='/account'>My Account</MenuItem>
+            open={anchorOpen}
+            onClose={anchorClose}>
+          <MenuItem onClick={anchorClose} component={Link} to='/account'>My Account</MenuItem>
           <MenuItem onClick={onSignOut}>Sign Out</MenuItem>
         </Menu>
       </Toolbar>

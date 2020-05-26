@@ -17,19 +17,19 @@ export class AuthAPI {
     return this.request.post('REACT_APP_API', 'v1/auth/login', params, data)
       .then((request: IRequestProps) => {
         if (request.status && request.status === 'success') {
-          const requestData: object = {type: 'success', message: 'login success'};
+          const requestData: object = {type: 'success', message: 'success.login'};
           if (request.data) {
             requestData['data'] = request.data;
           }
 
           return requestData;
         } else {
-          return {type: 'error', message: 'invalid username or password'};
+          return {type: 'error', message: 'error.login'};
         }
       })
       .catch (
         (error: any) => {
-          return {type: 'error', message: 'invalid username or password'};
+          return {type: 'error', message: 'error.login'};
         }
       );
   }

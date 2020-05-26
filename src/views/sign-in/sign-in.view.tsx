@@ -4,13 +4,8 @@ import { withRouter } from 'react-router-dom';
 import * as validate from 'validate.js';
 import * as md5 from 'md5';
 import { ChangeEvent, FormEvent, useState, useEffect } from 'react';
-
-import {
-  Grid,
-  Button,
-  TextField,
-  Typography,
-} from '@material-ui/core';
+import { Grid, Button, TextField, Typography } from '@material-ui/core';
+import { useTranslation } from 'react-i18next';
 
 import { GetAuth } from '../../provider/authentication/authentication.provider';
 import { GetSiteInformation } from '../../provider/site-information/site-information.provider';
@@ -20,7 +15,7 @@ import { signInStyle } from './sign-in.style';
 import { Helper } from '../../services/helper/helper.service';
 import { AuthAPI } from '../../api/authenttication.api';
 
-import { IFormProps, schema } from './sign-in.constant';
+import { IFormProps, schema, emptyForm } from './sign-in.constant';
 
 const helper: Helper = new Helper();
 const authRequest: AuthAPI = new AuthAPI();
@@ -29,22 +24,15 @@ const SignIn = (props: any) => {
   const { history } = props;
 
   const classes: any = signInStyle();
+  const { t } = useTranslation();
 
   const { setToken } = GetAuth();
   const { setNotificationData } = GetSiteInformation();
 
-  const [formState, setFormState] = useState<IFormProps>({
-    isValid: false,
-    values: {
-      username: 'spiderman',
-      password: 'password',
-    },
-    touched: {},
-    errors: {},
-  });
+  const [formState, setFormState] = useState<IFormProps>(emptyForm);
 
   useEffect(() => {
-    const errors = validate(formState.values, schema);
+    const errors = validate(formState.values, schema(t));
     setFormState((state: any) => ({
         ...state,
         isValid: errors ? false : true,
@@ -70,7 +58,7 @@ const SignIn = (props: any) => {
       };
 
       const requestData: any = await authRequest.login({}, apiData);
-      setNotificationData({type: requestData.type, message: requestData.message});
+      setNotificationData({type: requestData.type, message: t(requestData.message)});
 
       if (requestData.data) {
         setToken(requestData.data || '');
@@ -98,14 +86,14 @@ const SignIn = (props: any) => {
             <div className={classes.contentBody}>
               <form className={classes.form} onSubmit={handleSignIn} noValidate>
                 <Typography align='left' className={classes.title} variant='h4'>
-                  Sign In
+                  {t('common.signIn')}
                 </Typography>
                 <TextField
                   className={classes.textField}
                   error={ helper.hasFormError(formState, 'username') }
                   fullWidth
                   helperText={ helper.hasFormError(formState, 'username', true) }
-                  label='Username'
+                  label={t('form.username')}
                   name='username'
                   onChange={handleChange}
                   type='text'
@@ -117,7 +105,7 @@ const SignIn = (props: any) => {
                   error={ helper.hasFormError(formState, 'password') }
                   fullWidth
                   helperText={ helper.hasFormError(formState, 'password', true) }
-                  label='Password'
+                  label={t('form.password')}
                   name='password'
                   onChange={handleChange}
                   type='password'
@@ -127,7 +115,7 @@ const SignIn = (props: any) => {
                 <Button className={classes.signInButton}
                   disabled={!formState.isValid} color='primary'
                   fullWidth size='large' type='submit' variant='contained'>
-                  Sign In
+                  {t('common.signIn')}
                 </Button>
               </form>
             </div>

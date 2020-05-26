@@ -1,4 +1,3 @@
-
 export interface ISchemaProps {
     username?: object;
     password?: object;
@@ -11,17 +10,29 @@ export interface IFormProps {
   errors?: object;
 }
 
-const schema: ISchemaProps = {
+const schema = (t: any): ISchemaProps => {
+  return {
     username: {
-      presence: { allowEmpty: false, message: 'is required' },
+      presence: { allowEmpty: false, message: t('error.required') },
     },
     password: {
-      presence: { allowEmpty: false, message: 'is required' },
+      presence: { allowEmpty: false, message: t('error.required') },
       length: {
         minimum: 8,
-        message: 'is invalid',
+        message: t('error.invalid'),
       },
     },
+  };
 };
 
-export { schema };
+const emptyForm: IFormProps = {
+  isValid: false,
+  values: {
+    username: '',
+    password: '',
+  },
+  touched: {},
+  errors: {},
+};
+
+export { schema, emptyForm };
