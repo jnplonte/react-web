@@ -13,7 +13,7 @@
 
 
 ## Demo
-* web: [https://www.jnpl.me/playground/reactweb/](https://www.jnpl.me/playground/reactweb/)
+* web: [http://reactweb.jnpl.me/](http://reactweb.jnpl.me/)
 
 
 ## Installation
