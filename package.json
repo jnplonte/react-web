@@ -1,6 +1,6 @@
 {
-  "name": "barbershop-web",
-  "description": "barbershop web",
+  "name": "react-web",
+  "description": "react web",
   "version": "1.0.0",
   "main": "index.js",
   "private": true,
