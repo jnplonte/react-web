@@ -9,7 +9,7 @@ import { AppBar, Toolbar, Hidden, IconButton, Typography, Menu, MenuItem } from 
 import { useTranslation } from 'react-i18next';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import GTranslate from '@material-ui/icons/GTranslate';
+import GTranslate from '@material-ui/icons/GTranslateOutlined';
 
 import { topbarStyle } from './topbar.style';
 
@@ -71,6 +71,7 @@ const Topbar = (props: any) => {
             onClick={handleLocale}
             color='inherit'>
             <GTranslate />
+            <Typography variant='body1' className={classes.lang}>{i18n.language.toUpperCase()}</Typography>
         </IconButton>
         <Menu
             id='locale-appbar'

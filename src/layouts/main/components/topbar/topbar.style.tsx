@@ -8,4 +8,8 @@ export const topbarStyle = makeStyles((theme: any) => ({
     menuButton: {
       marginRight: theme.spacing(1),
     },
+    lang: {
+      marginLeft: theme.spacing(0.25),
+      color: theme.palette.white,
+    },
 }));
