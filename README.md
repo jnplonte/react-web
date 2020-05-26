@@ -8,7 +8,7 @@
 
 ## Dependencies
 * nodejs: [https://nodejs.org/](https://nodejs.org/en/)
-* reactjss: [https://reactjs.org/](https://reactjs.org/)
+* reactjs: [https://reactjs.org/](https://reactjs.org/)
 * materialui: [https://material-ui.com/](https://material-ui.com/)
 
 
