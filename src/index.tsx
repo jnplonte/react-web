@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-import './locale';
+import './locales';
 
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';

@@ -50,9 +50,7 @@
     "watch:css": "npm run build:css && node-sass src/styles/sass/ -o src/styles/css/ --watch --recursive",
     "start:js": "react-scripts-ts start",
     "start": "PORT=8384 npm-run-all -p watch:css start:js",
-    "build": "npm run build:css && react-scripts-ts build",
-    "test": "react-scripts-ts test --env=jsdom",
-    "eject": "react-scripts-ts eject"
+    "build": "npm run build:css && react-scripts-ts build"
   },
   "eslintConfig": {
     "extends": "react-app"
