@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Grid, Typography, CircularProgress } from '@material-ui/core';
 
@@ -8,7 +8,7 @@ import { userStyle } from './user.style';
 
 import { UserTable, UserToolbar, SearchInput} from './components';
 
-import { GetAuth } from '../../provider/authentication/authentication.provider';
+import { GetAuth } from '../../providers/authentication/authentication.provider';
 import { UserAPI } from '../../api/user.api';
 import { Helper } from 'src/services/helper/helper.service';
 
@@ -66,22 +66,24 @@ const User = (props: any) => {
           (<CircularProgress className={classes.loading} size={60} />)
         :
           (<div>
-            <Grid container spacing={1}>
-              <Grid item xs={8} sm={4}>
-                <SearchInput refreshData={handleRefresh} placeholder='Search User Name'/>
+            <Suspense fallback={<CircularProgress className={classes.loading} size={60} />}>
+              <Grid container spacing={1}>
+                <Grid item xs={8} sm={4}>
+                  <SearchInput refreshData={handleRefresh} placeholder='Search User Name'/>
+                </Grid>
+                <Grid item xs={4} sm={8}>
+                  <UserToolbar refreshData={handleRefresh} />
+                </Grid>
               </Grid>
-              <Grid item xs={4} sm={8}>
-                <UserToolbar refreshData={handleRefresh} />
-              </Grid>
-            </Grid>
-            <div className={classes.content}>
-              {users.length >= 1
-                ?
-                  (<UserTable data={users} pagination={paginations} limit={apiParams['limit']} refreshData={handleRefresh}/>)
-                :
-                  (<Typography className={classes.noUser} variant='h4'>No User Data</Typography>)
-              }
-            </div>
+              <div className={classes.content}>
+                {users.length >= 1
+                  ?
+                    (<UserTable data={users} pagination={paginations} limit={apiParams['limit']} refreshData={handleRefresh}/>)
+                  :
+                    (<Typography className={classes.noUser} variant='h4'>No User Data</Typography>)
+                }
+              </div>
+            </Suspense>
           </div>)
       }
     </div>

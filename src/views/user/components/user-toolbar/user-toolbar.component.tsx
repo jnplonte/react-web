@@ -8,8 +8,8 @@ import { Button, Modal } from '@material-ui/core';
 
 import { userToolbarStyles } from './user-toolbar.style';
 
-import { GetAuth } from '../../../../provider/authentication/authentication.provider';
-import { GetSiteInformation } from '../../../../provider/site-information/site-information.provider';
+import { GetAuth } from '../../../../providers/authentication/authentication.provider';
+import { GetSiteInformation } from '../../../../providers/site-information/site-information.provider';
 import { UserAPI } from '../../../../api/user.api';
 
 import { UserForm } from '../../components';

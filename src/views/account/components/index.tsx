@@ -1,2 +1,4 @@
-export { default as Profile } from './profile/profile.component';
-export { default as Password } from './password/password.component';
+import { lazy } from 'react';
+
+export const Profile = lazy(() => import('./profile/profile.component'));
+export const Password = lazy(() => import('./password/password.component'));

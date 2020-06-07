@@ -4,7 +4,7 @@ import * as PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { Avatar, Typography } from '@material-ui/core';
 
-import { GetAuth } from '../../../../../../provider/authentication/authentication.provider';
+import { GetAuth } from '../../../../../../providers/authentication/authentication.provider';
 
 import { profileStyle } from './profile.style';
 

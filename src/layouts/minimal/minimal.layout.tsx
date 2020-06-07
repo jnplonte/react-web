@@ -8,7 +8,7 @@ import { Topbar } from './components';
 
 import { NotificationComponent } from '../../components';
 
-import { GetAuth } from '../../provider/authentication/authentication.provider';
+import { GetAuth } from '../../providers/authentication/authentication.provider';
 
 const Minimal = (props: any) => {
   const { children } = props;

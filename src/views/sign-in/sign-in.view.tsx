@@ -7,8 +7,8 @@ import { ChangeEvent, FormEvent, useState, useEffect } from 'react';
 import { Grid, Button, TextField, Typography } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 
-import { GetAuth } from '../../provider/authentication/authentication.provider';
-import { GetSiteInformation } from '../../provider/site-information/site-information.provider';
+import { GetAuth } from '../../providers/authentication/authentication.provider';
+import { GetSiteInformation } from '../../providers/site-information/site-information.provider';
 
 import { signInStyle } from './sign-in.style';
 

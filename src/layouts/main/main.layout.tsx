@@ -13,7 +13,7 @@ import { Sidebar, Topbar, Footer } from './components';
 
 import { NotificationComponent } from '../../components';
 
-import { GetAuth } from '../../provider/authentication/authentication.provider';
+import { GetAuth } from '../../providers/authentication/authentication.provider';
 
 function ScrollTop(props: any) {
   const { children, window } = props;
@@ -69,7 +69,6 @@ const Main = (props: any) => {
     event.preventDefault();
 
     setToken('');
-    window.location.reload();
   };
 
   const shouldOpenSidebar = isDesktop ? true : openSidebar;

@@ -8,8 +8,8 @@ import { Paper } from '@material-ui/core';
 import Theme from './themes';
 import Routes from './routes';
 
-import { AuthProvider } from './provider/authentication/authentication.provider';
-import { SiteInformationProvider } from './provider/site-information/site-information.provider';
+import { AuthProvider } from './providers/authentication/authentication.provider';
+import { SiteInformationProvider } from './providers/site-information/site-information.provider';
 
 const browserHistory = createBrowserHistory();
 

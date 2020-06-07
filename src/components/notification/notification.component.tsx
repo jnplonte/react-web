@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 
-import { GetSiteInformation } from '../../provider/site-information/site-information.provider';
+import { GetSiteInformation } from '../../providers/site-information/site-information.provider';
 
 function Alert(props: any) {
     return <MuiAlert className='app-notiification' elevation={6} variant='filled' {...props} />;

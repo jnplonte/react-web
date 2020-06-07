@@ -9,4 +9,7 @@ export const dashboardStyle = makeStyles((theme: any) => ({
       width: 32,
       color: theme.palette.white,
     },
+    loading: {
+      marginTop: theme.spacing(24),
+    },
 }));

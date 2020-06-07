@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 
 import { Route, Redirect } from 'react-router-dom';
-import { GetAuth } from '../../provider/authentication/authentication.provider';
+import { GetAuth } from '../../providers/authentication/authentication.provider';
 
 const UnAuthenticatedRoute = (props: any) => {
   const { layout: Layout, component: Component, isExact, ...rest } = props;

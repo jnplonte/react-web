@@ -1,14 +1,14 @@
 import * as React from 'react';
 import * as md5 from 'md5';
 
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useState, Suspense } from 'react';
 import { withRouter } from 'react-router-dom';
-import { Tabs, Tab } from '@material-ui/core';
+import { Tabs, Tab, CircularProgress } from '@material-ui/core';
 
 import { accountStyle } from './account.style';
 
-import { GetAuth } from '../../provider/authentication/authentication.provider';
-import { GetSiteInformation } from '../../provider/site-information/site-information.provider';
+import { GetAuth } from '../../providers/authentication/authentication.provider';
+import { GetSiteInformation } from '../../providers/site-information/site-information.provider';
 import { UserAPI } from '../../api/user.api';
 
 import { TabPannelComponent } from '../../components';
@@ -57,16 +57,18 @@ const Account = (props: any) => {
 
   return (
     <div className={classes.root}>
-      <Tabs value={value} onChange={handleChange} variant='fullWidth'>
-        <Tab label='Profile' id='tab-0' />
-        <Tab label='Password' id='tab-1' />
-      </Tabs>
-      <TabPannelComponent value={value} index={0}>
-        <Profile onUpdate={handleProfileUpdate} data={authData}/>
-      </TabPannelComponent>
-      <TabPannelComponent value={value} index={1}>
-        <Password onUpdate={handlePasswordUpdate}/>
-      </TabPannelComponent>
+      <Suspense fallback={<CircularProgress className={classes.loading} size={60} />}>
+        <Tabs value={value} onChange={handleChange} variant='fullWidth'>
+          <Tab label='Profile' id='tab-0' />
+          <Tab label='Password' id='tab-1' />
+        </Tabs>
+        <TabPannelComponent value={value} index={0}>
+          <Profile onUpdate={handleProfileUpdate} data={authData}/>
+        </TabPannelComponent>
+        <TabPannelComponent value={value} index={1}>
+          <Password onUpdate={handlePasswordUpdate}/>
+        </TabPannelComponent>
+      </Suspense>
     </div>
   );
 };
