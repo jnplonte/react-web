@@ -12,7 +12,7 @@ const Footer = (props: any) => {
   const classes = footerStyle();
 
   return (
-    <div className={clsx(classes.root, className, 'right-text')}>
+    <div className={clsx(classes.root, className, 'right-text', 'dark-white')}>
       <Typography variant='caption'>
         {process.env.REACT_APP_NAME}
       </Typography>

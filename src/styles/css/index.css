@@ -148,14 +148,20 @@ body {
   bottom: 30px;
   right: 30px; }
 
-.green {
+.text-green {
   color: #14AF1B; }
 
-.red {
+.text-red {
   color: #DC3545; }
 
-.grey {
+.text-grey {
   color: #707070; }
 
-.blue {
+.text-blue {
   color: #4051B5; }
+
+.text-white {
+  color: #FFFFFF; }
+
+.dark-white {
+  background-color: #D3D3D3; }

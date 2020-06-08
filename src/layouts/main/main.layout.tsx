@@ -6,6 +6,7 @@ import clsx from 'clsx';
 import { MouseEvent, useState } from 'react';
 import { useTheme } from '@material-ui/styles';
 import { useMediaQuery, Zoom, Fab, useScrollTrigger } from '@material-ui/core';
+import { useTranslation } from 'react-i18next';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 
 import { mainStyle } from './main.style';
@@ -14,6 +15,7 @@ import { Sidebar, Topbar, Footer } from './components';
 import { NotificationComponent } from '../../components';
 
 import { GetAuth } from '../../providers/authentication/authentication.provider';
+import { GetSiteInformation } from '../../providers/site-information/site-information.provider';
 
 function ScrollTop(props: any) {
   const { children, window } = props;
@@ -49,7 +51,10 @@ const Main = (props: any) => {
   const classes: any = mainStyle();
   const theme: any = useTheme();
 
+  const { t } = useTranslation();
+
   const { setToken } = GetAuth();
+  const { setNotificationData } = GetSiteInformation();
 
   const isDesktop = useMediaQuery(theme.breakpoints.up('lg'), {
     defaultMatches: true,
@@ -67,6 +72,8 @@ const Main = (props: any) => {
 
   const handleSignOut = (event: MouseEvent) => {
     event.preventDefault();
+
+    setNotificationData({type: 'success', message: t('success.logout')});
 
     setToken('');
   };

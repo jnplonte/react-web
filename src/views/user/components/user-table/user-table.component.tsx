@@ -157,19 +157,19 @@ const UserTable = (props: any) => {
               <TableCell>{user.username}</TableCell>
               <TableCell>{user.email}</TableCell>
               <TableCell>{user.phone}</TableCell>
-              <TableCell align='center'>{(user.active) ? (<CheckIcon className='green'/>) : (<CloseIcon className='red'/>)}</TableCell>
+              <TableCell align='center'>{(user.active) ? (<CheckIcon className='text-green'/>) : (<CloseIcon className='text-red'/>)}</TableCell>
               <TableCell>{user.createdAt}</TableCell>
               <TableCell align='center'>
               <IconButton disabled={(authData['id'] === user.id)} onClick={() => handleEditOpen(user.id)} component={Link} to={`/user/${user.id}`}>
                 <EditIcon className={clsx({
-                  green: (authData['id'] !== user.id),
-                  grey: (authData['id'] === user.id),
+                  'text-green': (authData['id'] !== user.id),
+                  'text-grey': (authData['id'] === user.id),
                 })}/>
               </IconButton>
               <IconButton disabled={(authData['id'] === user.id)} onClick={() => handleDeleteOpen(user.id)}>
                 <DeleteIcon className={clsx({
-                  red: (authData['id'] !== user.id),
-                  grey: (authData['id'] === user.id),
+                  'text-red': (authData['id'] !== user.id),
+                  'text-grey': (authData['id'] === user.id),
                 })}/>
               </IconButton>
               </TableCell>

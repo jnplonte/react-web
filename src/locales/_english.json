@@ -12,6 +12,7 @@
         "login": "invalid username or password"
     },
     "success": {
-        "login": "login success"
+        "login": "login success",
+        "logout": "logout success"
     }
 }
