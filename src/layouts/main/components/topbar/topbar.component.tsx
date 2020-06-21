@@ -5,8 +5,9 @@ import clsx from 'clsx';
 
 import { MouseEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { AppBar, Toolbar, Hidden, IconButton, Typography, Menu, MenuItem } from '@material-ui/core';
+import { AppBar, Toolbar, Hidden, IconButton, Button, Typography, Menu, MenuItem } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
+import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import GTranslate from '@material-ui/icons/GTranslateOutlined';
@@ -66,13 +67,14 @@ const Topbar = (props: any) => {
           </Hidden>
         </Link>
         <div className={classes.flexGrow} />
-        <IconButton
+        <Button
             aria-haspopup='true'
             onClick={handleLocale}
-            color='inherit'>
+            color='inherit'
+            endIcon={<KeyboardArrowDown />}>
             <GTranslate />
             <Typography variant='body1' className={classes.lang}>{i18n.language.toUpperCase()}</Typography>
-        </IconButton>
+        </Button>
         <Menu
             id='locale-appbar'
             anchorEl={localeEl}

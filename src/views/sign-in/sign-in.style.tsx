@@ -19,7 +19,7 @@ export const signInStyle = makeStyles((theme: any) => ({
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundImage: 'url(https://i.picsum.photos/id/293/300/600.jpg?grayscale)',
+      backgroundImage: 'url(https://picsum.photos/400/400)',
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
       backgroundPosition: 'center',
