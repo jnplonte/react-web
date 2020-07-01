@@ -4,7 +4,11 @@ import * as PropTypes from 'prop-types';
 import * as validate from 'validate.js';
 import clsx from 'clsx';
 import { FormEvent, ChangeEvent, useState, useEffect } from 'react';
-import { Grid, Button, TextField, FormControl, InputLabel, Select, Typography } from '@material-ui/core';
+import { Grid, Button, TextField, FormControl, InputLabel, Select,
+    Card, CardHeader, CardContent, CardActions } from '@material-ui/core';
+
+import PeopleIcon from '@material-ui/icons/People';
+import EditIcon from '@material-ui/icons/Edit';
 
 import { userFormStyles } from './user-form.style';
 
@@ -20,6 +24,7 @@ const UserForm = (props: any) => {
   const classes: any = userFormStyles();
 
   const [confirmText, setConfirmText] = useState('Update');
+  const [confirmHeaderIcon, setConfirmHeaderIcon] = useState(<EditIcon />);
   const [confirmHeaderText, setConfirmHeaderText] = useState('Update User');
 
   const [formState, setFormState] = useState<IFormProps>(emptyForm);
@@ -77,11 +82,13 @@ const UserForm = (props: any) => {
       case 'insert':
         setConfirmText('Insert');
         setConfirmHeaderText('Insert User');
+        setConfirmHeaderIcon(<PeopleIcon />);
         break;
 
       case 'update':
         setConfirmText('Update');
         setConfirmHeaderText('Update User');
+        setConfirmHeaderIcon(<EditIcon />);
         break;
     }
   }, [type]);
@@ -100,144 +107,146 @@ const UserForm = (props: any) => {
   };
 
   return (
-    <div className={clsx(classes.root, className)}>
-      <Typography variant='h4'>{confirmHeaderText}</Typography>
-      <form className={classes.form} onSubmit={handleFormSubmit} noValidate>
-        <Grid container spacing={3}>
-          <Grid item xs={9}>
-            <TextField
-              autoComplete='off'
-              disabled={type === 'update'}
-              className={classes.textField}
-              error={ helper.hasFormError(formState, 'username') }
-              fullWidth
-              helperText={ helper.hasFormError(formState, 'username', true) }
-              label='Username'
-              name='username'
-              onChange={handleChange}
-              type='text'
-              value={formState.values['username'] || ''}
-            />
-          </Grid>
-          <Grid item xs={3}>
-            <FormControl
-              disabled={Number(formState.values['roleId']) === 1}
-              className={classes.textField}
-              fullWidth>
-              <InputLabel htmlFor='roleId'>Role</InputLabel>
-              <Select
-                native
-                value={Number(formState.values['roleId'] || process.env.REACT_APP_DEFAULT_ROLEID)}
+    <form className={classes.form} onSubmit={handleFormSubmit} noValidate>
+      <Card className={clsx(classes.root, className)}>
+        <CardHeader className='header' avatar={confirmHeaderIcon} title={confirmHeaderText}></CardHeader>
+        <CardContent>
+          <Grid container spacing={3}>
+            <Grid item xs={9}>
+              <TextField
+                autoComplete='off'
+                disabled={type === 'update'}
+                className={classes.textField}
+                error={ helper.hasFormError(formState, 'username') }
+                fullWidth
+                helperText={ helper.hasFormError(formState, 'username', true) }
+                label='Username'
+                name='username'
                 onChange={handleChange}
-                inputProps={{ name: 'roleId', id: 'roleId' }}>
-                <option value={1} disabled>Super Admin</option>
-                <option value={2}>Admin</option>
-                <option value={3}>User</option>
-              </Select>
-            </FormControl>
-          </Grid>
-        </Grid>
-        <Grid container spacing={3}>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              autoComplete='off'
-              className={classes.textField}
-              error={ helper.hasFormError(formState, 'firstName') }
-              fullWidth
-              helperText={ helper.hasFormError(formState, 'firstName', true) }
-              label='First Name'
-              name='firstName'
-              onChange={handleChange}
-              type='text'
-              value={formState.values['firstName'] || ''}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              autoComplete='off'
-              className={classes.textField}
-              error={ helper.hasFormError(formState, 'lastName') }
-              fullWidth
-              helperText={ helper.hasFormError(formState, 'lastName', true) }
-              label='Last Name'
-              name='lastName'
-              onChange={handleChange}
-              type='text'
-              value={formState.values['lastName'] || ''}
-            />
-          </Grid>
-        </Grid>
-        <Grid container spacing={3}>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              autoComplete='off'
-              className={classes.textField}
-              error={ helper.hasFormError(formState, 'email') }
-              fullWidth
-              helperText={ helper.hasFormError(formState, 'email', true) }
-              label='Email'
-              name='email'
-              onChange={handleChange}
-              type='text'
-              value={formState.values['email'] || ''}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              autoComplete='off'
-              className={classes.textField}
-              error={ helper.hasFormError(formState, 'phone') }
-              fullWidth
-              helperText={ helper.hasFormError(formState, 'phone', true) }
-              label='Phone Number'
-              name='phone'
-              onChange={handleChange}
-              type='text'
-              value={formState.values['phone'] || ''}
-            />
-          </Grid>
-        </Grid>
-        {(type === 'insert')
-          ?
-            (<Grid container spacing={3}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete='off'
-                  className={classes.textField}
-                  error={ helper.hasFormError(formState, 'password') }
-                  fullWidth
-                  helperText={ helper.hasFormError(formState, 'password', true) }
-                  label='Password'
-                  name='password'
+                type='text'
+                value={formState.values['username'] || ''}
+              />
+            </Grid>
+            <Grid item xs={3}>
+              <FormControl
+                disabled={Number(formState.values['roleId']) === 1}
+                className={classes.textField}
+                fullWidth>
+                <InputLabel htmlFor='roleId'>Role</InputLabel>
+                <Select
+                  native
+                  value={Number(formState.values['roleId'] || process.env.REACT_APP_DEFAULT_ROLEID)}
                   onChange={handleChange}
-                  type='password'
-                  value={formState.values['password'] || ''}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete='off'
-                  className={classes.textField}
-                  error={ helper.hasFormError(formState, 'confirmPassword') }
-                  fullWidth
-                  helperText={ helper.hasFormError(formState, 'confirmPassword', true) }
-                  label='Confirm Password'
-                  name='confirmPassword'
-                  onChange={handleChange}
-                  type='password'
-                  value={formState.values['confirmPassword'] || ''}
-                />
-              </Grid>
-            </Grid>)
-          :
-            null
-        }
-        <div className='footer'>
+                  inputProps={{ name: 'roleId', id: 'roleId' }}>
+                  <option value={1} disabled>Super Admin</option>
+                  <option value={2}>Admin</option>
+                  <option value={3}>User</option>
+                </Select>
+              </FormControl>
+            </Grid>
+          </Grid>
+          <Grid container spacing={3}>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                autoComplete='off'
+                className={classes.textField}
+                error={ helper.hasFormError(formState, 'firstName') }
+                fullWidth
+                helperText={ helper.hasFormError(formState, 'firstName', true) }
+                label='First Name'
+                name='firstName'
+                onChange={handleChange}
+                type='text'
+                value={formState.values['firstName'] || ''}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                autoComplete='off'
+                className={classes.textField}
+                error={ helper.hasFormError(formState, 'lastName') }
+                fullWidth
+                helperText={ helper.hasFormError(formState, 'lastName', true) }
+                label='Last Name'
+                name='lastName'
+                onChange={handleChange}
+                type='text'
+                value={formState.values['lastName'] || ''}
+              />
+            </Grid>
+          </Grid>
+          <Grid container spacing={3}>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                autoComplete='off'
+                className={classes.textField}
+                error={ helper.hasFormError(formState, 'email') }
+                fullWidth
+                helperText={ helper.hasFormError(formState, 'email', true) }
+                label='Email'
+                name='email'
+                onChange={handleChange}
+                type='text'
+                value={formState.values['email'] || ''}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                autoComplete='off'
+                className={classes.textField}
+                error={ helper.hasFormError(formState, 'phone') }
+                fullWidth
+                helperText={ helper.hasFormError(formState, 'phone', true) }
+                label='Phone Number'
+                name='phone'
+                onChange={handleChange}
+                type='text'
+                value={formState.values['phone'] || ''}
+              />
+            </Grid>
+          </Grid>
+          {(type === 'insert')
+            ?
+              (<Grid container spacing={3}>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    autoComplete='off'
+                    className={classes.textField}
+                    error={ helper.hasFormError(formState, 'password') }
+                    fullWidth
+                    helperText={ helper.hasFormError(formState, 'password', true) }
+                    label='Password'
+                    name='password'
+                    onChange={handleChange}
+                    type='password'
+                    value={formState.values['password'] || ''}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    autoComplete='off'
+                    className={classes.textField}
+                    error={ helper.hasFormError(formState, 'confirmPassword') }
+                    fullWidth
+                    helperText={ helper.hasFormError(formState, 'confirmPassword', true) }
+                    label='Confirm Password'
+                    name='confirmPassword'
+                    onChange={handleChange}
+                    type='password'
+                    value={formState.values['confirmPassword'] || ''}
+                  />
+                </Grid>
+              </Grid>)
+            :
+              null
+          }
+        </CardContent>
+        <CardActions className='footer'>
           <Button onClick={onCancel} className='footerText' color='primary'>Cancel</Button>
           <Button disabled={!formState.isValid} type='submit' className='footerText' color='primary' autoFocus>{confirmText}</Button>
-        </div>
-      </form>
-    </div>
+        </CardActions>
+      </Card>
+    </form>
   );
 };
 

@@ -3,7 +3,6 @@
     background-color: $white;
     border-radius: 5px;
     box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2), 0px 5px 8px 0px rgba(0,0,0,0.14), 0px 1px 14px 0px rgba(0,0,0,0.12);
-    padding: 16px 16px 0px 16px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -11,6 +10,17 @@
     @include respond-to('small') {
         top: 40%;
         width: 800px;
+    }
+
+    .header {
+        background-color: $blue;
+        .MuiCardHeader-avatar {
+            color: $white;
+        }
+        .MuiCardHeader-title {
+            color: $white;
+            font-size: 1rem;
+        }
     }
 
     .footer {

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as md5 from 'md5';
 
-import { ChangeEvent, useState, Suspense } from 'react';
+import { ChangeEvent, useState, useEffect, Suspense } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Tabs, Tab, CircularProgress } from '@material-ui/core';
 
@@ -24,9 +24,16 @@ const Account = (props: any) => {
 
   const [value, setValue] = useState(0);
 
+  useEffect(() => {
+    setTimeout(() => {
+      window.dispatchEvent(new CustomEvent('resize'));
+    }, 100);
+  }, []);
+
   const handleChange = (event: ChangeEvent, newValue: number) => {
     event.persist();
 
+    window.dispatchEvent(new CustomEvent('resize'));
     setValue(newValue);
   };
 
@@ -58,7 +65,7 @@ const Account = (props: any) => {
   return (
     <div className={classes.root}>
       <Suspense fallback={<CircularProgress className={classes.loading} size={60} />}>
-        <Tabs value={value} onChange={handleChange} variant='fullWidth'>
+        <Tabs value={value} onChange={handleChange} variant='fullWidth' >
           <Tab label='Profile' id='tab-0' />
           <Tab label='Password' id='tab-1' />
         </Tabs>
