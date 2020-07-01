@@ -4,7 +4,7 @@ import * as md5 from 'md5';
 
 import clsx from 'clsx';
 import { useState } from 'react';
-import { Button, Modal } from '@material-ui/core';
+import { Button, Modal, Hidden } from '@material-ui/core';
 
 import { userToolbarStyles } from './user-toolbar.style';
 
@@ -63,7 +63,7 @@ const UserToolbar = (props: any) => {
       </Modal>
       <div className={classes.row}>
         <span className={classes.spacer} />
-        <Button color='primary' variant='contained' onClick={handleAddOpen}>Insert User</Button>
+        <Button color='primary' variant='contained' onClick={handleAddOpen}>Insert <Hidden only='xs'>User</Hidden></Button>
       </div>
     </div>
   );

@@ -130,11 +130,9 @@
   .modal .footer {
     flex: 0 0 auto;
     display: flex;
-    padding: 8px;
+    padding: 8px 16px;
     align-items: center;
     justify-content: flex-end; }
-    .modal .footer .footerText {
-      padding: 16px 8px 8px 8px; }
   .modal .footer > :not(:first-child) {
     margin-left: 8px; }
 

@@ -242,8 +242,8 @@ const UserForm = (props: any) => {
           }
         </CardContent>
         <CardActions className='footer'>
-          <Button onClick={onCancel} className='footerText' color='primary'>Cancel</Button>
-          <Button disabled={!formState.isValid} type='submit' className='footerText' color='primary' autoFocus>{confirmText}</Button>
+          <Button onClick={onCancel}>Cancel</Button>
+          <Button disabled={!formState.isValid} type='submit' variant='contained' color='primary' autoFocus>{confirmText}</Button>
         </CardActions>
       </Card>
     </form>

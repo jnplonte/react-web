@@ -126,11 +126,11 @@ const UserTable = (props: any) => {
 
   return (
     <Paper className={clsx(classes.root, className)}>
-        <Modal open={editModal} onClose={handleEditClose}>
-          <div className={clsx(classes.root, 'modal')}>
-            <UserForm onUpdate={handleEditConfirm} onCancel={handleEditClose} type='update' data={selected} />
-          </div>
-        </Modal>
+      <Modal open={editModal} onClose={handleEditClose}>
+        <div className={clsx(classes.root, 'modal')}>
+          <UserForm onUpdate={handleEditConfirm} onCancel={handleEditClose} type='update' data={selected} />
+        </div>
+      </Modal>
 
       <Dialog open={deleteModal} onClose={handleDeleteClose}>
         <div className={classes.dialog}>
@@ -138,7 +138,7 @@ const UserTable = (props: any) => {
         </div>
       </Dialog>
 
-      <Table className={classes.table}>
+      <Table className={classes.table} size='small'>
         <TableHead>
           <TableRow>
           <TableCell>Full Name</TableCell>
@@ -153,7 +153,7 @@ const UserTable = (props: any) => {
         <TableBody>
           {data.map((user: any) => (
             <TableRow className={classes.tableRow} hover key={user.id}>
-              <TableCell>{user.firstName} {user.lastName}</TableCell>
+              <TableCell component='th' scope='row'>{user.firstName} {user.lastName}</TableCell>
               <TableCell>{user.username}</TableCell>
               <TableCell>{user.email}</TableCell>
               <TableCell>{user.phone}</TableCell>

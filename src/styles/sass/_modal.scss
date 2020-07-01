@@ -26,13 +26,9 @@
     .footer {
         flex: 0 0 auto;
         display: flex;
-        padding: 8px;
+        padding: 8px 16px;
         align-items: center;
         justify-content: flex-end;
-
-        .footerText {
-            padding: 16px 8px 8px 8px;
-        }
     }
 
     .footer > :not(:first-child) {
