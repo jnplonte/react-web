@@ -4,6 +4,7 @@ interface IRequestProps {
   status: string;
   message: string;
   data?: object | Array<any | null> | null;
+  pagination?: object | null;
 }
 
 export class UserAPI {
@@ -18,7 +19,8 @@ export class UserAPI {
       .then((request: IRequestProps) => {
         if (request.status && request.status === 'success') {
           return {
-            data: request.data || null,
+            data: request.data || [],
+            pagination: request.pagination || {},
           };
         } else {
           return null;
