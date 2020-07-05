@@ -14,9 +14,9 @@ import {
   TableRow,
   TablePagination,
   IconButton,
-  Modal,
-  Dialog
+  Modal
 } from '@material-ui/core';
+
 import CheckIcon from '@material-ui/icons/Check';
 import CloseIcon from '@material-ui/icons/Close';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -24,7 +24,8 @@ import EditIcon from '@material-ui/icons/Edit';
 
 import { userTableStyles } from './user-table.style';
 
-import { UserForm, DeleteForm } from '../../components';
+import { ConfimDialogComponent } from '../../../../components';
+import { UserForm } from '../../components';
 
 import { GetAuth } from '../../../../providers/authentication/authentication.provider';
 import { GetSiteInformation } from '../../../../providers/site-information/site-information.provider';
@@ -89,6 +90,8 @@ const UserTable = (props: any) => {
   };
 
   const handleEditConfirm = async (uData: object = {}) => {
+    setEditModal(false);
+
     const apiData: object = {
       email: uData['email'],
       firstName: uData['firstName'],
@@ -100,13 +103,15 @@ const UserTable = (props: any) => {
 
     if (requestData.data) {
       refreshData();
-      setEditModal(false);
+
+      history.push('/user');
     }
   };
 
-  const handleDeleteOpen = (uId: string = '') => {
-    setDeleteModal(true);
+  const handleDialog = (uId: string = '') => {
     setSelected({id: uId});
+
+    setDeleteModal(true);
   };
 
   const handleDeleteClose = () => {
@@ -114,13 +119,16 @@ const UserTable = (props: any) => {
     setSelected({});
   };
 
-  const handleDeleteConfirm = async (uData: object = {}) => {
-    const requestData: any = await userRequest.delete({id: selected['id']});
-    setNotificationData({type: requestData.type, message: requestData.message});
+  const handleDeleteConfirm = async (result: any) => {
+    setDeleteModal(false);
 
-    if (requestData.data) {
-      refreshData();
-      setDeleteModal(false);
+    if (result) {
+      const requestData: any = await userRequest.delete({id: selected['id']});
+      setNotificationData({type: requestData.type, message: requestData.message});
+
+      if (requestData.data) {
+        refreshData();
+      }
     }
   };
 
@@ -131,12 +139,15 @@ const UserTable = (props: any) => {
           <UserForm onUpdate={handleEditConfirm} onCancel={handleEditClose} type='update' data={selected} />
         </div>
       </Modal>
-
-      <Dialog open={deleteModal} onClose={handleDeleteClose}>
-        <div className={classes.dialog}>
-            <DeleteForm onDelete={handleDeleteConfirm} onCancel={handleDeleteClose} data={selected} />
-        </div>
-      </Dialog>
+      <ConfimDialogComponent
+        isVisible={deleteModal}
+        title={'Warnning'}
+        message={'Are you sure you want to delete this user?'}
+        buttonTrueText={'Yes'}
+        buttonFalseText={'No'}
+        onFalse={handleDeleteClose}
+        onTrue={handleDeleteConfirm}
+        type='warning' />
 
       <Table className={classes.table} size='small'>
         <TableHead>
@@ -166,7 +177,7 @@ const UserTable = (props: any) => {
                   'text-grey': (authData['id'] === user.id),
                 })}/>
               </IconButton>
-              <IconButton disabled={(authData['id'] === user.id)} onClick={() => handleDeleteOpen(user.id)}>
+              <IconButton disabled={(authData['id'] === user.id)} onClick={() => handleDialog(user.id)}>
                 <DeleteIcon className={clsx({
                   'text-red': (authData['id'] !== user.id),
                   'text-grey': (authData['id'] === user.id),

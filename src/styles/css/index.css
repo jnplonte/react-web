@@ -121,7 +121,7 @@
       top: 40%;
       width: 800px; } }
   .modal .header {
-    background-color: #4051B5; }
+    background-color: #2196f3; }
     .modal .header .MuiCardHeader-avatar {
       color: #FFFFFF; }
     .modal .header .MuiCardHeader-title {
@@ -153,19 +153,37 @@ body {
   right: 30px; }
 
 .text-green {
-  color: #14AF1B; }
+  color: #4caf50; }
 
 .text-red {
-  color: #DC3545; }
+  color: #f44336; }
 
 .text-grey {
   color: #707070; }
 
 .text-blue {
-  color: #4051B5; }
+  color: #2196f3; }
 
 .text-white {
   color: #FFFFFF; }
+
+.text-green {
+  color: #4caf50; }
+
+.bg-red {
+  background-color: #f44336; }
+
+.bg-grey {
+  background-color: #707070; }
+
+.bg-yellow {
+  background-color: #fdd835; }
+
+.bg-blue {
+  background-color: #2196f3; }
+
+.bg-white {
+  background-color: #FFFFFF; }
 
 .dark-white {
   background-color: #D3D3D3; }

@@ -5,4 +5,3 @@ export const UserToolbar = lazy(() => import('./user-toolbar/user-toolbar.compon
 export const SearchInput = lazy(() => import('./search-input/search-input.component'));
 
 export const UserForm = lazy(() => import('./user-form/user-form.component'));
-export const DeleteForm = lazy(() => import('./delete-form/delete-form.component'));

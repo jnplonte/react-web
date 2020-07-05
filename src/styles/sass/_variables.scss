@@ -12,13 +12,17 @@ $light-white:               #F6FAFD;
 $white:                     #FFFFFF;
 $dark-white:                #D3D3D3;
 
-$red:                       #DC3545;
-$dark-red:                  #C8313F;
+$red:                       #f44336;
+$dark-red:                  #d32f2f;
 
-$green:                     #14AF1B;
-$dark-green:                #119017;
+$yellow:                    #ffeb3b;
+$dark-yellow:               #fdd835;
 
-$blue:                     #4051B5;
+$green:                     #4caf50;
+$dark-green:                #43a047;
+
+$blue:                      #2196f3;
+$dark-blue:                 #1e88e5;
 
 $breakpoints: (
   small:  767px,

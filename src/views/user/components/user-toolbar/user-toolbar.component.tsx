@@ -35,6 +35,8 @@ const UserToolbar = (props: any) => {
   };
 
   const handleAddConfirm = async (data: object = {}) => {
+    setAddModal(false);
+
     const apiData: object = {
       username: data['username'],
       email: data['email'],
@@ -44,13 +46,11 @@ const UserToolbar = (props: any) => {
       lastName: data['lastName'],
       phone: data['phone'] || '',
     };
-
     const requestData: any = await userRequest.post(apiData);
     setNotificationData({type: requestData.type, message: requestData.message});
 
     if (requestData.data) {
       refreshData();
-      setAddModal(false);
     }
   };
 
