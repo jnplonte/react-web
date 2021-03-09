@@ -5,37 +5,37 @@
 @import 'modal';
 
 body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Roboto', sans-serif;
+	margin: 0;
+	padding: 0;
+	font-family: 'Roboto', sans-serif;
 }
 
 .hidden {
-  display: none !important;
+	display: none !important;
 }
 
 .right-text {
-  text-align: right !important;
+	text-align: right !important;
 }
 
 .backToTop {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
+	position: fixed;
+	bottom: 30px;
+	right: 30px;
 }
 
 .green {
-  color: $green;
+	color: $green;
 }
 
 .red {
-  color: $red;
+	color: $red;
 }
 
 .grey {
-  color: $grey;
+	color: $grey;
 }
 
 .blue {
-  color: $blue;
+	color: $blue;
 }

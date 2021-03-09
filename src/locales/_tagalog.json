@@ -1,0 +1,66 @@
+{
+	"signin": {
+		"signIn": "MAG-SIGN IN"
+	},
+	"general": {
+		"warning": "BABALA!",
+		"cancel": "Kanselahin",
+		"confirm": "Kumpirmahin"
+	},
+	"error": {
+		"required": "kailangan ang field",
+		"usernameRequired": "kailangan ang username",
+		"passwordRequired": "kailangan ang password",
+		"passwordInvalid": "Imbalido ang password",
+		"login": "Mali ang username o password",
+		"passwordDosentMatch": "Hindi Magkatugma ang Password"
+	},
+	"success": {
+		"login": "tagumpay sa pag-login",
+		"logout": "Tagumpay sa pagpasok"
+	},
+	"notfound": {
+		"pageNotFound": "HINDI NATAGPUAN ANG PAHINA",
+		"goBackToHome": "HOME PAGE"
+	},
+	"form": {
+		"username": "UserName",
+		"password": "Password",
+		"confirmPassword": "Kumpirmahin ang Password",
+		"search": "Magsaliksik ng Username",
+		"firstName": "Unang Pangalan",
+		"lastName": "Apelyido",
+		"roles": "Papel ng Gumagamit",
+		"email": "Email Address",
+		"phone": "Numero ng Kontak"
+	},
+	"account": {
+		"profile": "PROFILE",
+		"password": "PASSWORD",
+		"updateProfile": "Kumpirmahin",
+		"updatePassword": "Kumpirmahin"
+	},
+	"menu": {
+		"dashboard": "Dashboard",
+		"user": "Gumagamit",
+		"account": "Account",
+		"signOut": "Mag-sign Out"
+	},
+	"user": {
+		"active": "Aktibo",
+		"inactive": "HINDI AKTIBO",
+		"fullName": "BUONG PANGALAN",
+		"userName": "USERNAME",
+		"email": "EMAIL ADDRESS",
+		"phone": "NUMERO NG CONTACT",
+		"createdAt": "NILIKHA SA",
+		"action": "AKSYON",
+		"insert": "Magsingit",
+		"search": "Paghahanap",
+		"headerInsert": "Magsingit ng Gumagamit",
+		"headerUpdate": "Magsunod-sa-panahon ng Gumagamit",
+		"confirnInsert": "Kumpirmahin",
+		"confirmUpdate": "Kumpirmahin",
+		"delete": "Tiyak ka bang gusto mong magtanggal nitong USER?"
+	}
+}

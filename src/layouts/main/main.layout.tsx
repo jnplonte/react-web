@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import * as PropTypes from 'prop-types';
 
 import clsx from 'clsx';
@@ -16,93 +16,85 @@ import { NotificationComponent } from '../../components';
 import { GetAuth } from '../../provider/authentication/authentication.provider';
 
 function ScrollTop(props: any) {
-  const { children, window } = props;
+	const { children, window } = props;
 
-  const trigger = useScrollTrigger({
-    target: window ? window() : undefined,
-    disableHysteresis: true,
-    threshold: 100,
-  });
+	const trigger = useScrollTrigger({
+		target: window ? window() : undefined,
+		disableHysteresis: true,
+		threshold: 100,
+	});
 
-  const handleClick = (event: MouseEvent) => {
-    const anchor = ((event.target as HTMLElement).ownerDocument || document).querySelector(
-      '#back-to-top'
-    );
+	const handleClick = (event: MouseEvent) => {
+		const anchor = ((event.target as HTMLElement).ownerDocument || document).querySelector('#back-to-top');
 
-    if (anchor) {
-      anchor.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-  };
+		if (anchor) {
+			anchor.scrollIntoView({ behavior: 'smooth', block: 'center' });
+		}
+	};
 
-  return (
-    <Zoom in={trigger}>
-      <div onClick={handleClick} role='presentation' className='backToTop'>
-        {children}
-      </div>
-    </Zoom>
-  );
+	return (
+		<Zoom in={trigger}>
+			<div onClick={handleClick} role='presentation' className='backToTop'>
+				{children}
+			</div>
+		</Zoom>
+	);
 }
 
 const Main = (props: any) => {
-  const { children } = props;
+	const { children } = props;
 
-  const classes: any = mainStyle();
-  const theme: any = useTheme();
+	const classes: any = mainStyle();
+	const theme: any = useTheme();
 
-  const { setToken } = GetAuth();
+	const { setToken } = GetAuth();
 
-  const isDesktop = useMediaQuery(theme.breakpoints.up('lg'), {
-    defaultMatches: true,
-  });
+	const isDesktop = useMediaQuery(theme.breakpoints.up('lg'), {
+		defaultMatches: true,
+	});
 
-  const [openSidebar, setOpenSidebar] = useState(false);
+	const [openSidebar, setOpenSidebar] = useState(false);
 
-  const handleSidebarOpen = () => {
-    setOpenSidebar(true);
-  };
+	const handleSidebarOpen = () => {
+		setOpenSidebar(true);
+	};
 
-  const handleSidebarClose = () => {
-    setOpenSidebar(false);
-  };
+	const handleSidebarClose = () => {
+		setOpenSidebar(false);
+	};
 
-  const handleSignOut = (event: MouseEvent) => {
-    event.preventDefault();
+	const handleSignOut = (event: MouseEvent) => {
+		event.preventDefault();
 
-    setToken('');
-    window.location.reload();
-  };
+		setToken('');
+		window.location.reload();
+	};
 
-  const shouldOpenSidebar = isDesktop ? true : openSidebar;
+	const shouldOpenSidebar = isDesktop ? true : openSidebar;
 
-  return (
-    <div
-      className={clsx({
-        [classes.root]: true,
-        [classes.shiftContent]: isDesktop,
-      })}
-    >
-        <NotificationComponent/>
-        <Topbar id='back-to-top' onSidebarOpen={handleSidebarOpen} onSignOut={handleSignOut}/>
-        <Sidebar
-          onClose={handleSidebarClose}
-          open={shouldOpenSidebar}
-          variant={isDesktop ? 'persistent' : 'temporary'}
-        />
-        <main className={clsx(classes.content, 'main-container')}>
-          {children}
-        </main>
-        <ScrollTop {...props}>
-          <Fab color='secondary' size='small' aria-label='scroll to top'>
-            <KeyboardArrowUpIcon />
-          </Fab>
-        </ScrollTop>
-        <Footer />
-    </div>
-  );
+	return (
+		<div
+			className={clsx({
+				[classes.root]: true,
+				[classes.shiftContent]: isDesktop,
+			})}
+		>
+			<NotificationComponent />
+			<Topbar id='back-to-top' onSidebarOpen={handleSidebarOpen} onSignOut={handleSignOut} />
+			<Sidebar onClose={handleSidebarClose} open={shouldOpenSidebar} variant={isDesktop ? 'persistent' : 'temporary'} />
+			<main className={clsx(classes.content, 'main-container')}>{children}</main>
+			<ScrollTop {...props}>
+				<Fab color='secondary' size='small' aria-label='scroll to top'>
+					<KeyboardArrowUpIcon />
+				</Fab>
+			</ScrollTop>
+			<Footer />
+		</div>
+	);
 };
 
 Main.propTypes = {
-  children: PropTypes.node,
+	children: PropTypes.node,
 };
 
 export default Main;

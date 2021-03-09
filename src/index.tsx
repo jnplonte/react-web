@@ -1,14 +1,26 @@
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-import './locale';
+import './locales';
+
+import './styles/sass/index.scss';
 
 import App from './App';
-import registerServiceWorker from './registerServiceWorker';
-import './styles/css/index.css';
+
+// import reportWebVitals from './reportWebVitals';
+// import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(
-  <App />,
-  document.getElementById('jnpl-root') as HTMLElement
+	<React.StrictMode>
+		<App />
+	</React.StrictMode>,
+	document.getElementById('jnpl-root') as HTMLElement
 );
-registerServiceWorker();
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+// reportWebVitals();
+
+// service workers
+// registerServiceWorker();

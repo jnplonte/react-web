@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import * as PropTypes from 'prop-types';
 
 import clsx from 'clsx';
@@ -9,28 +9,30 @@ import { GetAuth } from '../../../../../../provider/authentication/authenticatio
 import { profileStyle } from './profile.style';
 
 const Profile = (props: any) => {
-  const { className } = props;
+	const { className } = props;
 
-  const classes: any = profileStyle();
-  const { authData } = GetAuth();
+	const classes: any = profileStyle();
+	const { authData } = GetAuth();
 
-  const user = {
-    name: `${authData['firstName']} ${authData['lastName']}`,
-    avatar: process.env.REACT_APP_LOGO,
-    email: authData['email'],
-  };
+	const user = {
+		name: `${authData['firstName']} ${authData['lastName']}`,
+		avatar: process.env.REACT_APP_LOGO,
+		email: authData['email'],
+	};
 
-  return (
-    <div className={clsx(classes.root, className)}>
-      <Avatar alt={user.name} title={user.name} className={classes.avatar} src={user.avatar}/>
-      <Typography className={classes.name} variant='h5'>{user.name}</Typography>
-      <Typography variant='body2'>{user.email}</Typography>
-    </div>
-  );
+	return (
+		<div className={clsx(classes.root, className)}>
+			<Avatar alt={user.name} title={user.name} className={classes.avatar} src={user.avatar} />
+			<Typography className={classes.name} variant='h5'>
+				{user.name}
+			</Typography>
+			<Typography variant='body2'>{user.email}</Typography>
+		</div>
+	);
 };
 
 Profile.propTypes = {
-  className: PropTypes.string,
+	className: PropTypes.string,
 };
 
 export default Profile;

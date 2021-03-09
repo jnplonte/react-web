@@ -1,0 +1,66 @@
+{
+	"signin": {
+		"signIn": "SIGN IN"
+	},
+	"general": {
+		"warning": "WARNING!",
+		"cancel": "Cancel",
+		"confirm": "Confirm"
+	},
+	"error": {
+		"required": "field is required",
+		"usernameRequired": "username is required",
+		"passwordRequired": "password is required",
+		"passwordInvalid": "password is invalid",
+		"login": "invalid username or password",
+		"passwordDosentMatch": "Password Dosen't Match"
+	},
+	"success": {
+		"login": "login success",
+		"logout": "logout success"
+	},
+	"notfound": {
+		"pageNotFound": "PAGE NOT FOUND",
+		"goBackToHome": "HOME PAGE"
+	},
+	"form": {
+		"username": "UserName",
+		"password": "Password",
+		"confirmPassword": "Confirm Password",
+		"search": "Search Username",
+		"firstName": "First Name",
+		"lastName": "Last Name",
+		"roles": "User Role",
+		"email": "Email Address",
+		"phone": "Contact Number"
+	},
+	"account": {
+		"profile": "PROFILE",
+		"password": "PASSWORD",
+		"updateProfile": "Update",
+		"updatePassword": "Update"
+	},
+	"menu": {
+		"dashboard": "Dashboard",
+		"user": "User",
+		"account": "Account",
+		"signOut": "Sign Out"
+	},
+	"user": {
+		"active": "ACTIVE",
+		"inactive": "INACTIVE",
+		"fullName": "FULL NAME",
+		"userName": "USERNAME",
+		"email": "EMAIL ADDRESS",
+		"phone": "CONTACT NUMBER",
+		"createdAt": "CREATED AT",
+		"action": "ACTION",
+		"insert": "Insert",
+		"search": "Search",
+		"headerInsert": "Insert User",
+		"headerUpdate": "Update User",
+		"confirnInsert": "Insert",
+		"confirmUpdate": "Update",
+		"delete": "Are you sure you want to delete this USER?"
+	}
+}
