@@ -1,10 +1,12 @@
 import { colors } from '@material-ui/core';
 
 const $white = '#FFFFFF';
+const $grey = '#D3D3D3';
 const $black = '#333333';
 
 const Pallete = {
 	white: $white,
+	darkWhite: $grey,
 	black: $black,
 	primary: {
 		contrastText: $white,

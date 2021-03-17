@@ -11,6 +11,7 @@
 		"required": "field is required",
 		"usernameRequired": "username is required",
 		"passwordRequired": "password is required",
+		"emailRequired": "email address is invalid",
 		"passwordInvalid": "password is invalid",
 		"login": "invalid username or password",
 		"passwordDosentMatch": "Password Dosen't Match"

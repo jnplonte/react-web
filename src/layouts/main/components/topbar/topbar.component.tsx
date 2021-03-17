@@ -17,7 +17,7 @@ const Topbar = (props: any) => {
 	const { className, onSignOut, onSidebarOpen } = props;
 
 	const classes = topbarStyle();
-	const { i18n } = useTranslation();
+	const { i18n, t } = useTranslation();
 
 	const [localeEl, setLocaleEl] = useState<null | HTMLElement>(null);
 	const localeOpen = Boolean(localeEl);
@@ -52,35 +52,35 @@ const Topbar = (props: any) => {
 	};
 
 	return (
-		<AppBar className={clsx('app-header', classes.root, className)} color='primary' position='fixed'>
+		<AppBar className={clsx('app-header', classes.root, className)} color="primary" position="fixed">
 			<Toolbar>
 				<Hidden lgUp>
-					<IconButton className={classes.menuButton} color='inherit' onClick={onSidebarOpen}>
+					<IconButton className={classes.menuButton} color="inherit" onClick={onSidebarOpen}>
 						<MenuIcon />
 					</IconButton>
 				</Hidden>
-				<Link to='/'>
+				<Link to="/">
 					<img
-						className='img'
+						className="img"
 						alt={process.env.REACT_APP_NAME}
 						title={process.env.REACT_APP_NAME}
 						src={process.env.REACT_APP_LOGO}
 					/>
 					<Hidden smDown>
-						<Typography variant='h6' className='title'>
+						<Typography variant="h6" className="title">
 							{process.env.REACT_APP_NAME}
 						</Typography>
 					</Hidden>
 				</Link>
 				<div className={classes.flexGrow} />
-				<IconButton aria-haspopup='true' onClick={handleLocale} color='inherit'>
+				<IconButton aria-haspopup="true" onClick={handleLocale} color="inherit">
 					<GTranslate />
-					<Typography variant='body1' className={classes.lang}>
+					<Typography variant="body1" className={classes.lang}>
 						{i18n.language.toUpperCase()}
 					</Typography>
 				</IconButton>
 				<Menu
-					id='locale-appbar'
+					id="locale-appbar"
 					anchorEl={localeEl}
 					anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
 					keepMounted
@@ -91,11 +91,11 @@ const Topbar = (props: any) => {
 					<MenuItem onClick={() => setLocale('en')}>ENGLISH</MenuItem>
 					<MenuItem onClick={() => setLocale('tg')}>TAGALOG</MenuItem>
 				</Menu>
-				<IconButton aria-haspopup='true' onClick={handleMenu} color='inherit'>
+				<IconButton aria-haspopup="true" onClick={handleMenu} color="inherit">
 					<AccountCircle />
 				</IconButton>
 				<Menu
-					id='account-appbar'
+					id="account-appbar"
 					anchorEl={anchorEl}
 					anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
 					keepMounted
@@ -103,10 +103,10 @@ const Topbar = (props: any) => {
 					open={anchorOpen}
 					onClose={anchorClose}
 				>
-					<MenuItem onClick={anchorClose} component={Link} to='/account'>
-						My Account
+					<MenuItem onClick={anchorClose} component={Link} to="/account">
+						{t('menu.account')}
 					</MenuItem>
-					<MenuItem onClick={onSignOut}>Sign Out</MenuItem>
+					<MenuItem onClick={onSignOut}>{t('menu.signOut')}</MenuItem>
 				</Menu>
 			</Toolbar>
 		</AppBar>

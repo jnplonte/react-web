@@ -4,6 +4,7 @@ import * as md5 from 'md5';
 import { ChangeEvent, useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Tabs, Tab } from '@material-ui/core';
+import { useTranslation } from 'react-i18next';
 
 import { accountStyle } from './account.style';
 
@@ -16,6 +17,7 @@ import { Profile, Password } from './components';
 
 const Account = (props: any) => {
 	const classes: any = accountStyle();
+	const { t } = useTranslation();
 
 	const { token, authData, setAuthData } = GetAuth();
 	const { setNotificationData } = GetSiteInformation();
@@ -57,9 +59,9 @@ const Account = (props: any) => {
 
 	return (
 		<div className={classes.root}>
-			<Tabs value={value} onChange={handleChange} variant='fullWidth'>
-				<Tab label='Profile' id='tab-0' />
-				<Tab label='Password' id='tab-1' />
+			<Tabs value={value} onChange={handleChange} variant="fullWidth">
+				<Tab label={t('account.profile')} id="tab-0" />
+				<Tab label={t('account.password')} id="tab-1" />
 			</Tabs>
 			<TabPannelComponent value={value} index={0}>
 				<Profile onUpdate={handleProfileUpdate} data={authData} />

@@ -4,7 +4,8 @@ import * as PropTypes from 'prop-types';
 import validateJS from 'validate.js';
 import clsx from 'clsx';
 import { FormEvent, ChangeEvent, useState, useEffect } from 'react';
-import { Grid, Typography, Divider, Button, TextField } from '@material-ui/core';
+import { Grid, Typography, Button, TextField } from '@material-ui/core';
+import { useTranslation } from 'react-i18next';
 
 import { profileStyles } from './profile.style';
 
@@ -18,17 +19,18 @@ const Profile = (props: any) => {
 	const { className, onUpdate, data } = props;
 
 	const classes: any = profileStyles();
+	const { t } = useTranslation();
 
 	const [formState, setFormState] = useState<IFormProps>(emptyForm);
 
 	useEffect(() => {
-		const errors = validateJS(formState.values, schema);
+		const errors = validateJS(formState.values, schema(t), { fullMessages: false });
 		setFormState((state: any) => ({
 			...state,
 			isValid: errors ? false : true,
 			errors: errors || {},
 		}));
-	}, [formState.values]);
+	}, [t, formState.values]);
 
 	useEffect(() => {
 		setFormState({
@@ -60,23 +62,21 @@ const Profile = (props: any) => {
 
 	return (
 		<div className={clsx(classes.root, className)}>
-			<Typography variant='h4'>Profile</Typography>
-			<Typography variant='body2'>Update User Profile</Typography>
-			<Divider />
+			<Typography variant="h4">{t('account.profile')}</Typography>
 			<form className={classes.form} onSubmit={handleFormSubmit} noValidate>
 				<Grid container spacing={3}>
 					<Grid item xs={12}>
 						<TextField
-							autoComplete='off'
+							autoComplete="off"
 							disabled={true}
 							className={classes.textField}
 							error={helper.hasFormError(formState, 'username')}
 							fullWidth
 							helperText={helper.hasFormError(formState, 'username', true)}
-							label='Username'
-							name='username'
+							label={t('form.username')}
+							name="username"
 							onChange={handleChange}
-							type='text'
+							type="text"
 							value={formState.values['username'] || ''}
 						/>
 					</Grid>
@@ -84,29 +84,29 @@ const Profile = (props: any) => {
 				<Grid container spacing={3}>
 					<Grid item xs={12} sm={6}>
 						<TextField
-							autoComplete='off'
+							autoComplete="off"
 							className={classes.textField}
 							error={helper.hasFormError(formState, 'firstName')}
 							fullWidth
 							helperText={helper.hasFormError(formState, 'firstName', true)}
-							label='First Name'
-							name='firstName'
+							label={t('form.firstName')}
+							name="firstName"
 							onChange={handleChange}
-							type='text'
+							type="text"
 							value={formState.values['firstName'] || ''}
 						/>
 					</Grid>
 					<Grid item xs={12} sm={6}>
 						<TextField
-							autoComplete='off'
+							autoComplete="off"
 							className={classes.textField}
 							error={helper.hasFormError(formState, 'lastName')}
 							fullWidth
 							helperText={helper.hasFormError(formState, 'lastName', true)}
-							label='Last Name'
-							name='lastName'
+							label={t('form.lastName')}
+							name="lastName"
 							onChange={handleChange}
-							type='text'
+							type="text"
 							value={formState.values['lastName'] || ''}
 						/>
 					</Grid>
@@ -114,37 +114,37 @@ const Profile = (props: any) => {
 				<Grid container spacing={3}>
 					<Grid item xs={12} sm={6}>
 						<TextField
-							autoComplete='off'
+							autoComplete="off"
 							className={classes.textField}
 							error={helper.hasFormError(formState, 'email')}
 							fullWidth
 							helperText={helper.hasFormError(formState, 'email', true)}
-							label='Email'
-							name='email'
+							label={t('form.email')}
+							name="email"
 							onChange={handleChange}
-							type='text'
+							type="text"
 							value={formState.values['email'] || ''}
 						/>
 					</Grid>
 					<Grid item xs={12} sm={6}>
 						<TextField
-							autoComplete='off'
+							autoComplete="off"
 							className={classes.textField}
 							error={helper.hasFormError(formState, 'phone')}
 							fullWidth
 							helperText={helper.hasFormError(formState, 'phone', true)}
-							label='Phone Number'
-							name='phone'
+							label={t('form.phone')}
+							name="phone"
 							onChange={handleChange}
-							type='text'
+							type="text"
 							value={formState.values['phone'] || ''}
 						/>
 					</Grid>
 				</Grid>
 				<Grid container spacing={3}>
-					<Grid item xs={12} className='right-text'>
-						<Button disabled={!formState.isValid} variant='contained' type='submit' color='primary' autoFocus>
-							Update
+					<Grid item xs={12} className="right-text">
+						<Button disabled={!formState.isValid} variant="contained" type="submit" color="primary" autoFocus>
+							{t('account.updateProfile')}
 						</Button>
 					</Grid>
 				</Grid>

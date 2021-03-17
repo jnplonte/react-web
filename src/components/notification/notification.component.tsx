@@ -2,13 +2,9 @@ import React from 'react';
 
 import { useEffect, useState } from 'react';
 import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
+import Alert from '@material-ui/lab/Alert';
 
 import { GetSiteInformation } from '../../provider/site-information/site-information.provider';
-
-function Alert(props: any) {
-	return <MuiAlert className='app-notiification' elevation={6} variant='filled' {...props} />;
-}
 
 const NotificationComponent = () => {
 	const { notificationData, setNotificationData } = GetSiteInformation();
@@ -38,10 +34,14 @@ const NotificationComponent = () => {
 			onClose={handleClose}
 			anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
 		>
-			{/* <Alert onClose={handleClose} severity={notificationData['type'] || 'success'}> */}
-			<Alert onClose={handleClose} severity={'success'}>
-				{/* {notificationData['message'] || ''} */}
-				xxx
+			<Alert
+				className="app-notiification"
+				elevation={6}
+				variant="filled"
+				onClose={handleClose}
+				severity={notificationData['type'] || 'success'}
+			>
+				<span>{notificationData['message'] || ''}</span>
 			</Alert>
 		</Snackbar>
 	);

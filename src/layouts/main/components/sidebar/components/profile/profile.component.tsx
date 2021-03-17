@@ -15,18 +15,18 @@ const Profile = (props: any) => {
 	const { authData } = GetAuth();
 
 	const user = {
-		name: `${authData['firstName']} ${authData['lastName']}`,
+		name: `${authData['firstName'] || ''} ${authData['lastName'] || ''}`,
 		avatar: process.env.REACT_APP_LOGO,
-		email: authData['email'],
+		email: authData['email'] || '',
 	};
 
 	return (
 		<div className={clsx(classes.root, className)}>
 			<Avatar alt={user.name} title={user.name} className={classes.avatar} src={user.avatar} />
-			<Typography className={classes.name} variant='h5'>
+			<Typography className={classes.name} variant="h5">
 				{user.name}
 			</Typography>
-			<Typography variant='body2'>{user.email}</Typography>
+			<Typography variant="body2">{user.email}</Typography>
 		</div>
 	);
 };

@@ -34,7 +34,7 @@ function ScrollTop(props: any) {
 
 	return (
 		<Zoom in={trigger}>
-			<div onClick={handleClick} role='presentation' className='backToTop'>
+			<div onClick={handleClick} role="presentation" className="backToTop">
 				{children}
 			</div>
 		</Zoom>
@@ -80,11 +80,11 @@ const Main = (props: any) => {
 			})}
 		>
 			<NotificationComponent />
-			<Topbar id='back-to-top' onSidebarOpen={handleSidebarOpen} onSignOut={handleSignOut} />
+			<Topbar id="back-to-top" onSidebarOpen={handleSidebarOpen} onSignOut={handleSignOut} />
 			<Sidebar onClose={handleSidebarClose} open={shouldOpenSidebar} variant={isDesktop ? 'persistent' : 'temporary'} />
 			<main className={clsx(classes.content, 'main-container')}>{children}</main>
 			<ScrollTop {...props}>
-				<Fab color='secondary' size='small' aria-label='scroll to top'>
+				<Fab color="secondary" size="small" aria-label="scroll to top">
 					<KeyboardArrowUpIcon />
 				</Fab>
 			</ScrollTop>

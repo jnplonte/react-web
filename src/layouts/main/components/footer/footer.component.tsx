@@ -12,8 +12,8 @@ const Footer = (props: any) => {
 	const classes = footerStyle();
 
 	return (
-		<div className={clsx(classes.root, className, 'right-text')}>
-			<Typography variant='caption'>{process.env.REACT_APP_NAME}</Typography>
+		<div className={clsx(classes.root, classes.footerComponent, className)}>
+			<Typography variant="caption">{process.env.REACT_APP_NAME}</Typography>
 		</div>
 	);
 };

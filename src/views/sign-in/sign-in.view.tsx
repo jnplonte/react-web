@@ -32,7 +32,7 @@ const SignIn = (props: any) => {
 	const [formState, setFormState] = useState<IFormProps>(emptyForm);
 
 	useEffect(() => {
-		const errors = validateJS(formState.values, schema(t));
+		const errors = validateJS(formState.values, schema(t), { fullMessages: false });
 		setFormState((state: any) => ({
 			...state,
 			isValid: errors ? false : true,
@@ -73,7 +73,7 @@ const SignIn = (props: any) => {
 					<div className={classes.quote}>
 						<div className={classes.quoteInner}>
 							<div className={classes.person}>
-								<Typography className={classes.name} variant='h3'>
+								<Typography className={classes.name} variant="h3">
 									{process.env.REACT_APP_NAME}
 								</Typography>
 							</div>
@@ -84,8 +84,8 @@ const SignIn = (props: any) => {
 					<div className={classes.content}>
 						<div className={classes.contentBody}>
 							<form className={classes.form} onSubmit={handleSignIn} noValidate>
-								<Typography align='left' className={classes.title} variant='h4'>
-									{t('common.signIn')}
+								<Typography align="left" className={classes.title} variant="h4">
+									{t('signin.signIn')}
 								</Typography>
 								<TextField
 									className={classes.textField}
@@ -93,11 +93,11 @@ const SignIn = (props: any) => {
 									fullWidth
 									helperText={helper.hasFormError(formState, 'username', true)}
 									label={t('form.username')}
-									name='username'
+									name="username"
 									onChange={handleChange}
-									type='text'
+									type="text"
 									value={formState.values['username'] || ''}
-									variant='outlined'
+									variant="outlined"
 								/>
 								<TextField
 									className={classes.textField}
@@ -105,22 +105,22 @@ const SignIn = (props: any) => {
 									fullWidth
 									helperText={helper.hasFormError(formState, 'password', true)}
 									label={t('form.password')}
-									name='password'
+									name="password"
 									onChange={handleChange}
-									type='password'
+									type="password"
 									value={formState.values['password'] || ''}
-									variant='outlined'
+									variant="outlined"
 								/>
 								<Button
 									className={classes.signInButton}
 									disabled={!formState.isValid}
-									color='primary'
+									color="primary"
 									fullWidth
-									size='large'
-									type='submit'
-									variant='contained'
+									size="large"
+									type="submit"
+									variant="contained"
 								>
-									{t('common.signIn')}
+									{t('signin.signIn')}
 								</Button>
 							</form>
 						</div>
