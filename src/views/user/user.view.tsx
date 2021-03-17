@@ -3,6 +3,7 @@ import React from 'react';
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Grid, Typography, CircularProgress } from '@material-ui/core';
+import { useTranslation } from 'react-i18next';
 
 import { userStyle } from './user.style';
 
@@ -16,6 +17,7 @@ const helper: Helper = new Helper();
 
 const User = (props: any) => {
 	const classes: any = userStyle();
+	const { t } = useTranslation();
 
 	const { token } = GetAuth();
 	const userRequest: UserAPI = useMemo(() => new UserAPI(token), [token]);
@@ -26,29 +28,34 @@ const User = (props: any) => {
 	const [users, setUsers] = useState<Array<any | null>>([]);
 	const [paginations, setPaginations] = useState<object>({});
 
-	const fetchDataAsync = useCallback(async () => {
-		setLoading(true);
-		const requestData: any = await userRequest.getAll(apiParams);
+	const fetchDataAsync = useCallback(
+		async (initLoad: boolean = false) => {
+			if (initLoad) {
+				setLoading(true);
+			}
+			const requestData: any = await userRequest.getAll(apiParams);
 
-		setLoading(false);
-		if (requestData.data) {
-			setUsers(requestData.data || []);
-			setPaginations(requestData.pagination || {});
-		} else {
-			setUsers([]);
-			setPaginations({});
-		}
-	}, [userRequest, apiParams]);
+			setLoading(false);
+			if (requestData.data) {
+				setUsers(requestData.data || []);
+				setPaginations(requestData.pagination || {});
+			} else {
+				setUsers([]);
+				setPaginations({});
+			}
+		},
+		[userRequest, apiParams]
+	);
 
 	useEffect(() => {
-		fetchDataAsync();
+		fetchDataAsync(true);
 
 		return () => {
 			setUsers([]);
 			setPaginations({});
 			setApiParams({ limit: 10, page: 1, order: 'createdAt:DESC', query: null });
 		};
-	}, [fetchDataAsync]);
+	}, []); // eslint-disable-line react-hooks/exhaustive-deps
 
 	const handleRefresh = (type: string, param: any) => {
 		if (helper.isNotEmpty(type)) {
@@ -66,10 +73,10 @@ const User = (props: any) => {
 			) : (
 				<div>
 					<Grid container spacing={1}>
-						<Grid item xs={8} sm={4}>
-							<SearchInput refreshData={handleRefresh} placeholder='Search User Name' />
+						<Grid item xs={12} sm={4}>
+							<SearchInput refreshData={handleRefresh} placeholder={t('form.search')} />
 						</Grid>
-						<Grid item xs={4} sm={8}>
+						<Grid item xs={12} sm={8}>
 							<UserToolbar refreshData={handleRefresh} />
 						</Grid>
 					</Grid>
@@ -77,8 +84,8 @@ const User = (props: any) => {
 						{users.length >= 1 ? (
 							<UserTable data={users} pagination={paginations} limit={apiParams['limit']} refreshData={handleRefresh} />
 						) : (
-							<Typography className={classes.noUser} variant='h4'>
-								No User Data
+							<Typography className={classes.noUser} variant="h4">
+								No data available
 							</Typography>
 						)}
 					</div>

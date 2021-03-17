@@ -80,7 +80,9 @@ const Main = (props: any) => {
 			})}
 		>
 			<NotificationComponent />
-			<Topbar id="back-to-top" onSidebarOpen={handleSidebarOpen} onSignOut={handleSignOut} />
+			<div id="back-to-top">
+				<Topbar onSidebarOpen={handleSidebarOpen} onSignOut={handleSignOut} />
+			</div>
 			<Sidebar onClose={handleSidebarClose} open={shouldOpenSidebar} variant={isDesktop ? 'persistent' : 'temporary'} />
 			<main className={clsx(classes.content, 'main-container')}>{children}</main>
 			<ScrollTop {...props}>

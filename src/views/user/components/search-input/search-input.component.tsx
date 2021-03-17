@@ -2,8 +2,10 @@ import React from 'react';
 import * as PropTypes from 'prop-types';
 
 import clsx from 'clsx';
-import { MouseEvent, KeyboardEvent, useRef } from 'react';
+import { MouseEvent, ChangeEvent, KeyboardEvent, useState } from 'react';
 import { Paper, Input, Button } from '@material-ui/core';
+import { useTranslation } from 'react-i18next';
+
 import SearchIcon from '@material-ui/icons/Search';
 
 import { searchInputStyles } from './search-input.style';
@@ -16,18 +18,17 @@ const SearchInput = (props: any) => {
 	const { className, placeholder, refreshData } = props;
 
 	const classes: any = searchInputStyles();
+	const { t } = useTranslation();
 
-	const inputEl: any = useRef();
+	const [search, setSearch] = useState('');
 
 	const handleSearch = (event: MouseEvent | KeyboardEvent) => {
 		event.preventDefault();
 
-		const target: HTMLInputElement = inputEl.current as HTMLInputElement;
-
 		let targetValue: string | null = null;
 
-		if (helper.isNotEmpty(target.value)) {
-			targetValue = `username:${target.value}`;
+		if (helper.isNotEmpty(search)) {
+			targetValue = `username:${search}`;
 		} else {
 			targetValue = null;
 		}
@@ -35,8 +36,15 @@ const SearchInput = (props: any) => {
 		refreshData('query', targetValue);
 	};
 
+	const handleChange = (event: ChangeEvent<{ name?: string; value: unknown }>) => {
+		event.persist();
+
+		const target: HTMLInputElement = event.target as HTMLInputElement;
+		setSearch(target.value);
+	};
+
 	const keyPress = (event: KeyboardEvent) => {
-		if (event.keyCode === 13) {
+		if (event.key === 'Enter') {
 			handleSearch(event);
 		}
 	};
@@ -44,14 +52,15 @@ const SearchInput = (props: any) => {
 	return (
 		<Paper className={clsx(classes.root, className)}>
 			<Input
-				inputRef={inputEl}
 				onKeyDown={keyPress}
 				className={classes.input}
 				disableUnderline
 				placeholder={placeholder}
+				onChange={handleChange}
+				value={search || ''}
 			/>
-			<Button onClick={handleSearch} variant='contained' color='secondary' startIcon={<SearchIcon />}>
-				Search
+			<Button onClick={handleSearch} variant="contained" color="secondary" startIcon={<SearchIcon />}>
+				{t('user.search')}
 			</Button>
 		</Paper>
 	);

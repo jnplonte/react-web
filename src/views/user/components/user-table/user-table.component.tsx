@@ -16,9 +16,10 @@ import {
 	IconButton,
 	Modal,
 	Dialog,
+	Chip,
 } from '@material-ui/core';
-import CheckIcon from '@material-ui/icons/Check';
-import CloseIcon from '@material-ui/icons/Close';
+import { useTranslation } from 'react-i18next';
+
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 
@@ -34,6 +35,7 @@ const UserTable = (props: any) => {
 	const { className, refreshData, data, pagination, limit, history } = props;
 
 	const classes: any = userTableStyles();
+	const { t } = useTranslation();
 
 	const { token, authData } = GetAuth();
 	const { setNotificationData } = GetSiteInformation();
@@ -70,7 +72,7 @@ const UserTable = (props: any) => {
 			setDeleteModal(false);
 			setSelected({});
 		};
-	}, [userId, authData, handleEditOpen]);
+	}, []); // eslint-disable-line react-hooks/exhaustive-deps
 
 	const handlePageChange = (event: MouseEvent<HTMLButtonElement>, nPage: number) => {
 		event.preventDefault();
@@ -127,11 +129,15 @@ const UserTable = (props: any) => {
 		}
 	};
 
+	const roleIdAdmin = () => {
+		return Number(process.env.REACT_APP_ROLE_ID_ADMIN);
+	};
+
 	return (
 		<Paper className={clsx(classes.root, className)}>
 			<Modal open={editModal} onClose={handleEditClose}>
 				<div className={clsx(classes.root, 'modal')}>
-					<UserForm onUpdate={handleEditConfirm} onCancel={handleEditClose} type='update' data={selected} />
+					<UserForm onUpdate={handleEditConfirm} onCancel={handleEditClose} type="update" data={selected} />
 				</div>
 			</Modal>
 
@@ -141,16 +147,16 @@ const UserTable = (props: any) => {
 				</div>
 			</Dialog>
 
-			<Table className={classes.table}>
+			<Table className={classes.table} size="small">
 				<TableHead>
 					<TableRow>
-						<TableCell>Full Name</TableCell>
-						<TableCell>UserName</TableCell>
-						<TableCell>Email Address</TableCell>
-						<TableCell>Phone Number</TableCell>
-						<TableCell align='center'>Active</TableCell>
-						<TableCell>Created At</TableCell>
-						<TableCell align='center'>Action</TableCell>
+						<TableCell>{t('user.fullName')}</TableCell>
+						<TableCell>{t('user.userName')}</TableCell>
+						<TableCell>{t('user.email')}</TableCell>
+						<TableCell>{t('user.phone')}</TableCell>
+						<TableCell align="center">{t('user.active')}</TableCell>
+						<TableCell>{t('user.createdAt')}</TableCell>
+						<TableCell align="center">{t('user.action')}</TableCell>
 					</TableRow>
 				</TableHead>
 				<TableBody>
@@ -162,29 +168,36 @@ const UserTable = (props: any) => {
 							<TableCell>{user.username}</TableCell>
 							<TableCell>{user.email}</TableCell>
 							<TableCell>{user.phone}</TableCell>
-							<TableCell align='center'>
-								{user.active ? <CheckIcon className='green' /> : <CloseIcon className='red' />}
+							<TableCell align="center">
+								{user.active ? (
+									<Chip className="green-bg white" label={t('user.active')} />
+								) : (
+									<Chip className="red-bg white" label={t('user.inactive')} />
+								)}
 							</TableCell>
 							<TableCell>{user.createdAt}</TableCell>
-							<TableCell align='center'>
+							<TableCell align="center">
 								<IconButton
-									disabled={authData['id'] === user.id}
+									disabled={authData['id'] === user.id || user.roleId === roleIdAdmin()}
 									onClick={() => handleEditOpen(user.id)}
 									component={Link}
 									to={`/user/${user.id}`}
 								>
 									<EditIcon
 										className={clsx({
-											green: authData['id'] !== user.id,
-											grey: authData['id'] === user.id,
+											green: authData['id'] !== user.id && user.roleId !== roleIdAdmin(),
+											grey: authData['id'] === user.id || user.roleId === roleIdAdmin(),
 										})}
 									/>
 								</IconButton>
-								<IconButton disabled={authData['id'] === user.id} onClick={() => handleDeleteOpen(user.id)}>
+								<IconButton
+									disabled={authData['id'] === user.id || user.roleId === roleIdAdmin()}
+									onClick={() => handleDeleteOpen(user.id)}
+								>
 									<DeleteIcon
 										className={clsx({
-											red: authData['id'] !== user.id,
-											grey: authData['id'] === user.id,
+											red: authData['id'] !== user.id && user.roleId !== roleIdAdmin(),
+											grey: authData['id'] === user.id || user.roleId === roleIdAdmin(),
 										})}
 									/>
 								</IconButton>
@@ -194,7 +207,7 @@ const UserTable = (props: any) => {
 				</TableBody>
 			</Table>
 			<TablePagination
-				component='div'
+				component="div"
 				count={pagination.totalData || 0}
 				onChangePage={handlePageChange}
 				onChangeRowsPerPage={handleRowsPerPageChange}

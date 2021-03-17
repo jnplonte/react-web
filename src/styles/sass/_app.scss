@@ -1,38 +1,38 @@
 .app {
-  text-align: center;
+	text-align: center;
 
-  .main-container {
-    min-height: calc(100vh - 131px);
-  }
+	.main-container {
+		min-height: calc(100vh - 131px);
+	}
 
-  .minimal-container {
-    min-height: 100vh;
-  }
+	.minimal-container {
+		min-height: 100vh;
+	}
 }
 
 .app-header {
-  color: $white;
+	color: $white;
 
-  .title {
-    display: inline-block;
-    padding: 0px 10px;
-    color: $white;
-    position: relative;
-    bottom: 10px;
-  }
+	.title {
+		display: inline-block;
+		padding: 0px 10px;
+		color: $white;
+		position: relative;
+		bottom: 10px;
+	}
 
-  .img {
-    height: 35px;
-    width: 35px;
-  }
+	.img {
+		height: 35px;
+		width: 35px;
+	}
 }
 
 .app-notiification {
-  min-width: 300px;
+	min-width: 300px;
 }
 
 .app-side-bar {
-  .active {
-    background-color: $dark-white;
-  }
+	.active {
+		background-color: $dark-white;
+	}
 }

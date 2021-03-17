@@ -24,18 +24,42 @@ body {
 	right: 30px;
 }
 
+.green-bg {
+	background-color: $green !important;
+}
+
+.red-bg {
+	background-color: $red !important;
+}
+
+.grey-bg {
+	background-color: $grey !important;
+}
+
+.blue-bg {
+	background-color: $blue !important;
+}
+
+.white-bg {
+	background-color: $white !important;
+}
+
 .green {
-	color: $green;
+	color: $green !important;
 }
 
 .red {
-	color: $red;
+	color: $red !important;
 }
 
 .grey {
-	color: $grey;
+	color: $grey !important;
 }
 
 .blue {
-	color: $blue;
+	color: $blue !important;
+}
+
+.white {
+	color: $white !important;
 }

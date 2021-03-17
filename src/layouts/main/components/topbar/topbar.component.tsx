@@ -5,11 +5,12 @@ import clsx from 'clsx';
 
 import { MouseEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { AppBar, Toolbar, Hidden, IconButton, Typography, Menu, MenuItem } from '@material-ui/core';
+import { AppBar, Toolbar, Hidden, IconButton, Button, Typography, Menu, MenuItem } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import GTranslate from '@material-ui/icons/GTranslateOutlined';
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
 import { topbarStyle } from './topbar.style';
 
@@ -73,12 +74,13 @@ const Topbar = (props: any) => {
 					</Hidden>
 				</Link>
 				<div className={classes.flexGrow} />
-				<IconButton aria-haspopup="true" onClick={handleLocale} color="inherit">
+				<Button aria-haspopup="true" onClick={handleLocale} color="inherit">
 					<GTranslate />
 					<Typography variant="body1" className={classes.lang}>
 						{i18n.language.toUpperCase()}
 					</Typography>
-				</IconButton>
+					<ArrowDropDownIcon />
+				</Button>
 				<Menu
 					id="locale-appbar"
 					anchorEl={localeEl}
@@ -91,6 +93,7 @@ const Topbar = (props: any) => {
 					<MenuItem onClick={() => setLocale('en')}>ENGLISH</MenuItem>
 					<MenuItem onClick={() => setLocale('tg')}>TAGALOG</MenuItem>
 				</Menu>
+
 				<IconButton aria-haspopup="true" onClick={handleMenu} color="inherit">
 					<AccountCircle />
 				</IconButton>

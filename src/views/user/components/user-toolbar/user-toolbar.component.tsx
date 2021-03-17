@@ -5,6 +5,7 @@ import * as md5 from 'md5';
 import clsx from 'clsx';
 import { useState } from 'react';
 import { Button, Modal } from '@material-ui/core';
+import { useTranslation } from 'react-i18next';
 
 import { userToolbarStyles } from './user-toolbar.style';
 
@@ -18,6 +19,7 @@ const UserToolbar = (props: any) => {
 	const { className, refreshData } = props;
 
 	const classes: any = userToolbarStyles();
+	const { t } = useTranslation();
 
 	const { token } = GetAuth();
 	const { setNotificationData } = GetSiteInformation();
@@ -58,13 +60,13 @@ const UserToolbar = (props: any) => {
 		<div className={clsx(classes.root, className)}>
 			<Modal open={addModal} onClose={handleAddClose}>
 				<div className={clsx(classes.root, 'modal')}>
-					<UserForm onUpdate={handleAddConfirm} onCancel={handleAddClose} type='insert' data={{}} />
+					<UserForm onUpdate={handleAddConfirm} onCancel={handleAddClose} type="insert" data={{}} />
 				</div>
 			</Modal>
 			<div className={classes.row}>
 				<span className={classes.spacer} />
-				<Button color='primary' variant='contained' onClick={handleAddOpen}>
-					Insert User
+				<Button className={classes.customW100} color="secondary" variant="contained" onClick={handleAddOpen}>
+					{t('user.insert')}
 				</Button>
 			</div>
 		</div>

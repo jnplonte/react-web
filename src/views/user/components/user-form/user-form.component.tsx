@@ -5,6 +5,10 @@ import validateJS from 'validate.js';
 import clsx from 'clsx';
 import { FormEvent, ChangeEvent, useState, useEffect } from 'react';
 import { Grid, Button, TextField, FormControl, InputLabel, Select, Typography } from '@material-ui/core';
+import { useTranslation } from 'react-i18next';
+
+import AddToPhotosIcon from '@material-ui/icons/AddToPhotos';
+import EditIcon from '@material-ui/icons/Edit';
 
 import { userFormStyles } from './user-form.style';
 
@@ -18,9 +22,11 @@ const UserForm = (props: any) => {
 	const { className, onUpdate, onCancel, data, type } = props;
 
 	const classes: any = userFormStyles();
+	const { t } = useTranslation();
 
-	const [confirmText, setConfirmText] = useState('Update');
-	const [confirmHeaderText, setConfirmHeaderText] = useState('Update User');
+	const [confirmText, setConfirmText] = useState(t('user.confirnInsert'));
+	const [confirmIcon, setConfirmIcon] = useState(<EditIcon />);
+	const [confirmHeaderText, setConfirmHeaderText] = useState(t('user.headerInsert'));
 
 	const [formState, setFormState] = useState<IFormProps>(emptyForm);
 
@@ -28,21 +34,21 @@ const UserForm = (props: any) => {
 		return () => {
 			setFormState(emptyForm);
 		};
-	}, []);
+	}, []); // eslint-disable-line react-hooks/exhaustive-deps
 
 	useEffect(() => {
-		let updatedSchema: ISchemaProps = schema;
+		let updatedSchema: ISchemaProps = schema(t);
 		if (type === 'insert') {
-			updatedSchema = { ...schema, ...inertSchema };
+			updatedSchema = { ...schema(t), ...inertSchema(t) };
 		}
 
-		const errors = validateJS(formState.values, updatedSchema);
+		const errors = validateJS(formState.values, updatedSchema, { fullMessages: false });
 		setFormState((state: any) => ({
 			...state,
 			isValid: errors ? false : true,
 			errors: errors || {},
 		}));
-	}, [type, formState.values]);
+	}, [t, type, formState.values]);
 
 	useEffect(() => {
 		switch (type) {
@@ -73,16 +79,18 @@ const UserForm = (props: any) => {
 	useEffect(() => {
 		switch (type) {
 			case 'insert':
-				setConfirmText('Insert');
-				setConfirmHeaderText('Insert User');
+				setConfirmText(t('user.confirnInsert'));
+				setConfirmIcon(<AddToPhotosIcon />);
+				setConfirmHeaderText(t('user.headerInsert'));
 				break;
 
 			case 'update':
-				setConfirmText('Update');
-				setConfirmHeaderText('Update User');
+				setConfirmText(t('user.confirmUpdate'));
+				setConfirmIcon(<EditIcon />);
+				setConfirmHeaderText(t('user.headerUpdate'));
 				break;
 		}
-	}, [type]);
+	}, [t, type]);
 
 	const handleChange = (event: ChangeEvent<{ name?: string; value: unknown }>) => {
 		event.persist();
@@ -99,7 +107,9 @@ const UserForm = (props: any) => {
 
 	return (
 		<div className={clsx(classes.root, className)}>
-			<Typography variant="h4">{confirmHeaderText}</Typography>
+			<Typography variant="h4" className={classes.header}>
+				<span className={classes.icon}>{confirmIcon}</span> {confirmHeaderText}
+			</Typography>
 			<form className={classes.form} onSubmit={handleFormSubmit} noValidate>
 				<Grid container spacing={3}>
 					<Grid item xs={9}>
@@ -110,7 +120,7 @@ const UserForm = (props: any) => {
 							error={helper.hasFormError(formState, 'username')}
 							fullWidth
 							helperText={helper.hasFormError(formState, 'username', true)}
-							label="Username"
+							label={t('form.username')}
 							name="username"
 							onChange={handleChange}
 							type="text"
@@ -119,7 +129,7 @@ const UserForm = (props: any) => {
 					</Grid>
 					<Grid item xs={3}>
 						<FormControl disabled={Number(formState.values['roleId']) === 1} className={classes.textField} fullWidth>
-							<InputLabel htmlFor="roleId">Role</InputLabel>
+							<InputLabel htmlFor="roleId">{t('form.roles')}</InputLabel>
 							<Select
 								native
 								value={Number(formState.values['roleId'] || process.env.REACT_APP_DEFAULT_ROLEID)}
@@ -143,7 +153,7 @@ const UserForm = (props: any) => {
 							error={helper.hasFormError(formState, 'firstName')}
 							fullWidth
 							helperText={helper.hasFormError(formState, 'firstName', true)}
-							label="First Name"
+							label={t('form.firstName')}
 							name="firstName"
 							onChange={handleChange}
 							type="text"
@@ -157,7 +167,7 @@ const UserForm = (props: any) => {
 							error={helper.hasFormError(formState, 'lastName')}
 							fullWidth
 							helperText={helper.hasFormError(formState, 'lastName', true)}
-							label="Last Name"
+							label={t('form.lastName')}
 							name="lastName"
 							onChange={handleChange}
 							type="text"
@@ -173,7 +183,7 @@ const UserForm = (props: any) => {
 							error={helper.hasFormError(formState, 'email')}
 							fullWidth
 							helperText={helper.hasFormError(formState, 'email', true)}
-							label="Email"
+							label={t('form.email')}
 							name="email"
 							onChange={handleChange}
 							type="text"
@@ -204,7 +214,7 @@ const UserForm = (props: any) => {
 								error={helper.hasFormError(formState, 'password')}
 								fullWidth
 								helperText={helper.hasFormError(formState, 'password', true)}
-								label="Password"
+								label={t('form.password')}
 								name="password"
 								onChange={handleChange}
 								type="password"
@@ -218,7 +228,7 @@ const UserForm = (props: any) => {
 								error={helper.hasFormError(formState, 'confirmPassword')}
 								fullWidth
 								helperText={helper.hasFormError(formState, 'confirmPassword', true)}
-								label="Confirm Password"
+								label={t('form.confirmPassword')}
 								name="confirmPassword"
 								onChange={handleChange}
 								type="password"
@@ -229,9 +239,9 @@ const UserForm = (props: any) => {
 				) : null}
 				<div className="footer">
 					<Button onClick={onCancel} className="footerText" color="primary">
-						Cancel
+						{t('general.cancel')}
 					</Button>
-					<Button disabled={!formState.isValid} type="submit" className="footerText" color="primary" autoFocus>
+					<Button disabled={!formState.isValid} variant="contained" type="submit" color="primary" autoFocus>
 						{confirmText}
 					</Button>
 				</div>
