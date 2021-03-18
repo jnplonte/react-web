@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect, useMemo, useCallback, Suspense } from 'react';
 
-import { useState, useEffect, useMemo, useCallback } from 'react';
 import { withRouter } from 'react-router-dom';
-import { Grid, Typography, CircularProgress } from '@material-ui/core';
+import { CircularProgress, Grid, Typography } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 
 import { userStyle } from './user.style';
@@ -68,29 +67,36 @@ const User = (props: any) => {
 
 	return (
 		<div className={classes.root}>
-			{loading ? (
-				<CircularProgress className={classes.loading} size={60} />
-			) : (
-				<div>
-					<Grid container spacing={1}>
-						<Grid item xs={12} sm={4}>
-							<SearchInput refreshData={handleRefresh} placeholder={t('form.search')} />
+			<Suspense fallback={<CircularProgress className={classes.loading} size={60} />}>
+				{loading ? (
+					<CircularProgress className={classes.loading} size={60} />
+				) : (
+					<div>
+						<Grid container spacing={1}>
+							<Grid item xs={12} sm={4}>
+								<SearchInput refreshData={handleRefresh} placeholder={t('form.search')} />
+							</Grid>
+							<Grid item xs={12} sm={8}>
+								<UserToolbar refreshData={handleRefresh} />
+							</Grid>
 						</Grid>
-						<Grid item xs={12} sm={8}>
-							<UserToolbar refreshData={handleRefresh} />
-						</Grid>
-					</Grid>
-					<div className={classes.content}>
-						{users.length >= 1 ? (
-							<UserTable data={users} pagination={paginations} limit={apiParams['limit']} refreshData={handleRefresh} />
-						) : (
-							<Typography className={classes.noUser} variant="h4">
-								No data available
-							</Typography>
-						)}
+						<div className={classes.content}>
+							{users.length >= 1 ? (
+								<UserTable
+									data={users}
+									pagination={paginations}
+									limit={apiParams['limit']}
+									refreshData={handleRefresh}
+								/>
+							) : (
+								<Typography className={classes.noUser} variant="h4">
+									No data available
+								</Typography>
+							)}
+						</div>
 					</div>
-				</div>
-			)}
+				)}
+			</Suspense>
 		</div>
 	);
 };

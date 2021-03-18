@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { MouseEvent, ChangeEvent, KeyboardEvent, useState } from 'react';
+
 import * as PropTypes from 'prop-types';
 
 import clsx from 'clsx';
-import { MouseEvent, ChangeEvent, KeyboardEvent, useState } from 'react';
 import { Paper, Input, Button } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 

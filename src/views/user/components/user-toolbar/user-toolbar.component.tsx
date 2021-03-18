@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
+
 import * as PropTypes from 'prop-types';
 import * as md5 from 'md5';
 
 import clsx from 'clsx';
-import { useState } from 'react';
 import { Button, Modal } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 

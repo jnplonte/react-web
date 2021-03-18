@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { FormEvent, ChangeEvent, useState, useEffect } from 'react';
+
 import * as PropTypes from 'prop-types';
 
 import validateJS from 'validate.js';
 import clsx from 'clsx';
-import { FormEvent, ChangeEvent, useState, useEffect } from 'react';
 import {
 	Grid,
 	Button,

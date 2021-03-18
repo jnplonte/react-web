@@ -1,4 +1,5 @@
 import React from 'react';
+
 import * as PropTypes from 'prop-types';
 
 import clsx from 'clsx';
@@ -14,12 +15,12 @@ const SummaryData = (props: any) => {
 	return (
 		<Card className={clsx(classes.root, className)}>
 			<CardContent>
-				<Grid container justify='space-between'>
+				<Grid container justify="space-between">
 					<Grid item>
-						<Typography className={classes.title} color='textSecondary' gutterBottom variant='body2'>
+						<Typography className={classes.title} color="textSecondary" gutterBottom variant="body2">
 							{title}
 						</Typography>
-						<Typography variant='h3'>{value}</Typography>
+						<Typography variant="h3">{value}</Typography>
 					</Grid>
 					<Grid item>
 						<Avatar className={classes.avatar}>{icon}</Avatar>

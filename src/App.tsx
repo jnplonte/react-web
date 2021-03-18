@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { createBrowserHistory } from 'history';
 import { Router } from 'react-router-dom';
@@ -17,7 +18,7 @@ class App extends React.Component {
 	public render() {
 		return (
 			<HelmetProvider>
-				<div className='app'>
+				<div className="app">
 					<Helmet>
 						<title>{process.env.REACT_APP_NAME}</title>
 					</Helmet>

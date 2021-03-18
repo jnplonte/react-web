@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { MouseEvent, useState } from 'react';
+
 import * as PropTypes from 'prop-types';
 
 import clsx from 'clsx';
 
-import { MouseEvent, useState } from 'react';
 import { useTheme } from '@material-ui/styles';
 import { useMediaQuery, Zoom, Fab, useScrollTrigger } from '@material-ui/core';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';

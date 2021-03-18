@@ -1,7 +1,6 @@
-import React from 'react';
-import * as PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
 
-import { useEffect, useState } from 'react';
+import * as PropTypes from 'prop-types';
 
 import clsx from 'clsx';
 

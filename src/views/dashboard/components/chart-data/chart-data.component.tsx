@@ -1,4 +1,5 @@
 import React from 'react';
+
 import * as PropTypes from 'prop-types';
 
 import clsx from 'clsx';
@@ -17,7 +18,7 @@ const ChartData = (props: any) => {
 
 	return (
 		<Card className={clsx(classes.root, className)}>
-			<CardHeader title='Chart Data' />
+			<CardHeader title="Chart Data" />
 			<Divider />
 			<CardContent>
 				<div className={classes.chartContainer}>
@@ -26,7 +27,7 @@ const ChartData = (props: any) => {
 			</CardContent>
 			<Divider />
 			<CardActions className={classes.actions}>
-				<Button color='primary' size='small' variant='text'>
+				<Button color="primary" size="small" variant="text">
 					View More <ArrowRightIcon />
 				</Button>
 			</CardActions>

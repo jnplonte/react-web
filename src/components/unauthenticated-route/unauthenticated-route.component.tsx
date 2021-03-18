@@ -1,4 +1,5 @@
 import React from 'react';
+
 import * as PropTypes from 'prop-types';
 
 import { Route, Redirect } from 'react-router-dom';
@@ -18,7 +19,7 @@ const UnAuthenticatedRoute = (props: any) => {
 						<Component {...matchProps} />
 					</Layout>
 				) : (
-					<Redirect to='/dashboard' />
+					<Redirect to="/dashboard" />
 				)
 			}
 		/>
