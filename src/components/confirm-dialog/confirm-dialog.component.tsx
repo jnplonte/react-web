@@ -1,44 +1,80 @@
 import React from 'react';
 import * as PropTypes from 'prop-types';
 
-import { Button, DialogTitle, DialogContent, DialogActions, Typography } from '@material-ui/core';
-import { useTranslation } from 'react-i18next';
+import { useEffect, useState } from 'react';
+
+import clsx from 'clsx';
+
+import { Typography, Dialog, Button, DialogTitle, DialogActions, DialogContent } from '@material-ui/core';
 
 import WarningIcon from '@material-ui/icons/Warning';
+import ErrorIcon from '@material-ui/icons/Error';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 
-const ConfirmDialog = (props: any) => {
-	const { className, text, onConfirm, onCancel, data } = props;
+import { confirmDialogStyles } from './confirm-dialog.style';
 
-	const { t } = useTranslation();
+const ConfimDialogComponent = (props: any) => {
+	const { className, onFalse, onTrue, isVisible, type, title, message, buttonFalseText, buttonTrueText } = props;
+
+	const classes: any = confirmDialogStyles();
+
+	const [icon, setIcon] = useState(<CheckCircleIcon className={classes.dialogTitleIcon} />);
+	const [dialogClass, setDialogClass] = useState('blue-bg');
+
+	useEffect(() => {
+		switch (type) {
+			case 'warning':
+				setIcon(<WarningIcon className={classes.dialogTitleIcon} />);
+				setDialogClass('yellow-bg');
+				break;
+			case 'general':
+				setIcon(<CheckCircleIcon className={classes.dialogTitleIcon} />);
+				setDialogClass('blue-bg');
+				break;
+			case 'error':
+				setIcon(<ErrorIcon className={classes.dialogTitleIcon} />);
+				setDialogClass('red-bg');
+				break;
+			default:
+				setIcon(<CheckCircleIcon className={classes.dialogTitleIcon} />);
+				setDialogClass('blue-bg');
+		}
+	}, [type, classes]);
 
 	return (
-		<div>
-			<DialogTitle disableTypography className={className}>
-				<Typography variant="h4">
-					<WarningIcon className="MuiIcon" /> {t(`general.${className}`)}
-				</Typography>
-			</DialogTitle>
-			<DialogContent>
-				<p>{text}</p>
-			</DialogContent>
-			<DialogActions>
-				<Button onClick={onCancel} color="primary">
-					{t('general.cancel')}
-				</Button>
-				<Button onClick={() => onConfirm(data)} color="primary" autoFocus>
-					{t('general.confirm')}
-				</Button>
-			</DialogActions>
+		<div className={clsx(classes.root, className)}>
+			<Dialog maxWidth="sm" open={isVisible} onClose={onFalse}>
+				<DialogTitle className={clsx(classes.dialogTitle, dialogClass)}>
+					{icon}
+					<Typography className={classes.dialogTitleText}>{title}</Typography>
+				</DialogTitle>
+				<DialogContent className={classes.dialog}>
+					<Typography className={classes.dialogContentText}>{message}</Typography>
+				</DialogContent>
+				<DialogActions>
+					<Button onClick={onFalse} color="secondary">
+						{buttonFalseText}
+					</Button>
+					<Button onClick={onTrue} color="primary" autoFocus>
+						{buttonTrueText}
+					</Button>
+				</DialogActions>
+			</Dialog>
 		</div>
 	);
 };
 
-ConfirmDialog.propTypes = {
+ConfimDialogComponent.propTypes = {
 	className: PropTypes.string,
-	text: PropTypes.string,
-	onConfirm: PropTypes.func.isRequired,
-	onCancel: PropTypes.func.isRequired,
-	data: PropTypes.object.isRequired,
+	buttonTrueText: PropTypes.string.isRequired,
+	buttonFalseText: PropTypes.string.isRequired,
+	message: PropTypes.string.isRequired,
+	title: PropTypes.string.isRequired,
+	isVisible: PropTypes.bool.isRequired,
+	type: PropTypes.string.isRequired,
+
+	onFalse: PropTypes.func.isRequired,
+	onTrue: PropTypes.func.isRequired,
 };
 
-export default ConfirmDialog;
+export default ConfimDialogComponent;

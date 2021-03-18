@@ -6,6 +6,10 @@
 	text-align: right !important;
 }
 
+.yellow-bg {
+	background-color: $yellow !important;
+}
+
 .green-bg {
 	background-color: $green !important;
 }
@@ -26,6 +30,10 @@
 	background-color: $white !important;
 }
 
+.yellow {
+	color: $yellow !important;
+}
+
 .green {
 	color: $green !important;
 }
@@ -44,17 +52,4 @@
 
 .white {
 	color: $white !important;
-}
-
-.warning {
-	background-color: $blue !important;
-	color: $white !important;
-	.MuiTypography-root {
-		color: $white !important;
-	}
-	.MuiIcon {
-		position: relative;
-		top: 5px;
-		margin-right: 10px;
-	}
 }

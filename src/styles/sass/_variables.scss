@@ -1,39 +1,39 @@
 // Colors system
-$blacker:                   #262626;
-$black:                     #333333;
+$blacker: #262626;
+$black: #333333;
 
 // SHADES OF GREY
-$light-grey:                #B1C4D3;
-$grey:                      #707070;
-$dark-grey:                 #262626;
+$light-grey: #b1c4d3;
+$grey: #707070;
+$dark-grey: #262626;
 
 // SHADES OF WHITE
-$light-white:               #F6FAFD;
-$white:                     #FFFFFF;
-$dark-white:                #D3D3D3;
+$light-white: #f6fafd;
+$white: #ffffff;
+$dark-white: #d3d3d3;
 
-$red:                       #DC3545;
-$dark-red:                  #C8313F;
+$red: #dc3545;
+$dark-red: #c8313f;
 
-$green:                     #14AF1B;
-$dark-green:                #119017;
+$yellow: #fdd736;
 
-$blue:                     #4051B5;
+$green: #14af1b;
+$dark-green: #119017;
+
+$blue: #4051b5;
 
 $breakpoints: (
-  small:  767px,
-  medium: 992px,
-  large:  1200px
+	small: 767px,
+	medium: 992px,
+	large: 1200px,
 ) !default;
 
 @mixin respond-to($breakpoint) {
-    @if map-has-key($breakpoints, $breakpoint) {
-      @media (min-width: map-get($breakpoints, $breakpoint)) {
-        @content;
-      }
-    }
-   
-    @else {
-      @warn "no breakpoint `#{$breakpoint}` available";
-    }
+	@if map-has-key($breakpoints, $breakpoint) {
+		@media (min-width: map-get($breakpoints, $breakpoint)) {
+			@content;
+		}
+	} @else {
+		@warn "no breakpoint `#{$breakpoint}` available";
+	}
 }

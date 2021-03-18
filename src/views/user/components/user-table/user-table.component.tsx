@@ -15,7 +15,6 @@ import {
 	TablePagination,
 	IconButton,
 	Modal,
-	Dialog,
 	Chip,
 } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
@@ -120,13 +119,16 @@ const UserTable = (props: any) => {
 		setSelected({});
 	};
 
-	const handleDeleteConfirm = async (uData: object = {}) => {
-		const requestData: any = await userRequest.delete({ id: selected['id'] });
-		setNotificationData({ type: requestData.type, message: requestData.message });
+	const handleDeleteConfirm = async (result: any) => {
+		setDeleteModal(false);
 
-		if (requestData.data) {
-			refreshData();
-			setDeleteModal(false);
+		if (result) {
+			const requestData: any = await userRequest.delete({ id: selected['id'] });
+			setNotificationData({ type: requestData.type, message: requestData.message });
+
+			if (requestData.data) {
+				refreshData();
+			}
 		}
 	};
 
@@ -142,17 +144,16 @@ const UserTable = (props: any) => {
 				</div>
 			</Modal>
 
-			<Dialog open={deleteModal} onClose={handleDeleteClose}>
-				<div className={classes.dialog}>
-					<ConfirmDialogComponent
-						className="warning"
-						onConfirm={handleDeleteConfirm}
-						onCancel={handleDeleteClose}
-						text={t('user.delete')}
-						data={selected}
-					/>
-				</div>
-			</Dialog>
+			<ConfirmDialogComponent
+				isVisible={deleteModal}
+				title={t('general.warning')}
+				message={t('user.delete')}
+				buttonTrueText={t('general.confirm')}
+				buttonFalseText={t('general.cancel')}
+				onFalse={handleDeleteClose}
+				onTrue={handleDeleteConfirm}
+				type="warning"
+			/>
 
 			<Table className={classes.table} size="small">
 				<TableHead>
