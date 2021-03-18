@@ -1,0 +1,60 @@
+.hidden {
+	display: none !important;
+}
+
+.right-text {
+	text-align: right !important;
+}
+
+.green-bg {
+	background-color: $green !important;
+}
+
+.red-bg {
+	background-color: $red !important;
+}
+
+.grey-bg {
+	background-color: $grey !important;
+}
+
+.blue-bg {
+	background-color: $blue !important;
+}
+
+.white-bg {
+	background-color: $white !important;
+}
+
+.green {
+	color: $green !important;
+}
+
+.red {
+	color: $red !important;
+}
+
+.grey {
+	color: $grey !important;
+}
+
+.blue {
+	color: $blue !important;
+}
+
+.white {
+	color: $white !important;
+}
+
+.warning {
+	background-color: $blue !important;
+	color: $white !important;
+	.MuiTypography-root {
+		color: $white !important;
+	}
+	.MuiIcon {
+		position: relative;
+		top: 5px;
+		margin-right: 10px;
+	}
+}

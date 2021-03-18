@@ -1,6 +1,7 @@
 @import 'font';
 @import 'variables';
 
+@import 'global';
 @import 'app';
 @import 'modal';
 
@@ -10,56 +11,8 @@ body {
 	font-family: 'Roboto', sans-serif;
 }
 
-.hidden {
-	display: none !important;
-}
-
-.right-text {
-	text-align: right !important;
-}
-
 .backToTop {
 	position: fixed;
 	bottom: 30px;
 	right: 30px;
-}
-
-.green-bg {
-	background-color: $green !important;
-}
-
-.red-bg {
-	background-color: $red !important;
-}
-
-.grey-bg {
-	background-color: $grey !important;
-}
-
-.blue-bg {
-	background-color: $blue !important;
-}
-
-.white-bg {
-	background-color: $white !important;
-}
-
-.green {
-	color: $green !important;
-}
-
-.red {
-	color: $red !important;
-}
-
-.grey {
-	color: $grey !important;
-}
-
-.blue {
-	color: $blue !important;
-}
-
-.white {
-	color: $white !important;
 }

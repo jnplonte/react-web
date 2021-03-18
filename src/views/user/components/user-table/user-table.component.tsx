@@ -25,7 +25,8 @@ import EditIcon from '@material-ui/icons/Edit';
 
 import { userTableStyles } from './user-table.style';
 
-import { UserForm, DeleteForm } from '../../components';
+import { UserForm } from '../../components';
+import { ConfirmDialogComponent } from '../../../../components';
 
 import { GetAuth } from '../../../../provider/authentication/authentication.provider';
 import { GetSiteInformation } from '../../../../provider/site-information/site-information.provider';
@@ -143,7 +144,13 @@ const UserTable = (props: any) => {
 
 			<Dialog open={deleteModal} onClose={handleDeleteClose}>
 				<div className={classes.dialog}>
-					<DeleteForm onDelete={handleDeleteConfirm} onCancel={handleDeleteClose} data={selected} />
+					<ConfirmDialogComponent
+						className="warning"
+						onConfirm={handleDeleteConfirm}
+						onCancel={handleDeleteClose}
+						text={t('user.delete')}
+						data={selected}
+					/>
 				</div>
 			</Dialog>
 
