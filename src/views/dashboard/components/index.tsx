@@ -1,4 +1,5 @@
-export { default as ChartData } from './chart-data/chart-data.component';
-export { default as PieData } from './pie-data/pie-data.component';
+import { lazy } from 'react';
 
-export { default as SummaryData } from './summary-data/summary-data.component';
+export const ChartData = lazy(() => import('./chart-data/chart-data.component'));
+export const PieData = lazy(() => import('./pie-data/pie-data.component'));
+export const SummaryData = lazy(() => import('./summary-data/summary-data.component'));

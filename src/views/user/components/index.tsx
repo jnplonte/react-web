@@ -1,5 +1,6 @@
-export { default as UserTable } from './user-table/user-table.component';
-export { default as UserToolbar } from './user-toolbar/user-toolbar.component';
-export { default as SearchInput } from './search-input/search-input.component';
+import { lazy } from 'react';
 
-export { default as UserForm } from './user-form/user-form.component';
+export const UserTable = lazy(() => import('./user-table/user-table.component'));
+export const UserToolbar = lazy(() => import('./user-toolbar/user-toolbar.component'));
+export const SearchInput = lazy(() => import('./search-input/search-input.component'));
+export const UserForm = lazy(() => import('./user-form/user-form.component'));
