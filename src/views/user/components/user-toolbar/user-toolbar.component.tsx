@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import * as PropTypes from 'prop-types';
 import * as md5 from 'md5';

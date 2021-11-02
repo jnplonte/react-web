@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState, SyntheticEvent } from 'react';
 
 import Snackbar from '@material-ui/core/Snackbar';
 import Alert from '@material-ui/lab/Alert';
@@ -16,7 +16,7 @@ const NotificationComponent = () => {
 		}
 	}, [notificationData]);
 
-	const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
+	const handleClose = (event?: SyntheticEvent, reason?: string) => {
 		if (reason === 'clickaway') {
 			return;
 		}

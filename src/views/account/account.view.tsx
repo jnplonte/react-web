@@ -1,4 +1,3 @@
-import React from 'react';
 import * as md5 from 'md5';
 
 import { ChangeEvent, useState, Suspense } from 'react';

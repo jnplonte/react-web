@@ -1,4 +1,4 @@
-import React, { ChangeEvent, MouseEvent, useState, useEffect, useCallback, useMemo } from 'react';
+import { ChangeEvent, MouseEvent, useState, useEffect, useCallback, useMemo } from 'react';
 
 import * as PropTypes from 'prop-types';
 
