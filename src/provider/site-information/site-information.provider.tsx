@@ -1,17 +1,17 @@
 import React, { createContext, useContext, useState } from 'react';
 
+interface INotificationProps {
+	message: string;
+	type: 'error' | 'info' | 'success' | 'warning';
+}
+
 interface IContextProps {
-	notificationData: object;
+	notificationData: INotificationProps;
 	setNotificationData: any;
 }
 
-interface INotificationProps {
-	message: string;
-	type: string;
-}
-
 export const SiteContext = createContext<IContextProps>({
-	notificationData: {},
+	notificationData: {} as INotificationProps,
 	setNotificationData: () => {},
 });
 
@@ -22,7 +22,7 @@ const GetSiteInformation = () => {
 const SiteInformationProvider = (props: any) => {
 	const { children } = props;
 
-	const [notificationState, setNotificationState] = useState<object>({});
+	const [notificationState, setNotificationState] = useState<INotificationProps>({} as INotificationProps);
 
 	const setNotificationStateData = (notify: INotificationProps) => {
 		setNotificationState(notify);

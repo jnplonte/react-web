@@ -43,7 +43,7 @@ export class Helper {
 		return deleteCookie(name, domain);
 	}
 
-	removeNullObject(obj: object = {}): object {
+	removeNullObject(obj: any = {}): object {
 		for (const propName in obj) {
 			if (obj[propName] === null || obj[propName] === undefined) {
 				delete obj[propName];
@@ -65,12 +65,27 @@ export class Helper {
 		}
 	}
 
-	initFormState(formState: any, target: object = {}): any {
+	initFormState(formState: any, target: any = {}): any {
+		let targetVal: unknown;
+
+		switch (target['type']) {
+			case 'checkbox':
+				targetVal = target['checked'];
+				break;
+
+			case 'file':
+				targetVal = target['files'][0];
+				break;
+			default:
+				targetVal = target['value'];
+				break;
+		}
+
 		return {
 			...formState,
 			values: {
 				...formState['values'],
-				[target['name']]: target['type'] === 'checkbox' ? target['checked'] : target['value'],
+				[target['name']]: targetVal,
 			},
 			touched: {
 				...formState.touched,

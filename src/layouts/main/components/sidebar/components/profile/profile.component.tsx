@@ -16,9 +16,9 @@ const Profile = (props: any) => {
 	const { authData } = GetAuth();
 
 	const user = {
-		name: `${authData['firstName'] || ''} ${authData['lastName'] || ''}`,
+		name: authData ? `${authData['firstName'] || ''} ${authData['lastName'] || ''}` : '',
 		avatar: process.env.REACT_APP_LOGO,
-		email: authData['email'] || '',
+		email: authData ? authData['email'] : '',
 	};
 
 	return (

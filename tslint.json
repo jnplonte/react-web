@@ -12,7 +12,7 @@
 		"eofline": true,
 		"forin": true,
 		"import-spacing": true,
-		"indent": [true, "tab", 2],
+		"indent": [true, "tab", 4],
 		"interface-over-type-literal": true,
 		"label-position": true,
 		"max-line-length": [true, 320],

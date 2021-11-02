@@ -26,13 +26,13 @@ const Account = (props: any) => {
 
 	const [value, setValue] = useState(0);
 
-	const handleChange = (event: ChangeEvent, newValue: number) => {
-		event.persist();
+	const handleChange = (event: ChangeEvent<{}> | null, newValue: number) => {
+		event?.persist();
 
 		setValue(newValue);
 	};
 
-	const handleProfileUpdate = async (uData: object = {}) => {
+	const handleProfileUpdate = async (uData: any = {}) => {
 		const apiData: object = {
 			email: uData['email'],
 			firstName: uData['firstName'],
@@ -40,7 +40,7 @@ const Account = (props: any) => {
 			phone: uData['phone'] || '',
 		};
 
-		const requestData: any = await userRequest.put({ id: authData['id'] }, apiData);
+		const requestData: any = await userRequest.put({ id: authData ? authData['id'] : '' }, apiData);
 		setNotificationData({ type: requestData.type, message: requestData.message });
 
 		if (requestData.data) {
@@ -48,12 +48,12 @@ const Account = (props: any) => {
 		}
 	};
 
-	const handlePasswordUpdate = async (uData: object = {}) => {
+	const handlePasswordUpdate = async (uData: any = {}) => {
 		const apiData: object = {
 			password: md5(uData['password']),
 		};
 
-		const requestData: any = await userRequest.put({ id: authData['id'] }, apiData);
+		const requestData: any = await userRequest.put({ id: authData ? authData['id'] : '' }, apiData);
 		setNotificationData({ type: requestData.type, message: requestData.message });
 	};
 

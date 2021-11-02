@@ -24,8 +24,8 @@ function ScrollTop(props: any) {
 		threshold: 100,
 	});
 
-	const handleClick = (event: MouseEvent) => {
-		const anchor = ((event.target as HTMLElement).ownerDocument || document).querySelector('#back-to-top');
+	const handleClick = (event: MouseEvent | null) => {
+		const anchor = ((event?.target as HTMLElement).ownerDocument || document).querySelector('#back-to-top');
 
 		if (anchor) {
 			anchor.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -63,8 +63,8 @@ const Main = (props: any) => {
 		setOpenSidebar(false);
 	};
 
-	const handleSignOut = (event: MouseEvent) => {
-		event.preventDefault();
+	const handleSignOut = (event: MouseEvent | null) => {
+		event?.preventDefault();
 
 		setToken('');
 		window.location.reload();

@@ -1,25 +1,26 @@
 {
 	"compilerOptions": {
 		"target": "es5",
-		"module": "esnext",
+		"lib": ["dom", "dom.iterable", "esnext"],
 		"allowJs": true,
 		"skipLibCheck": true,
 		"esModuleInterop": true,
 		"allowSyntheticDefaultImports": true,
-		"strict": false,
+		"strict": true,
 		"forceConsistentCasingInFileNames": true,
 		"noFallthroughCasesInSwitch": true,
+		"module": "esnext",
 		"moduleResolution": "node",
 		"resolveJsonModule": true,
 		"isolatedModules": true,
 		"noEmit": true,
 		"jsx": "react-jsx",
+
 		"importHelpers": true,
 		"experimentalDecorators": true,
 		"sourceMap": true,
 		"baseUrl": ".",
-		"typeRoots": ["./node_modules/@types", "./src/typings"],
-		"lib": ["dom", "dom.iterable", "esnext"]
+		"typeRoots": ["./node_modules/@types", "./src/typings"]
 	},
 	"include": ["./src"],
 	"exclude": ["node_modules"]

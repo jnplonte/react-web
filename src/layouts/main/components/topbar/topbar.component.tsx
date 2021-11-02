@@ -26,13 +26,13 @@ const Topbar = (props: any) => {
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 	const anchorOpen = Boolean(anchorEl);
 
-	const handleLocale = (event: MouseEvent) => {
-		const element = event.currentTarget as HTMLElement;
+	const handleLocale = (event: MouseEvent | null) => {
+		const element = event?.currentTarget as HTMLElement;
 		setLocaleEl(element);
 	};
 
-	const handleMenu = (event: MouseEvent) => {
-		const element = event.currentTarget as HTMLElement;
+	const handleMenu = (event: MouseEvent | null) => {
+		const element = event?.currentTarget as HTMLElement;
 		setAnchorEl(element);
 	};
 

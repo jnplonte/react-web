@@ -31,6 +31,8 @@ import { GetAuth } from '../../../../provider/authentication/authentication.prov
 import { GetSiteInformation } from '../../../../provider/site-information/site-information.provider';
 import { UserAPI } from '../../../../api/user.api';
 
+import { ICoreProps } from '../../../../interfaces/core.interface';
+
 const UserTable = (props: any) => {
 	const { className, refreshData, data, pagination, limit, history } = props;
 
@@ -46,7 +48,7 @@ const UserTable = (props: any) => {
 	const [editModal, setEditModal] = useState(false);
 	const [deleteModal, setDeleteModal] = useState(false);
 
-	const [selected, setSelected] = useState({});
+	const [selected, setSelected] = useState<ICoreProps>({});
 
 	const handleEditOpen = useCallback(
 		async (uId: string = '') => {
@@ -63,7 +65,7 @@ const UserTable = (props: any) => {
 	);
 
 	useEffect(() => {
-		if (userId && authData['id'] !== userId) {
+		if (userId && authData && authData['id'] !== userId) {
 			handleEditOpen(userId);
 		}
 
@@ -74,14 +76,14 @@ const UserTable = (props: any) => {
 		};
 	}, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-	const handlePageChange = (event: MouseEvent<HTMLButtonElement>, nPage: number) => {
-		event.preventDefault();
+	const handlePageChange = (event: MouseEvent | null, nPage: number) => {
+		event?.preventDefault();
 
-		refreshData('page', nPage + 1);
+		refreshData({ page: nPage + 1 });
 	};
 
-	const handleRowsPerPageChange = (event: ChangeEvent) => {
-		const target: HTMLInputElement = event.target as HTMLInputElement;
+	const handleRowsPerPageChange = (event: ChangeEvent | null) => {
+		const target: HTMLInputElement = event?.target as HTMLInputElement;
 
 		refreshData('limit', Number(target.value));
 	};
@@ -93,7 +95,7 @@ const UserTable = (props: any) => {
 		history.push('/user');
 	};
 
-	const handleEditConfirm = async (uData: object = {}) => {
+	const handleEditConfirm = async (uData: any = {}) => {
 		const apiData: object = {
 			email: uData['email'],
 			firstName: uData['firstName'],
@@ -186,26 +188,26 @@ const UserTable = (props: any) => {
 							<TableCell>{user.createdAt}</TableCell>
 							<TableCell align="center">
 								<IconButton
-									disabled={authData['id'] === user.id || user.roleId === roleIdAdmin()}
+									disabled={(authData && authData['id'] === user.id) || user.roleId === roleIdAdmin()}
 									onClick={() => handleEditOpen(user.id)}
 									component={Link}
 									to={`/user/${user.id}`}
 								>
 									<EditIcon
 										className={clsx({
-											green: authData['id'] !== user.id && user.roleId !== roleIdAdmin(),
-											grey: authData['id'] === user.id || user.roleId === roleIdAdmin(),
+											green: (authData && authData['id'] === user.id) || user.roleId !== roleIdAdmin(),
+											grey: (authData && authData['id'] === user.id) || user.roleId === roleIdAdmin(),
 										})}
 									/>
 								</IconButton>
 								<IconButton
-									disabled={authData['id'] === user.id || user.roleId === roleIdAdmin()}
+									disabled={(authData && authData['id'] === user.id) || user.roleId === roleIdAdmin()}
 									onClick={() => handleDeleteOpen(user.id)}
 								>
 									<DeleteIcon
 										className={clsx({
-											red: authData['id'] !== user.id && user.roleId !== roleIdAdmin(),
-											grey: authData['id'] === user.id || user.roleId === roleIdAdmin(),
+											red: (authData && authData['id'] === user.id) || user.roleId !== roleIdAdmin(),
+											grey: (authData && authData['id'] === user.id) || user.roleId === roleIdAdmin(),
 										})}
 									/>
 								</IconButton>
@@ -217,7 +219,7 @@ const UserTable = (props: any) => {
 			<TablePagination
 				component="div"
 				count={pagination.totalData || 0}
-				onChangePage={handlePageChange}
+				onPageChange={handlePageChange}
 				onChangeRowsPerPage={handleRowsPerPageChange}
 				page={(pagination.currentPage || 1) - 1}
 				rowsPerPage={limit}

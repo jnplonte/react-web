@@ -9,7 +9,6 @@ import './styles/sass/index.scss';
 import App from './App';
 
 // import reportWebVitals from './reportWebVitals';
-// import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(
 	<React.StrictMode>
@@ -22,6 +21,3 @@ ReactDOM.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 // reportWebVitals();
-
-// service workers
-// registerServiceWorker();

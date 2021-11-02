@@ -8,10 +8,24 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { Helper } from '../../services/helper/helper.service';
 import { UserAPI } from '../../api/user.api';
 
+interface IAuthDataProps {
+	id: string;
+	username: string;
+	firstName: string;
+	lastName: string;
+	phone: string | null;
+	email: string | null;
+	roleId: number;
+	languageId: number;
+	countryId: number;
+	active: boolean;
+	verified: boolean;
+}
+
 interface IContextProps {
 	token: string;
 	isLogin: boolean;
-	authData: object;
+	authData: IAuthDataProps | null;
 	setToken: any;
 	setAuthData: any;
 }
@@ -19,7 +33,7 @@ interface IContextProps {
 export const AuthContext = createContext<IContextProps>({
 	token: '',
 	isLogin: false,
-	authData: {},
+	authData: null,
 	setToken: () => {},
 	setAuthData: () => {},
 });
@@ -52,7 +66,7 @@ const AuthProvider = (props: any) => {
 
 	const [tokenState, setTokenState] = useState(authToken);
 	const [isLoginState, setIsLoginState] = useState(helper.isNotEmpty(authToken));
-	const [authState, setAuthState] = useState({});
+	const [authState, setAuthState] = useState<IAuthDataProps | null>(null);
 
 	const setTokenStateData = (token: string) => {
 		setTokenState(token);
@@ -70,7 +84,7 @@ const AuthProvider = (props: any) => {
 			setAuthState(requestData.data);
 		} else {
 			setIsLoginState(false);
-			setAuthState({});
+			setAuthState(null);
 
 			helper.deleteCookie(process.env.REACT_APP_AUTH_COOKIE);
 		}
@@ -81,7 +95,7 @@ const AuthProvider = (props: any) => {
 			fetchDataAsync();
 		} else {
 			setIsLoginState(false);
-			setAuthState({});
+			setAuthState(null);
 
 			helper.deleteCookie(process.env.REACT_APP_AUTH_COOKIE);
 		}

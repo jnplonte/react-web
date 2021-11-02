@@ -1,4 +1,4 @@
-import React, { MouseEvent, ChangeEvent, KeyboardEvent, useState } from 'react';
+import React, { MouseEvent, KeyboardEvent, ChangeEvent, useState } from 'react';
 
 import * as PropTypes from 'prop-types';
 
@@ -22,8 +22,8 @@ const SearchInput = (props: any) => {
 
 	const [search, setSearch] = useState('');
 
-	const handleSearch = (event: MouseEvent | KeyboardEvent) => {
-		event.preventDefault();
+	const handleSearch = (event: MouseEvent | KeyboardEvent | null) => {
+		event?.preventDefault();
 
 		let targetValue: string | null = null;
 
@@ -36,15 +36,15 @@ const SearchInput = (props: any) => {
 		refreshData('query', targetValue);
 	};
 
-	const handleChange = (event: ChangeEvent<{ name?: string; value: unknown }>) => {
-		event.persist();
+	const handleChange = (event: ChangeEvent<{ name?: string; value: unknown }> | null) => {
+		event?.persist();
 
-		const target: HTMLInputElement = event.target as HTMLInputElement;
+		const target: HTMLInputElement = event?.target as HTMLInputElement;
 		setSearch(target.value);
 	};
 
-	const keyPress = (event: KeyboardEvent) => {
-		if (event.key === 'Enter') {
+	const keyPress = (event: KeyboardEvent | null) => {
+		if (event?.key === 'Enter') {
 			handleSearch(event);
 		}
 	};

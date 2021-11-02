@@ -11,7 +11,7 @@ export interface ISchemaProps {
 
 export interface IFormProps {
 	isValid: boolean;
-	values: object;
+	values: any;
 	touched?: object;
 	errors?: object;
 }

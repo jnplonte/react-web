@@ -36,7 +36,7 @@ const UserToolbar = (props: any) => {
 		setAddModal(false);
 	};
 
-	const handleAddConfirm = async (data: object = {}) => {
+	const handleAddConfirm = async (data: any = {}) => {
 		const apiData: object = {
 			username: data['username'],
 			email: data['email'],

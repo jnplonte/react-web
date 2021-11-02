@@ -12,6 +12,8 @@ import { GetAuth } from '../../provider/authentication/authentication.provider';
 import { UserAPI } from '../../api/user.api';
 import { Helper } from '../../services/helper/helper.service';
 
+import { IQueryProps } from '../../interfaces/core.interface';
+
 const helper: Helper = new Helper();
 
 const User = (props: any) => {
@@ -22,7 +24,7 @@ const User = (props: any) => {
 	const userRequest: UserAPI = useMemo(() => new UserAPI(token), [token]);
 
 	const [loading, setLoading] = useState<boolean>(false);
-	const [apiParams, setApiParams] = useState<object>({ limit: 10, page: 1, order: 'createdAt:DESC', query: null });
+	const [apiParams, setApiParams] = useState<IQueryProps>({ limit: 10, page: 1, order: 'createdAt:DESC', query: null });
 
 	const [users, setUsers] = useState<Array<any | null>>([]);
 	const [paginations, setPaginations] = useState<object>({});

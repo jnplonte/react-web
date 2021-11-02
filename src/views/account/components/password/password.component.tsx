@@ -32,15 +32,15 @@ const Password = (props: any) => {
 		}));
 	}, [t, formState.values]);
 
-	const handleChange = (event: ChangeEvent<{ name?: string; value: unknown }>) => {
-		event.persist();
+	const handleChange = (event: ChangeEvent<{ name?: string; value: unknown }> | null) => {
+		event?.persist();
 
-		const target: HTMLInputElement = event.target as HTMLInputElement;
+		const target: HTMLInputElement = event?.target as HTMLInputElement;
 		setFormState((state: any) => helper.initFormState(state, target));
 	};
 
-	const handleFormSubmit = (event: FormEvent) => {
-		event.preventDefault();
+	const handleFormSubmit = (event: FormEvent | null) => {
+		event?.preventDefault();
 
 		onUpdate(formState.values);
 		setFormState(emptyForm);
