@@ -40,11 +40,7 @@ const UserForm = (props: any) => {
 
 	const [formState, setFormState] = useState<IFormProps>(emptyForm);
 
-	useEffect(() => {
-		return () => {
-			setFormState(emptyForm);
-		};
-	}, []); // eslint-disable-line react-hooks/exhaustive-deps
+	useEffect(() => () => setFormState(emptyForm), []);
 
 	useEffect(() => {
 		let updatedSchema: ISchemaProps = schema(t);

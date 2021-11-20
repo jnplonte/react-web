@@ -1,9 +1,10 @@
-import { ChangeEvent, FormEvent, useState, useEffect } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 
 import { withRouter } from 'react-router-dom';
 
 import validateJS from 'validate.js';
-import * as md5 from 'md5';
+import md5 from 'md5';
+
 import { Grid, Button, TextField, Typography } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 
@@ -13,7 +14,7 @@ import { GetSiteInformation } from '../../provider/site-information/site-informa
 import { signInStyle } from './sign-in.style';
 
 import { Helper } from '../../services/helper/helper.service';
-import { AuthAPI } from '../../api/authenttication.api';
+import { AuthAPI } from '../../api/authentication.api';
 
 import { IFormProps, schema, emptyForm } from './sign-in.constant';
 
@@ -31,20 +32,20 @@ const SignIn = (props: any) => {
 
 	const [formState, setFormState] = useState<IFormProps>(emptyForm);
 
-	useEffect(() => {
-		const errors = validateJS(formState.values, schema(t), { fullMessages: false });
-		setFormState((state: any) => ({
-			...state,
-			isValid: errors ? false : true,
-			errors: errors || {},
-		}));
-	}, [t, formState.values]);
-
 	const handleChange = (event: ChangeEvent<{ name?: string; value: unknown }> | null) => {
 		event?.persist();
 
 		const target: HTMLInputElement = event?.target as HTMLInputElement;
-		setFormState((state: any) => helper.initFormState(state, target));
+		setFormState((state: any) => {
+			const updatedState = helper.initFormState(state, target);
+			const updatedError = validateJS(updatedState.values, schema(t), { fullMessages: false });
+
+			return {
+				...updatedState,
+				isValid: updatedError ? false : true,
+				errors: updatedError || {},
+			};
+		});
 	};
 
 	const handleSignIn = async (event: FormEvent | null) => {
@@ -59,7 +60,7 @@ const SignIn = (props: any) => {
 			const requestData: any = await authRequest.login({}, apiData);
 			setNotificationData({ type: requestData.type, message: t(requestData.message) });
 
-			if (requestData.data) {
+			if (requestData && requestData.data) {
 				setToken(requestData.data || '');
 				history.push('/dashboard');
 			}
@@ -83,11 +84,12 @@ const SignIn = (props: any) => {
 				<Grid className={classes.content} item lg={5} xs={12}>
 					<div className={classes.content}>
 						<div className={classes.contentBody}>
-							<form className={classes.form} onSubmit={handleSignIn} noValidate>
+							<form data-testid="submitform" className={classes.form} onSubmit={handleSignIn} noValidate>
 								<Typography align="left" className={classes.title} variant="h4">
 									{t('signin.signIn')}
 								</Typography>
 								<TextField
+									data-testid="username"
 									className={classes.textField}
 									error={helper.hasFormError(formState, 'username')}
 									fullWidth
@@ -100,6 +102,7 @@ const SignIn = (props: any) => {
 									variant="outlined"
 								/>
 								<TextField
+									data-testid="password"
 									className={classes.textField}
 									error={helper.hasFormError(formState, 'password')}
 									fullWidth
@@ -107,11 +110,12 @@ const SignIn = (props: any) => {
 									label={t('form.password')}
 									name="password"
 									onChange={handleChange}
-									type="password"
+									type="text"
 									value={formState.values['password'] || ''}
 									variant="outlined"
 								/>
 								<Button
+									data-testid="signin"
 									className={classes.signInButton}
 									disabled={!formState.isValid}
 									color="primary"

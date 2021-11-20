@@ -28,8 +28,6 @@ export class AuthAPI {
 					return { type: 'error', message: 'error.login' };
 				}
 			})
-			.catch((error: any) => {
-				return { type: 'error', message: 'error.login' };
-			});
+			.catch((error: any) => ({ type: 'error', message: 'error.login' }));
 	}
 }

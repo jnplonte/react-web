@@ -13,23 +13,21 @@ export interface IFormProps {
 	errors?: object;
 }
 
-const schema = (t: any): ISchemaProps => {
-	return {
-		username: {
-			presence: { allowEmpty: false, message: t('error.required') },
-		},
-		firstName: {
-			presence: { allowEmpty: false, message: t('error.required') },
-		},
-		lastName: {
-			presence: { allowEmpty: false, message: t('error.required') },
-		},
-		email: {
-			presence: { allowEmpty: false, message: t('error.required') },
-			email: { message: t('error.emailRequired') },
-		},
-	};
-};
+const schema = (t: any): ISchemaProps => ({
+	username: {
+		presence: { allowEmpty: false, message: t('error.required') },
+	},
+	firstName: {
+		presence: { allowEmpty: false, message: t('error.required') },
+	},
+	lastName: {
+		presence: { allowEmpty: false, message: t('error.required') },
+	},
+	email: {
+		presence: { allowEmpty: false, message: t('error.required') },
+		email: { message: t('error.emailRequired') },
+	},
+});
 
 const emptyForm: IFormProps = {
 	isValid: false,

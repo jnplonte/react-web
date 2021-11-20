@@ -56,7 +56,7 @@ const User = (props: any) => {
 			setPaginations({});
 			setApiParams({ limit: 10, page: 1, order: 'createdAt:DESC', query: null });
 		};
-	}, []); // eslint-disable-line react-hooks/exhaustive-deps
+	}, []);
 
 	const handleRefresh = (type: string, param: any) => {
 		if (helper.isNotEmpty(type)) {

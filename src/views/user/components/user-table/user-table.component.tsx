@@ -74,7 +74,7 @@ const UserTable = (props: any) => {
 			setDeleteModal(false);
 			setSelected({});
 		};
-	}, []); // eslint-disable-line react-hooks/exhaustive-deps
+	}, []);
 
 	const handlePageChange = (event: MouseEvent | null, nPage: number) => {
 		event?.preventDefault();
@@ -134,9 +134,7 @@ const UserTable = (props: any) => {
 		}
 	};
 
-	const roleIdAdmin = () => {
-		return Number(process.env.REACT_APP_ROLE_ID_ADMIN);
-	};
+	const roleIdAdmin = () => Number(process.env.REACT_APP_ROLE_ID_ADMIN);
 
 	return (
 		<Paper className={clsx(classes.root, className)}>

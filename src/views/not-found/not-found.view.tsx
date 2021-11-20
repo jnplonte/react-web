@@ -21,7 +21,12 @@ const NotFound = (props: any) => {
 				<Grid item lg={6} xs={12}>
 					<div className={classes.content}>
 						<Typography variant="h1">{t('notfound.pageNotFound')}</Typography>
-						<Typography variant="subtitle1" onClick={handleGoBackToHome} className={classes.goback}>
+						<Typography
+							data-testid="goback"
+							variant="subtitle1"
+							onClick={handleGoBackToHome}
+							className={classes.goback}
+						>
 							{t('notfound.goBackToHome')}
 						</Typography>
 					</div>

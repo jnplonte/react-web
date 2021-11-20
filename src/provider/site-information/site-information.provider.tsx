@@ -12,12 +12,10 @@ interface IContextProps {
 
 export const SiteContext = createContext<IContextProps>({
 	notificationData: {} as INotificationProps,
-	setNotificationData: () => {},
+	setNotificationData: () => ({}),
 });
 
-const GetSiteInformation = () => {
-	return useContext(SiteContext);
-};
+const GetSiteInformation = () => useContext(SiteContext);
 
 const SiteInformationProvider = (props: any) => {
 	const { children } = props;

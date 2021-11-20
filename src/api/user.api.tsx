@@ -25,9 +25,7 @@ export class UserAPI {
 					return null;
 				}
 			})
-			.catch((error: any) => {
-				return null;
-			});
+			.catch((error: any) => null);
 	}
 
 	get(params: any = {}) {
@@ -42,9 +40,7 @@ export class UserAPI {
 					return null;
 				}
 			})
-			.catch((error: any) => {
-				return null;
-			});
+			.catch((error: any) => null);
 	}
 
 	getAll(params: object = {}) {
@@ -59,9 +55,7 @@ export class UserAPI {
 					return [];
 				}
 			})
-			.catch((error: any) => {
-				return [];
-			});
+			.catch((error: any) => []);
 	}
 
 	post(data: object = {}) {
@@ -79,9 +73,7 @@ export class UserAPI {
 					return { type: 'error', message: 'insert failed' };
 				}
 			})
-			.catch((error: any) => {
-				return { type: 'error', message: 'insert failed' };
-			});
+			.catch((error: any) => ({ type: 'error', message: 'insert failed' }));
 	}
 
 	put(params: any = {}, data: object = {}) {
@@ -99,9 +91,7 @@ export class UserAPI {
 					return { type: 'error', message: 'update failed' };
 				}
 			})
-			.catch((error: any) => {
-				return { type: 'error', message: 'update failed' };
-			});
+			.catch((error: any) => ({ type: 'error', message: 'update failed' }));
 	}
 
 	delete(params: any = {}) {
@@ -119,8 +109,6 @@ export class UserAPI {
 					return { type: 'error', message: 'delete failed' };
 				}
 			})
-			.catch((error: any) => {
-				return { type: 'error', message: 'delete failed' };
-			});
+			.catch((error: any) => ({ type: 'error', message: 'delete failed' }));
 	}
 }

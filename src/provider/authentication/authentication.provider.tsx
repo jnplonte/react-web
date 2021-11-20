@@ -34,15 +34,13 @@ export const AuthContext = createContext<IContextProps>({
 	token: '',
 	isLogin: false,
 	authData: null,
-	setToken: () => {},
-	setAuthData: () => {},
+	setToken: () => ({}),
+	setAuthData: () => ({}),
 });
 
 const helper: Helper = new Helper();
 
-const GetAuth = () => {
-	return useContext(AuthContext);
-};
+const GetAuth = () => useContext(AuthContext);
 
 const AuthProvider = (props: any) => {
 	const { children } = props;

@@ -16,38 +16,34 @@ export interface IFormProps {
 	errors?: object;
 }
 
-const schema = (t: any): ISchemaProps => {
-	return {
-		username: {
-			presence: { allowEmpty: false, message: t('error.required') },
-		},
-		firstName: {
-			presence: { allowEmpty: false, message: t('error.required') },
-		},
-		lastName: {
-			presence: { allowEmpty: false, message: t('error.required') },
-		},
-		email: {
-			presence: { allowEmpty: false, message: t('error.required') },
-			email: { message: t('error.emailRequired') },
-		},
-	};
-};
+const schema = (t: any): ISchemaProps => ({
+	username: {
+		presence: { allowEmpty: false, message: t('error.required') },
+	},
+	firstName: {
+		presence: { allowEmpty: false, message: t('error.required') },
+	},
+	lastName: {
+		presence: { allowEmpty: false, message: t('error.required') },
+	},
+	email: {
+		presence: { allowEmpty: false, message: t('error.required') },
+		email: { message: t('error.emailRequired') },
+	},
+});
 
-const inertSchema = (t: any): ISchemaProps => {
-	return {
-		password: {
-			presence: { allowEmpty: false, message: t('error.required') },
-			length: {
-				minimum: 8,
-				message: t('error.passwordInvalid'),
-			},
+const inertSchema = (t: any): ISchemaProps => ({
+	password: {
+		presence: { allowEmpty: false, message: t('error.required') },
+		length: {
+			minimum: 8,
+			message: t('error.passwordInvalid'),
 		},
-		confirmPassword: {
-			equality: 'password',
-		},
-	};
-};
+	},
+	confirmPassword: {
+		equality: 'password',
+	},
+});
 
 const emptyForm: IFormProps = {
 	isValid: false,

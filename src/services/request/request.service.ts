@@ -9,20 +9,18 @@ const handleResponse = (response: any) => {
 	return status
 		? response.data
 		: {
-				status: 'failed',
-				message: response.data && response.data.message ? response.data.message : 'server-error',
-				data: response.data && response.data.data ? response.data.data : {},
+			status: 'failed',
+			message: response.data && response.data.message ? response.data.message : 'server-error',
+			data: response.data && response.data.data ? response.data.data : {},
 		  };
 };
 
-const handleError = (error: any, type?: string) => {
-	return type === 'GET'
-		? null
-		: {
-				status: 'failed',
-				message: error,
+const handleError = (error: any, type?: string) => type === 'GET'
+	? null
+	: {
+		status: 'failed',
+		message: error,
 		  };
-};
 
 export class Request {
 	logger: Logger;
@@ -77,9 +75,7 @@ export class Request {
 		});
 
 		return Promise.all(promises)
-			.then((results: any) => {
-				return results;
-			})
+			.then((results: any) => results)
 			.catch((error: any) => {
 				this.logger.error('GET', error);
 				handleError(error, 'GET');

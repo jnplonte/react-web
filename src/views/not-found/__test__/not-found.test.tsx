@@ -1,4 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
+import { act } from 'react-dom/test-utils';
 import { MockViews } from '../../../react-app-test-helper';
 
 import { createMemoryHistory } from 'history';
@@ -26,8 +27,10 @@ describe('not found view', () => {
 
 		render(<MockViews history={history} view={<NotFound />} />);
 
-		const homePageButton = screen.getByText(/HOME PAGE/i);
-		await fireEvent.click(homePageButton);
+		const gobackButton = screen.getByTestId(/goback/i);
+		await act(async () => {
+			fireEvent.click(gobackButton);
+		});
 
 		expect(history.location.pathname).toEqual('/');
 	});
