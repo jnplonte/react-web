@@ -2,7 +2,7 @@ import * as PropTypes from 'prop-types';
 
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
-import { AppBar, Toolbar, Typography, Hidden } from '@material-ui/core';
+import { AppBar, Toolbar, Typography, Hidden } from '@mui/material';
 
 const Topbar = (props: any) => {
 	const { className } = props;
@@ -17,7 +17,7 @@ const Topbar = (props: any) => {
 						title={process.env.REACT_APP_NAME}
 						src={process.env.REACT_APP_LOGO}
 					/>
-					<Hidden smDown>
+					<Hidden mdDown>
 						<Typography variant="h6" className="title">
 							{process.env.REACT_APP_NAME}
 						</Typography>

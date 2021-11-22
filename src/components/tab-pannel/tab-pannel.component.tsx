@@ -1,6 +1,6 @@
 import * as PropTypes from 'prop-types';
 
-import { Box } from '@material-ui/core';
+import { Box } from '@mui/material';
 
 const TabPanel = (props: any) => {
 	const { children, value, index } = props;

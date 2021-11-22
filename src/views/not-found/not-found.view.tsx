@@ -1,6 +1,6 @@
-import React, { withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
-import { Grid, Typography } from '@material-ui/core';
+import { Box, Grid, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
 import { notFoundStyle } from './not-found.style';
@@ -8,7 +8,6 @@ import { notFoundStyle } from './not-found.style';
 const NotFound = (props: any) => {
 	const { history } = props;
 
-	const classes: any = notFoundStyle();
 	const { t } = useTranslation();
 
 	const handleGoBackToHome = () => {
@@ -16,23 +15,16 @@ const NotFound = (props: any) => {
 	};
 
 	return (
-		<div className={classes.root}>
+		<Box sx={[notFoundStyle.root]}>
 			<Grid container justifyContent="center" spacing={4}>
 				<Grid item lg={6} xs={12}>
-					<div className={classes.content}>
-						<Typography variant="h1">{t('notfound.pageNotFound')}</Typography>
-						<Typography
-							data-testid="goback"
-							variant="subtitle1"
-							onClick={handleGoBackToHome}
-							className={classes.goback}
-						>
-							{t('notfound.goBackToHome')}
-						</Typography>
-					</div>
+					<Typography variant="h2">{t('notfound.pageNotFound')}</Typography>
+					<Typography data-testid="goback" variant="subtitle1" onClick={handleGoBackToHome} sx={notFoundStyle.goback}>
+						{t('notfound.goBackToHome')}
+					</Typography>
 				</Grid>
 			</Grid>
-		</div>
+		</Box>
 	);
 };
 

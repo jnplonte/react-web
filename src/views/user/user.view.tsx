@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo, useCallback, Suspense } from 'react';
 
 import { withRouter } from 'react-router-dom';
-import { CircularProgress, Grid, Typography } from '@material-ui/core';
+import { CircularProgress, Grid, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
 import { userStyle } from './user.style';

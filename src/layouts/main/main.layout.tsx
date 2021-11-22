@@ -2,11 +2,11 @@ import { MouseEvent, useState } from 'react';
 
 import * as PropTypes from 'prop-types';
 
-import clsx from 'clsx';
+import { Box } from '@mui/material';
 
-import { useTheme } from '@material-ui/styles';
-import { useMediaQuery, Zoom, Fab, useScrollTrigger } from '@material-ui/core';
-import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import { useTheme } from '@mui/styles';
+import { useMediaQuery, Zoom, Fab, useScrollTrigger } from '@mui/material';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 import { mainStyle } from './main.style';
 import { Sidebar, Topbar, Footer } from './components';
@@ -44,7 +44,6 @@ function ScrollTop(props: any) {
 const Main = (props: any) => {
 	const { children } = props;
 
-	const classes: any = mainStyle();
 	const theme: any = useTheme();
 
 	const { setToken } = GetAuth();
@@ -73,25 +72,22 @@ const Main = (props: any) => {
 	const shouldOpenSidebar = isDesktop ? true : openSidebar;
 
 	return (
-		<div
-			className={clsx({
-				[classes.root]: true,
-				[classes.shiftContent]: isDesktop,
-			})}
-		>
+		<Box sx={[mainStyle.root]}>
 			<NotificationComponent />
 			<div id="back-to-top">
 				<Topbar onSidebarOpen={handleSidebarOpen} onSignOut={handleSignOut} />
 			</div>
 			<Sidebar onClose={handleSidebarClose} open={shouldOpenSidebar} variant={isDesktop ? 'persistent' : 'temporary'} />
-			<main className={clsx(classes.content, 'main-container')}>{children}</main>
+			<main sx={mainStyle.content} className="main-container">
+				{children}
+			</main>
 			<ScrollTop {...props}>
 				<Fab color="secondary" size="small" aria-label="scroll to top">
 					<KeyboardArrowUpIcon />
 				</Fab>
 			</ScrollTop>
 			<Footer />
-		</div>
+		</Box>
 	);
 };
 

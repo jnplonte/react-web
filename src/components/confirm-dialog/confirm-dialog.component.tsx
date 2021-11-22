@@ -4,11 +4,11 @@ import * as PropTypes from 'prop-types';
 
 import clsx from 'clsx';
 
-import { Typography, Dialog, Button, DialogTitle, DialogActions, DialogContent } from '@material-ui/core';
+import { Typography, Dialog, Button, DialogTitle, DialogActions, DialogContent } from '@mui/material';
 
-import WarningIcon from '@material-ui/icons/Warning';
-import ErrorIcon from '@material-ui/icons/Error';
-import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import WarningIcon from '@mui/icons-material/Warning';
+import ErrorIcon from '@mui/icons-material/Error';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 import { confirmDialogStyles } from './confirm-dialog.style';
 

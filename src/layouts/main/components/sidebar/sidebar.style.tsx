@@ -1,24 +1,14 @@
-import { makeStyles } from '@material-ui/styles';
-
-export const sidebarStyle = makeStyles((theme: any) => ({
-	root: {
+export const sidebarStyle = {
+	root: (theme: any) => ({
 		backgroundColor: theme.palette.white,
-		display: 'flex',
-		flexDirection: 'column',
 		height: '100%',
-		padding: theme.spacing(2),
-	},
-	drawer: {
-		width: 240,
-		[theme.breakpoints.up('lg')]: {
-			marginTop: 64,
-			height: 'calc(100% - 64px)',
-		},
-	},
-	divider: {
+		width: 210,
+		padding: theme.spacing(10, 2, 2, 2),
+	}),
+	divider: (theme: any) => ({
 		margin: theme.spacing(2, 0),
-	},
-	nav: {
+	}),
+	nav: (theme: any) => ({
 		marginBottom: theme.spacing(2),
-	},
-}));
+	}),
+};

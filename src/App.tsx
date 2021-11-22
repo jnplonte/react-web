@@ -1,10 +1,10 @@
-import React from 'react';
+import { Component } from 'react';
 
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { createBrowserHistory } from 'history';
 import { Router } from 'react-router-dom';
-import { ThemeProvider } from '@material-ui/core/styles';
-import { Paper } from '@material-ui/core';
+
+import { ThemeProvider } from '@mui/material/styles';
 
 import Theme from './themes';
 import Routes from './routes';
@@ -14,7 +14,7 @@ import { SiteInformationProvider } from './provider/site-information/site-inform
 
 const browserHistory = createBrowserHistory();
 
-class App extends React.Component {
+class App extends Component {
 	public render() {
 		return (
 			<HelmetProvider>
@@ -25,11 +25,9 @@ class App extends React.Component {
 					<AuthProvider>
 						<SiteInformationProvider>
 							<ThemeProvider theme={Theme}>
-								<Paper>
-									<Router history={browserHistory}>
-										<Routes />
-									</Router>
-								</Paper>
+								<Router history={browserHistory}>
+									<Routes />
+								</Router>
 							</ThemeProvider>
 						</SiteInformationProvider>
 					</AuthProvider>

@@ -1,9 +1,9 @@
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@mui/styles';
 
 export const confirmDialogStyles = makeStyles((theme: any) => ({
 	root: {},
 	dialogTitle: {
-		padding: `${theme.spacing(1.5)}px ${theme.spacing(2)}px`,
+		padding: `${theme.spacing(1.5)} ${theme.spacing(2)}`,
 	},
 	general: {
 		backgroundColor: theme.palette.primary.main,

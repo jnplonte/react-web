@@ -2,7 +2,8 @@ import { Router } from 'react-router-dom';
 
 import './locales';
 
-import { ThemeProvider } from '@material-ui/core/styles';
+import { ThemeProvider } from '@mui/material/styles';
+
 import Theme from './themes';
 
 import { AuthProvider } from './provider/authentication/authentication.provider';

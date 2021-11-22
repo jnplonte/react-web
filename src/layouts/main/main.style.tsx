@@ -1,14 +1,12 @@
-import { makeStyles } from '@material-ui/styles';
-
-export const mainStyle = makeStyles(() => ({
-	root: {
-		height: '100%',
-		paddingTop: 64,
-	},
-	shiftContent: {
-		paddingLeft: 240,
-	},
+export const mainStyle = {
+	root: (theme: any) => ({
+		paddingTop: theme.spacing(8),
+		paddingLeft: theme.spacing(30),
+		[theme.breakpoints.down('lg')]: {
+			paddingLeft: theme.spacing(0),
+		},
+	}),
 	content: {
 		height: '100%',
 	},
-}));
+};

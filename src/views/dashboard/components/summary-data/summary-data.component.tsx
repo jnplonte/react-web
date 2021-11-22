@@ -1,31 +1,30 @@
 import * as PropTypes from 'prop-types';
 
-import clsx from 'clsx';
-import { Card, CardContent, Grid, Typography, Avatar } from '@material-ui/core';
+import { Box, Card, CardContent, Grid, Typography, Avatar } from '@mui/material';
 
 import { summaryStyle } from './summary-data.style';
 
 const SummaryData = (props: any) => {
 	const { className, title, value, icon } = props;
 
-	const classes: any = summaryStyle();
-
 	return (
-		<Card className={clsx(classes.root, className)}>
-			<CardContent>
-				<Grid container justify="space-between">
-					<Grid item>
-						<Typography className={classes.title} color="textSecondary" gutterBottom variant="body2">
-							{title}
-						</Typography>
-						<Typography variant="h3">{value}</Typography>
+		<Box sx={[summaryStyle.root]} className={className}>
+			<Card>
+				<CardContent>
+					<Grid container justifyContent="space-between">
+						<Grid item>
+							<Typography align="left" color="textSecondary" gutterBottom variant="body2">
+								{title}
+							</Typography>
+							<Typography variant="h3">{value}</Typography>
+						</Grid>
+						<Grid item>
+							<Avatar sx={[summaryStyle.avatar]}>{icon}</Avatar>
+						</Grid>
 					</Grid>
-					<Grid item>
-						<Avatar className={classes.avatar}>{icon}</Avatar>
-					</Grid>
-				</Grid>
-			</CardContent>
-		</Card>
+				</CardContent>
+			</Card>
+		</Box>
 	);
 };
 

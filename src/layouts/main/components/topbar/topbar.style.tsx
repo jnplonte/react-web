@@ -1,15 +1,17 @@
-import { makeStyles } from '@material-ui/styles';
-
-export const topbarStyle = makeStyles((theme: any) => ({
-	root: {},
-	flexGrow: {
+export const topbarStyle = {
+	root: {
 		flexGrow: 1,
 	},
-	menuButton: {
+	menuButton: (theme: any) => ({
 		marginRight: theme.spacing(1),
-	},
-	lang: {
+	}),
+	link: (theme: any) => ({
+		marginLeft: theme.spacing(0.25),
+		display: 'flex',
+		flexGrow: 1,
+	}),
+	lang: (theme: any) => ({
 		marginLeft: theme.spacing(0.25),
 		color: theme.palette.white,
-	},
-}));
+	}),
+};

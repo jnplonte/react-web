@@ -1,14 +1,14 @@
-import { unstable_createMuiStrictModeTheme as createMuiTheme } from '@material-ui/core';
+import { createTheme } from '@mui/material/styles';
 
 import palette from './palette';
 import typography from './typography';
 
 const basePalette: object = palette || {};
 const baseTypography: object = typography || {};
-const Theme = createMuiTheme({
+const Theme = createTheme({
 	palette: {
 		...basePalette,
-		type: 'light',
+		mode: 'light',
 	},
 	typography: baseTypography,
 	zIndex: {

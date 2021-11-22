@@ -16,11 +16,11 @@ import {
 	IconButton,
 	Modal,
 	Chip,
-} from '@material-ui/core';
+} from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
-import DeleteIcon from '@material-ui/icons/Delete';
-import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
 import { userTableStyles } from './user-table.style';
 
@@ -190,6 +190,7 @@ const UserTable = (props: any) => {
 									onClick={() => handleEditOpen(user.id)}
 									component={Link}
 									to={`/user/${user.id}`}
+									size="large"
 								>
 									<EditIcon
 										className={clsx({
@@ -201,6 +202,7 @@ const UserTable = (props: any) => {
 								<IconButton
 									disabled={(authData && authData['id'] === user.id) || user.roleId === roleIdAdmin()}
 									onClick={() => handleDeleteOpen(user.id)}
+									size="large"
 								>
 									<DeleteIcon
 										className={clsx({
@@ -218,7 +220,7 @@ const UserTable = (props: any) => {
 				component="div"
 				count={pagination.totalData || 0}
 				onPageChange={handlePageChange}
-				onChangeRowsPerPage={handleRowsPerPageChange}
+				onRowsPerPageChange={handleRowsPerPageChange}
 				page={(pagination.currentPage || 1) - 1}
 				rowsPerPage={limit}
 				rowsPerPageOptions={[10, 20, 30]}

@@ -1,16 +1,10 @@
-import { makeStyles } from '@material-ui/styles';
-
-export const summaryStyle = makeStyles((theme: any) => ({
+export const summaryStyle = {
 	root: {
 		height: '100%',
 	},
-	title: {
-		fontWeight: 700,
-		textAlign: 'left',
-	},
-	avatar: {
+	avatar: (theme: any) => ({
 		backgroundColor: theme.palette.primary.main,
 		height: 56,
 		width: 56,
-	},
-}));
+	}),
+};

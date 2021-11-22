@@ -1,17 +1,16 @@
-import { makeStyles } from '@material-ui/styles';
-
-export const profileStyle = makeStyles((theme: any) => ({
-	root: {
+export const profileStyle = {
+	root: {},
+	avatarContainer: {
 		display: 'flex',
-		flexDirection: 'column',
+		justifyContent: 'center',
 		alignItems: 'center',
-		minHeight: 'fit-content',
+		alignContent: 'center',
 	},
 	avatar: {
 		width: 60,
 		height: 60,
 	},
-	name: {
-		marginTop: theme.spacing(1),
-	},
-}));
+	name: (theme: any) => ({
+		marginTop: theme.spacing(2),
+	}),
+};

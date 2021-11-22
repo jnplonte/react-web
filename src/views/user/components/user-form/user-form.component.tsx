@@ -4,21 +4,11 @@ import * as PropTypes from 'prop-types';
 
 import validateJS from 'validate.js';
 import clsx from 'clsx';
-import {
-	Grid,
-	Button,
-	TextField,
-	FormControl,
-	InputLabel,
-	Select,
-	Card,
-	CardContent,
-	CardHeader,
-} from '@material-ui/core';
+import { Grid, Button, TextField, FormControl, InputLabel, Select, Card, CardContent, CardHeader } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
-import PeopleIcon from '@material-ui/icons/People';
-import EditIcon from '@material-ui/icons/Edit';
+import PeopleIcon from '@mui/icons-material/People';
+import EditIcon from '@mui/icons-material/Edit';
 
 import { userFormStyles } from './user-form.style';
 
@@ -138,7 +128,7 @@ const UserForm = (props: any) => {
 								<Select
 									native
 									value={Number(formState.values['roleId'] || process.env.REACT_APP_DEFAULT_ROLEID)}
-									onChange={handleChange}
+									onChange={(e) => handleChange(e as ChangeEvent<{ name?: string; value: unknown }>)}
 									inputProps={{ name: 'roleId', id: 'roleId' }}
 								>
 									<option value={1} disabled>

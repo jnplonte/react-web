@@ -1,9 +1,8 @@
 import * as PropTypes from 'prop-types';
 
 import validateJS from 'validate.js';
-import clsx from 'clsx';
 import { FormEvent, ChangeEvent, useState, useEffect } from 'react';
-import { Grid, Typography, Button, TextField } from '@material-ui/core';
+import { Box, Grid, Typography, Button, TextField } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
 import { passwordStyles } from './password.style';
@@ -17,7 +16,6 @@ const helper: Helper = new Helper();
 const Password = (props: any) => {
 	const { className, onUpdate } = props;
 
-	const classes: any = passwordStyles();
 	const { t } = useTranslation();
 
 	const [formState, setFormState] = useState<IFormProps>(emptyForm);
@@ -46,14 +44,14 @@ const Password = (props: any) => {
 	};
 
 	return (
-		<div className={clsx(classes.root, className)}>
+		<Box sx={[passwordStyles.root]} className={className}>
 			<Typography variant="h4">{t('account.password')}</Typography>
-			<form className={classes.form} onSubmit={handleFormSubmit} noValidate>
+			<Box component="form" sx={passwordStyles.form} onSubmit={handleFormSubmit} noValidate>
 				<Grid container spacing={3}>
 					<Grid item xs={12} sm={6}>
 						<TextField
 							autoComplete="off"
-							className={classes.textField}
+							sx={passwordStyles.textField}
 							error={helper.hasFormError(formState, 'password')}
 							fullWidth
 							helperText={helper.hasFormError(formState, 'password', true)}
@@ -67,7 +65,7 @@ const Password = (props: any) => {
 					<Grid item xs={12} sm={6}>
 						<TextField
 							autoComplete="off"
-							className={classes.textField}
+							sx={passwordStyles.textField}
 							error={helper.hasFormError(formState, 'confirmPassword')}
 							fullWidth
 							helperText={helper.hasFormError(formState, 'confirmPassword', true)}
@@ -81,13 +79,20 @@ const Password = (props: any) => {
 				</Grid>
 				<Grid container spacing={3}>
 					<Grid item xs={12} className="right-text">
-						<Button disabled={!formState.isValid} variant="contained" type="submit" color="primary" autoFocus>
+						<Button
+							sx={passwordStyles.button}
+							disabled={!formState.isValid}
+							variant="contained"
+							type="submit"
+							color="primary"
+							autoFocus
+						>
 							{t('account.updatePassword')}
 						</Button>
 					</Grid>
 				</Grid>
-			</form>
-		</div>
+			</Box>
+		</Box>
 	);
 };
 

@@ -2,8 +2,8 @@ import React, { createContext, useContext, useState, useEffect, useCallback } fr
 
 import clsx from 'clsx';
 
-import { makeStyles } from '@material-ui/styles';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import { makeStyles } from '@mui/styles';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import { Helper } from '../../services/helper/helper.service';
 import { UserAPI } from '../../api/user.api';

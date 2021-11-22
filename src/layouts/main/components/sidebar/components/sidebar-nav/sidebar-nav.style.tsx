@@ -1,9 +1,9 @@
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@mui/styles';
 
-export const sidebarStyle = makeStyles((theme: any) => ({
+export const sidebarStyle = {
 	root: {},
-	item: {
+	item: (theme: any) => ({
 		display: 'flex',
 		padding: theme.spacing(1),
-	},
-}));
+	}),
+};

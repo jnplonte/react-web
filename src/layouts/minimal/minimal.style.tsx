@@ -1,11 +1,6 @@
-import { makeStyles } from '@material-ui/styles';
-
-export const minimalStyle = makeStyles((theme: any) => ({
-	root: {
-		paddingTop: 64,
-		height: '100%',
-	},
+export const minimalStyle = {
+	root: {},
 	content: {
 		height: '100%',
 	},
-}));
+};

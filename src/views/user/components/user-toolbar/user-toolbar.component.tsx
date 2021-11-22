@@ -4,7 +4,7 @@ import * as PropTypes from 'prop-types';
 import * as md5 from 'md5';
 
 import clsx from 'clsx';
-import { Button, Modal } from '@material-ui/core';
+import { Button, Modal } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
 import { userToolbarStyles } from './user-toolbar.style';

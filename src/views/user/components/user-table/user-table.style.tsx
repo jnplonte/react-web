@@ -1,4 +1,4 @@
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@mui/styles';
 
 export const userTableStyles = makeStyles((theme: any) => ({
 	root: {

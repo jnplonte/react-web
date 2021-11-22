@@ -1,12 +1,11 @@
-import { makeStyles } from '@material-ui/styles';
-
-export const chartStyle = makeStyles(() => ({
-	root: {},
+export const chartStyle = {
+	root: {
+		height: '100%',
+	},
 	chartContainer: {
 		height: 400,
-		position: 'relative',
 	},
 	actions: {
 		justifyContent: 'flex-end',
 	},
-}));
+};

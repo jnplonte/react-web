@@ -1,20 +1,40 @@
-import { makeStyles } from '@material-ui/styles';
-
-export const signInStyle = makeStyles((theme: any) => ({
-	root: {
-		backgroundColor: theme.palette.background.default,
-		height: '100vh',
-	},
+export const signInStyle = {
 	grid: {
 		height: '100%',
 	},
-	quoteContainer: {
-		[theme.breakpoints.down('md')]: {
-			display: 'none',
-		},
+	content: {
+		display: 'flex',
 	},
-	quote: {
-		backgroundColor: theme.palette.neutral,
+	root: (theme: any) => ({
+		backgroundColor: theme.palette.background.default,
+		height: '100vh',
+	}),
+	contentInner: (theme: any) => ({
+		flexGrow: 1,
+		display: 'flex',
+		alignItems: 'center',
+		justifyContent: 'center',
+		[theme.breakpoints.down('lg')]: {
+			padding: theme.spacing(2),
+		},
+	}),
+	form: (theme: any) => ({
+		[theme.breakpoints.down('lg')]: {
+			paddingLeft: theme.spacing(2),
+			paddingRight: theme.spacing(2),
+		},
+	}),
+	title: (theme: any) => ({
+		marginTop: theme.spacing(2),
+	}),
+	textField: (theme: any) => ({
+		marginTop: theme.spacing(2),
+	}),
+	signInButton: (theme: any) => ({
+		margin: theme.spacing(2, 0),
+	}),
+	quote: (theme: any) => ({
+		backgroundColor: theme.palette.background.default,
 		height: '100%',
 		display: 'flex',
 		justifyContent: 'center',
@@ -23,56 +43,19 @@ export const signInStyle = makeStyles((theme: any) => ({
 		backgroundSize: 'cover',
 		backgroundRepeat: 'no-repeat',
 		backgroundPosition: 'center',
-	},
-	quoteInner: {
-		textAlign: 'center',
-		flexBasis: '600px',
-	},
-	quoteText: {
+		[theme.breakpoints.down('lg')]: {
+			display: 'none',
+		},
+	}),
+	quoteText: (theme: any) => ({
 		color: theme.palette.white,
 		fontWeight: 300,
-	},
-	name: {
+	}),
+	name: (theme: any) => ({
 		marginTop: theme.spacing(3),
 		color: theme.palette.white,
-	},
-	bio: {
+	}),
+	bio: (theme: any) => ({
 		color: theme.palette.white,
-	},
-	contentContainer: {},
-	content: {
-		height: '100%',
-		display: 'flex',
-		flexDirection: 'column',
-	},
-	logoImage: {
-		marginLeft: theme.spacing(3),
-	},
-	contentBody: {
-		flexGrow: 1,
-		display: 'flex',
-		alignItems: 'center',
-		[theme.breakpoints.down('md')]: {
-			justifyContent: 'center',
-		},
-	},
-	form: {
-		paddingLeft: 100,
-		paddingRight: 100,
-		paddingBottom: 125,
-		flexBasis: 700,
-		[theme.breakpoints.down('sm')]: {
-			paddingLeft: theme.spacing(2),
-			paddingRight: theme.spacing(2),
-		},
-	},
-	title: {
-		marginTop: theme.spacing(3),
-	},
-	textField: {
-		marginTop: theme.spacing(2),
-	},
-	signInButton: {
-		margin: theme.spacing(2, 0),
-	},
-}));
+	}),
+};

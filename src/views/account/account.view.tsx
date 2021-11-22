@@ -2,7 +2,7 @@ import * as md5 from 'md5';
 
 import { ChangeEvent, useState, Suspense } from 'react';
 import { withRouter } from 'react-router-dom';
-import { CircularProgress, Tabs, Tab } from '@material-ui/core';
+import { Box, CircularProgress, Tabs, Tab } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
 import { accountStyle } from './account.style';
@@ -14,8 +14,7 @@ import { UserAPI } from '../../api/user.api';
 import { TabPannelComponent } from '../../components';
 import { Profile, Password } from './components';
 
-const Account = (props: any) => {
-	const classes: any = accountStyle();
+const Account = () => {
 	const { t } = useTranslation();
 
 	const { token, authData, setAuthData } = GetAuth();
@@ -57,8 +56,8 @@ const Account = (props: any) => {
 	};
 
 	return (
-		<div className={classes.root}>
-			<Suspense fallback={<CircularProgress className={classes.loading} size={60} />}>
+		<Box sx={[accountStyle.root]}>
+			<Suspense fallback={<CircularProgress size={60} />}>
 				<Tabs value={value} onChange={handleChange} variant="fullWidth">
 					<Tab label={t('account.profile')} id="tab-0" />
 					<Tab label={t('account.password')} id="tab-1" />
@@ -70,7 +69,7 @@ const Account = (props: any) => {
 					<Password onUpdate={handlePasswordUpdate} />
 				</TabPannelComponent>
 			</Suspense>
-		</div>
+		</Box>
 	);
 };
 

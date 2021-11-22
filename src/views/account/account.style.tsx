@@ -1,7 +1,5 @@
-import { makeStyles } from '@material-ui/styles';
-
-export const accountStyle = makeStyles((theme: any) => ({
-	root: {
+export const accountStyle = {
+	root: (theme: any) => ({
 		padding: theme.spacing(3),
-	},
-}));
+	}),
+};

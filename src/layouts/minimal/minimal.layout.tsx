@@ -1,5 +1,7 @@
 import * as PropTypes from 'prop-types';
 
+import { Box } from '@mui/material';
+
 import clsx from 'clsx';
 
 import { minimalStyle } from './minimal.style';
@@ -12,16 +14,16 @@ import { GetAuth } from '../../provider/authentication/authentication.provider';
 const Minimal = (props: any) => {
 	const { children } = props;
 
-	const classes: any = minimalStyle();
-
 	const { isLogin } = GetAuth();
 
 	return (
-		<div>
+		<Box sx={[minimalStyle.root]}>
 			<NotificationComponent />
 			<Topbar className={clsx({ hidden: !isLogin })} />
-			<main className={clsx(classes.content, 'minimal-container')}>{children}</main>
-		</div>
+			<main sx={minimalStyle.content} className="minimal-container">
+				{children}
+			</main>
+		</Box>
 	);
 };
 

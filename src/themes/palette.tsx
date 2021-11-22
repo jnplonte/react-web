@@ -1,4 +1,4 @@
-import { colors } from '@material-ui/core';
+import { colors } from '@mui/material';
 
 const $white = '#FFFFFF';
 const $grey = '#D3D3D3';
@@ -54,6 +54,7 @@ const Pallete = {
 	background: {
 		main: '#F4F6F8',
 		paper: $white,
+		black: '#333333',
 	},
 	icon: colors.blueGrey[600],
 	divider: colors.grey[200],

@@ -31,8 +31,6 @@
 	min-width: 300px;
 }
 
-.app-side-bar {
-	.active {
-		background-color: $dark-white;
-	}
+.active-sidebar-nav {
+	background-color: $dark-white !important;
 }

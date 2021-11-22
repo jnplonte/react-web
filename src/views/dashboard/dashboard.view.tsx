@@ -1,45 +1,39 @@
-import React from 'react';
-
 import { Suspense } from 'react';
-import { CircularProgress, Grid } from '@material-ui/core';
+import { Box, Grid, CircularProgress } from '@mui/material';
 
 import { dashboardStyle } from './dashboard.style';
-import MoneyIcon from '@material-ui/icons/Money';
-import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
-import InsertChartIcon from '@material-ui/icons/InsertChartOutlined';
-import PeopleIcon from '@material-ui/icons/PeopleOutlined';
+import MoneyIcon from '@mui/icons-material/Money';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import InsertChartIcon from '@mui/icons-material/InsertChartOutlined';
+import PeopleIcon from '@mui/icons-material/PeopleOutlined';
 
 import { ChartData, PieData, SummaryData } from './components';
 
-const Dashboard = () => {
-	const classes: any = dashboardStyle();
-
-	return (
-		<div className={classes.root}>
-			<Suspense fallback={<CircularProgress className={classes.loading} size={60} />}>
-				<Grid container spacing={4}>
-					<Grid item xs={12} sm={3}>
-						<SummaryData title="Summary 1" value="$1,000.00" icon={<MoneyIcon className={classes.icon} />} />
-					</Grid>
-					<Grid item xs={12} sm={3}>
-						<SummaryData title="Summary 2" value="2,000" icon={<PeopleIcon className={classes.icon} />} />
-					</Grid>
-					<Grid item xs={12} sm={3}>
-						<SummaryData title="Summary 3" value="80.5%" icon={<InsertChartIcon className={classes.icon} />} />
-					</Grid>
-					<Grid item xs={12} sm={3}>
-						<SummaryData title="Summary 4" value="$2,000.00" icon={<AttachMoneyIcon className={classes.icon} />} />
-					</Grid>
-					<Grid item xs={12} sm={8}>
-						<ChartData />
-					</Grid>
-					<Grid item xs={12} sm={4}>
-						<PieData />
-					</Grid>
+const Dashboard = () => (
+	<Box sx={[dashboardStyle.root]}>
+		<Suspense fallback={<CircularProgress size={60} />}>
+			<Grid container spacing={4}>
+				<Grid item xs={12} sm={3}>
+					<SummaryData title="Summary 1" value="$1,000.00" icon={<MoneyIcon sx={[dashboardStyle.icon]} />} />
 				</Grid>
-			</Suspense>
-		</div>
-	);
-};
+				<Grid item xs={12} sm={3}>
+					<SummaryData title="Summary 2" value="2,000" icon={<PeopleIcon sx={[dashboardStyle.icon]} />} />
+				</Grid>
+				<Grid item xs={12} sm={3}>
+					<SummaryData title="Summary 3" value="80.5%" icon={<InsertChartIcon sx={[dashboardStyle.icon]} />} />
+				</Grid>
+				<Grid item xs={12} sm={3}>
+					<SummaryData title="Summary 4" value="$2,000.00" icon={<AttachMoneyIcon sx={[dashboardStyle.icon]} />} />
+				</Grid>
+				<Grid item xs={12} sm={8}>
+					<ChartData />
+				</Grid>
+				<Grid item xs={12} sm={4}>
+					<PieData />
+				</Grid>
+			</Grid>
+		</Suspense>
+	</Box>
+);
 
 export default Dashboard;

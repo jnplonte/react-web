@@ -3,10 +3,10 @@ import { MouseEvent, KeyboardEvent, ChangeEvent, useState } from 'react';
 import * as PropTypes from 'prop-types';
 
 import clsx from 'clsx';
-import { Paper, Input, Button } from '@material-ui/core';
+import { Paper, Input, Button } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
-import SearchIcon from '@material-ui/icons/Search';
+import SearchIcon from '@mui/icons-material/Search';
 
 import { searchInputStyles } from './search-input.style';
 

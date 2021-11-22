@@ -1,5 +1,3 @@
-import React from 'react';
-
 import * as PropTypes from 'prop-types';
 
 import { Route, Redirect } from 'react-router-dom';
