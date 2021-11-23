@@ -29,7 +29,7 @@ const Sidebar = (props: any) => {
 	];
 
 	return (
-		<Drawer anchor="left" onClose={onClose} open={open} variant={variant}>
+		<Drawer sx={sidebarStyle.drawer} anchor="left" onClose={onClose} open={open} variant={variant}>
 			<Box sx={[sidebarStyle.root]} className={className}>
 				<Profile />
 				<Divider sx={sidebarStyle.divider} />
