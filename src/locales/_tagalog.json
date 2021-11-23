@@ -3,6 +3,7 @@
 		"signIn": "MAG-SIGN IN"
 	},
 	"general": {
+		"noData": "No Data Available",
 		"warning": "BABALA!",
 		"cancel": "Kanselahin",
 		"confirm": "Kumpirmahin"

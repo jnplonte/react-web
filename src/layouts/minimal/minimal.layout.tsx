@@ -20,9 +20,7 @@ const Minimal = (props: any) => {
 		<Box sx={[minimalStyle.root]}>
 			<NotificationComponent />
 			<Topbar className={clsx({ hidden: !isLogin })} />
-			<main sx={minimalStyle.content} className="minimal-container">
-				{children}
-			</main>
+			<main className="minimal-container">{children}</main>
 		</Box>
 	);
 };

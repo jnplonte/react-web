@@ -2,10 +2,12 @@
 	text-align: center;
 
 	.main-container {
+		width: 100%;
 		min-height: calc(100vh - 131px);
 	}
 
 	.minimal-container {
+		width: 100%;
 		min-height: 100vh;
 	}
 }

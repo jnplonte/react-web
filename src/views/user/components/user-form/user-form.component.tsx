@@ -3,8 +3,21 @@ import React, { FormEvent, ChangeEvent, useState, useEffect } from 'react';
 import * as PropTypes from 'prop-types';
 
 import validateJS from 'validate.js';
-import clsx from 'clsx';
-import { Grid, Button, TextField, FormControl, InputLabel, Select, Card, CardContent, CardHeader } from '@mui/material';
+
+import {
+	Box,
+	Grid,
+	Button,
+	InputLabel,
+	TextField,
+	FormControl,
+	Card,
+	CardContent,
+	CardHeader,
+	MenuItem,
+} from '@mui/material';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+
 import { useTranslation } from 'react-i18next';
 
 import PeopleIcon from '@mui/icons-material/People';
@@ -21,7 +34,6 @@ const helper: Helper = new Helper();
 const UserForm = (props: any) => {
 	const { className, onUpdate, onCancel, data, type } = props;
 
-	const classes: any = userFormStyles();
 	const { t } = useTranslation();
 
 	const [confirmText, setConfirmText] = useState(t('user.confirnInsert'));
@@ -95,6 +107,11 @@ const UserForm = (props: any) => {
 		setFormState((state: any) => helper.initFormState(state, target));
 	};
 
+	const handleChangeSelect = (event: SelectChangeEvent<{ name?: string; value: unknown }> | null) => {
+		const target: HTMLInputElement = event?.target as HTMLInputElement;
+		setFormState((state: any) => helper.initFormState(state, target));
+	};
+
 	const handleFormSubmit = (event: FormEvent | null) => {
 		event?.preventDefault();
 
@@ -102,16 +119,16 @@ const UserForm = (props: any) => {
 	};
 
 	return (
-		<Card className={clsx(classes.root, className)}>
+		<Card sx={[userFormStyles.root]} className={className}>
 			<CardHeader className="header" avatar={confirmIcon} title={confirmHeaderText}></CardHeader>
 			<CardContent>
-				<form className={classes.form} onSubmit={handleFormSubmit} noValidate>
+				<Box component="form" onSubmit={handleFormSubmit} noValidate>
 					<Grid container spacing={3}>
 						<Grid item xs={8}>
 							<TextField
 								autoComplete="off"
 								disabled={type === 'update'}
-								className={classes.textField}
+								sx={userFormStyles.textField}
 								error={helper.hasFormError(formState, 'username')}
 								fullWidth
 								helperText={helper.hasFormError(formState, 'username', true)}
@@ -123,19 +140,22 @@ const UserForm = (props: any) => {
 							/>
 						</Grid>
 						<Grid item xs={4}>
-							<FormControl disabled={Number(formState.values['roleId']) === 1} className={classes.textField} fullWidth>
-								<InputLabel htmlFor="roleId">{t('form.roles')}</InputLabel>
+							<FormControl disabled={Number(formState.values['roleId']) === 1} sx={userFormStyles.textField} fullWidth>
+								<InputLabel id="role">{t('form.roles')}</InputLabel>
 								<Select
-									native
-									value={Number(formState.values['roleId'] || process.env.REACT_APP_DEFAULT_ROLEID)}
-									onChange={(e) => handleChange(e as ChangeEvent<{ name?: string; value: unknown }>)}
+									labelId="role"
+									id="role"
+									value={formState.values['roleId'] || process.env.REACT_APP_DEFAULT_ROLEID}
+									onChange={handleChangeSelect}
+									autoWidth
 									inputProps={{ name: 'roleId', id: 'roleId' }}
+									label={t('form.roles')}
 								>
-									<option value={1} disabled>
+									<MenuItem value={1} disabled>
 										Super Admin
-									</option>
-									<option value={2}>Admin</option>
-									<option value={3}>User</option>
+									</MenuItem>
+									<MenuItem value={2}>Admin</MenuItem>
+									<MenuItem value={3}>User</MenuItem>
 								</Select>
 							</FormControl>
 						</Grid>
@@ -144,7 +164,7 @@ const UserForm = (props: any) => {
 						<Grid item xs={12} sm={6}>
 							<TextField
 								autoComplete="off"
-								className={classes.textField}
+								sx={userFormStyles.textField}
 								error={helper.hasFormError(formState, 'firstName')}
 								fullWidth
 								helperText={helper.hasFormError(formState, 'firstName', true)}
@@ -158,7 +178,7 @@ const UserForm = (props: any) => {
 						<Grid item xs={12} sm={6}>
 							<TextField
 								autoComplete="off"
-								className={classes.textField}
+								sx={userFormStyles.textField}
 								error={helper.hasFormError(formState, 'lastName')}
 								fullWidth
 								helperText={helper.hasFormError(formState, 'lastName', true)}
@@ -174,7 +194,7 @@ const UserForm = (props: any) => {
 						<Grid item xs={12} sm={6}>
 							<TextField
 								autoComplete="off"
-								className={classes.textField}
+								sx={userFormStyles.textField}
 								error={helper.hasFormError(formState, 'email')}
 								fullWidth
 								helperText={helper.hasFormError(formState, 'email', true)}
@@ -188,7 +208,7 @@ const UserForm = (props: any) => {
 						<Grid item xs={12} sm={6}>
 							<TextField
 								autoComplete="off"
-								className={classes.textField}
+								sx={userFormStyles.textField}
 								error={helper.hasFormError(formState, 'phone')}
 								fullWidth
 								helperText={helper.hasFormError(formState, 'phone', true)}
@@ -205,7 +225,7 @@ const UserForm = (props: any) => {
 							<Grid item xs={12} sm={6}>
 								<TextField
 									autoComplete="off"
-									className={classes.textField}
+									sx={userFormStyles.textField}
 									error={helper.hasFormError(formState, 'password')}
 									fullWidth
 									helperText={helper.hasFormError(formState, 'password', true)}
@@ -219,7 +239,7 @@ const UserForm = (props: any) => {
 							<Grid item xs={12} sm={6}>
 								<TextField
 									autoComplete="off"
-									className={classes.textField}
+									sx={userFormStyles.textField}
 									error={helper.hasFormError(formState, 'confirmPassword')}
 									fullWidth
 									helperText={helper.hasFormError(formState, 'confirmPassword', true)}
@@ -232,15 +252,15 @@ const UserForm = (props: any) => {
 							</Grid>
 						</Grid>
 					) : null}
-					<div className="footer">
+					<Box className="footer">
 						<Button onClick={onCancel} className="footerText" color="primary">
 							{t('general.cancel')}
 						</Button>
 						<Button disabled={!formState.isValid} variant="contained" type="submit" color="primary" autoFocus>
 							{confirmText}
 						</Button>
-					</div>
-				</form>
+					</Box>
+				</Box>
 			</CardContent>
 		</Card>
 	);

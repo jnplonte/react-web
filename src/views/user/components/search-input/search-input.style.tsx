@@ -1,17 +1,16 @@
-import { makeStyles } from '@mui/styles';
-
-export const searchInputStyles = makeStyles((theme: any) => ({
-	root: {
+export const searchInputStyles = {
+	root: (theme: any) => ({
 		borderRadius: '4px',
-		alignItems: 'center',
+		alignItems: 'left',
 		padding: theme.spacing(1),
-		display: 'flex',
-		flexBasis: 500,
-	},
-	input: {
-		flexGrow: 1,
-		fontSize: '14px',
-		lineHeight: '16px',
-		letterSpacing: '-0.05px',
-	},
-}));
+	}),
+	container: (theme: any) => ({
+		paddingTop: theme.spacing(1),
+	}),
+	input: (theme: any) => ({
+		padding: theme.spacing(1),
+	}),
+	button: (theme: any) => ({
+		margin: theme.spacing(1),
+	}),
+};

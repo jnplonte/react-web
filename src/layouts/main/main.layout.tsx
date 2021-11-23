@@ -78,9 +78,7 @@ const Main = (props: any) => {
 				<Topbar onSidebarOpen={handleSidebarOpen} onSignOut={handleSignOut} />
 			</div>
 			<Sidebar onClose={handleSidebarClose} open={shouldOpenSidebar} variant={isDesktop ? 'persistent' : 'temporary'} />
-			<main sx={mainStyle.content} className="main-container">
-				{children}
-			</main>
+			<main className="main-container">{children}</main>
 			<ScrollTop {...props}>
 				<Fab color="secondary" size="small" aria-label="scroll to top">
 					<KeyboardArrowUpIcon />

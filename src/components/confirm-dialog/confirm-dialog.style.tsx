@@ -1,31 +1,21 @@
-import { makeStyles } from '@mui/styles';
-
-export const confirmDialogStyles = makeStyles((theme: any) => ({
+export const confirmDialogStyles = {
 	root: {},
 	dialogTitle: {
-		padding: `${theme.spacing(1.5)} ${theme.spacing(2)}`,
+		display: 'flex',
 	},
-	general: {
-		backgroundColor: theme.palette.primary.main,
-	},
-	warning: {
-		backgroundColor: theme.palette.warning.main,
-	},
-	error: {
-		backgroundColor: theme.palette.error.main,
-	},
-	dialogTitleIcon: {
-		position: 'relative',
-		top: '5px',
-		marginRight: '10px',
+	dialogTitleIcon: (theme: any) => ({
+		marginRight: theme.spacing(1),
+		display: 'flex',
 		color: theme.palette.white,
-	},
-	dialogTitleText: {
+		alignItems: 'center',
+	}),
+	dialogTitleText: (theme: any) => ({
 		color: theme.palette.white,
-		display: 'inline-block',
 		fontSize: '16px',
-	},
-	dialogContentText: {
+		display: 'flex',
+		alignItems: 'center',
+	}),
+	dialogContentText: (theme: any) => ({
 		padding: theme.spacing(3),
-	},
-}));
+	}),
+};

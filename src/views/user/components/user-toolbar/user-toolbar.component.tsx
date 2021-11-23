@@ -3,8 +3,7 @@ import { useState } from 'react';
 import * as PropTypes from 'prop-types';
 import * as md5 from 'md5';
 
-import clsx from 'clsx';
-import { Button, Modal } from '@mui/material';
+import { Box, Button, Modal } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
 import { userToolbarStyles } from './user-toolbar.style';
@@ -18,7 +17,6 @@ import { UserForm } from '../../components';
 const UserToolbar = (props: any) => {
 	const { className, refreshData } = props;
 
-	const classes: any = userToolbarStyles();
 	const { t } = useTranslation();
 
 	const { token } = GetAuth();
@@ -57,19 +55,19 @@ const UserToolbar = (props: any) => {
 	};
 
 	return (
-		<div className={clsx(classes.root, className)}>
+		<Box sx={[userToolbarStyles.root]} className={className}>
 			<Modal open={addModal} onClose={handleAddClose}>
-				<div className={clsx(classes.root, 'modal')}>
+				<div className="modal">
 					<UserForm onUpdate={handleAddConfirm} onCancel={handleAddClose} type="insert" data={{}} />
 				</div>
 			</Modal>
-			<div className={classes.row}>
-				<span className={classes.spacer} />
-				<Button className={classes.customW100} color="secondary" variant="contained" onClick={handleAddOpen}>
+			<Box sx={[userToolbarStyles.row]}>
+				<Box sx={userToolbarStyles.spacer} />
+				<Button sx={userToolbarStyles.customW100} color="secondary" variant="contained" onClick={handleAddOpen}>
 					{t('user.insert')}
 				</Button>
-			</div>
-		</div>
+			</Box>
+		</Box>
 	);
 };
 

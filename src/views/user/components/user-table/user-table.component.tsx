@@ -6,6 +6,7 @@ import clsx from 'clsx';
 
 import { Link, useParams, withRouter } from 'react-router-dom';
 import {
+	Box,
 	Paper,
 	Table,
 	TableBody,
@@ -15,6 +16,7 @@ import {
 	TablePagination,
 	IconButton,
 	Modal,
+	TableContainer,
 	Chip,
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
@@ -36,7 +38,6 @@ import { ICoreProps } from '../../../../interfaces/core.interface';
 const UserTable = (props: any) => {
 	const { className, refreshData, data, pagination, limit, history } = props;
 
-	const classes: any = userTableStyles();
 	const { t } = useTranslation();
 
 	const { token, authData } = GetAuth();
@@ -137,9 +138,9 @@ const UserTable = (props: any) => {
 	const roleIdAdmin = () => Number(process.env.REACT_APP_ROLE_ID_ADMIN);
 
 	return (
-		<Paper className={clsx(classes.root, className)}>
+		<Box sx={[userTableStyles.root]} className={className}>
 			<Modal open={editModal} onClose={handleEditClose}>
-				<div className={clsx(classes.root, 'modal')}>
+				<div className="modal">
 					<UserForm onUpdate={handleEditConfirm} onCancel={handleEditClose} type="update" data={selected} />
 				</div>
 			</Modal>
@@ -155,77 +156,81 @@ const UserTable = (props: any) => {
 				type="warning"
 			/>
 
-			<Table className={classes.table} size="small">
-				<TableHead>
-					<TableRow>
-						<TableCell>{t('user.fullName')}</TableCell>
-						<TableCell>{t('user.userName')}</TableCell>
-						<TableCell>{t('user.email')}</TableCell>
-						<TableCell>{t('user.phone')}</TableCell>
-						<TableCell align="center">{t('user.active')}</TableCell>
-						<TableCell>{t('user.createdAt')}</TableCell>
-						<TableCell align="center">{t('user.action')}</TableCell>
-					</TableRow>
-				</TableHead>
-				<TableBody>
-					{data.map((user: any) => (
-						<TableRow className={classes.tableRow} hover key={user.id}>
-							<TableCell>
-								{user.firstName} {user.lastName}
-							</TableCell>
-							<TableCell>{user.username}</TableCell>
-							<TableCell>{user.email}</TableCell>
-							<TableCell>{user.phone}</TableCell>
-							<TableCell align="center">
-								{user.active ? (
-									<Chip className="green-bg white" label={t('user.active')} />
-								) : (
-									<Chip className="red-bg white" label={t('user.inactive')} />
-								)}
-							</TableCell>
-							<TableCell>{user.createdAt}</TableCell>
-							<TableCell align="center">
-								<IconButton
-									disabled={(authData && authData['id'] === user.id) || user.roleId === roleIdAdmin()}
-									onClick={() => handleEditOpen(user.id)}
-									component={Link}
-									to={`/user/${user.id}`}
-									size="large"
-								>
-									<EditIcon
-										className={clsx({
-											green: (authData && authData['id'] === user.id) || user.roleId !== roleIdAdmin(),
-											grey: (authData && authData['id'] === user.id) || user.roleId === roleIdAdmin(),
-										})}
-									/>
-								</IconButton>
-								<IconButton
-									disabled={(authData && authData['id'] === user.id) || user.roleId === roleIdAdmin()}
-									onClick={() => handleDeleteOpen(user.id)}
-									size="large"
-								>
-									<DeleteIcon
-										className={clsx({
-											red: (authData && authData['id'] === user.id) || user.roleId !== roleIdAdmin(),
-											grey: (authData && authData['id'] === user.id) || user.roleId === roleIdAdmin(),
-										})}
-									/>
-								</IconButton>
-							</TableCell>
-						</TableRow>
-					))}
-				</TableBody>
-			</Table>
-			<TablePagination
-				component="div"
-				count={pagination.totalData || 0}
-				onPageChange={handlePageChange}
-				onRowsPerPageChange={handleRowsPerPageChange}
-				page={(pagination.currentPage || 1) - 1}
-				rowsPerPage={limit}
-				rowsPerPageOptions={[10, 20, 30]}
-			/>
-		</Paper>
+			<Paper>
+				<TableContainer>
+					<Table stickyHeader>
+						<TableHead>
+							<TableRow>
+								<TableCell>{t('user.fullName')}</TableCell>
+								<TableCell>{t('user.userName')}</TableCell>
+								<TableCell>{t('user.email')}</TableCell>
+								<TableCell>{t('user.phone')}</TableCell>
+								<TableCell align="center">{t('user.active')}</TableCell>
+								<TableCell>{t('user.createdAt')}</TableCell>
+								<TableCell align="center">{t('user.action')}</TableCell>
+							</TableRow>
+						</TableHead>
+						<TableBody>
+							{data.map((user: any) => (
+								<TableRow hover key={user.id}>
+									<TableCell>
+										{user.firstName} {user.lastName}
+									</TableCell>
+									<TableCell>{user.username}</TableCell>
+									<TableCell>{user.email}</TableCell>
+									<TableCell>{user.phone}</TableCell>
+									<TableCell align="center">
+										{user.active ? (
+											<Chip className="green-bg white" label={t('user.active')} />
+										) : (
+											<Chip className="red-bg white" label={t('user.inactive')} />
+										)}
+									</TableCell>
+									<TableCell>{user.createdAt}</TableCell>
+									<TableCell align="center">
+										<IconButton
+											disabled={(authData && authData['id'] === user.id) || user.roleId === roleIdAdmin()}
+											onClick={() => handleEditOpen(user.id)}
+											component={Link}
+											to={`/user/${user.id}`}
+											size="large"
+										>
+											<EditIcon
+												className={clsx({
+													green: (authData && authData['id'] === user.id) || user.roleId !== roleIdAdmin(),
+													grey: (authData && authData['id'] === user.id) || user.roleId === roleIdAdmin(),
+												})}
+											/>
+										</IconButton>
+										<IconButton
+											disabled={(authData && authData['id'] === user.id) || user.roleId === roleIdAdmin()}
+											onClick={() => handleDeleteOpen(user.id)}
+											size="large"
+										>
+											<DeleteIcon
+												className={clsx({
+													red: (authData && authData['id'] === user.id) || user.roleId !== roleIdAdmin(),
+													grey: (authData && authData['id'] === user.id) || user.roleId === roleIdAdmin(),
+												})}
+											/>
+										</IconButton>
+									</TableCell>
+								</TableRow>
+							))}
+						</TableBody>
+					</Table>
+					<TablePagination
+						component="div"
+						count={pagination.totalData || 0}
+						onPageChange={handlePageChange}
+						onRowsPerPageChange={handleRowsPerPageChange}
+						page={(pagination.currentPage || 1) - 1}
+						rowsPerPage={limit}
+						rowsPerPageOptions={[10, 20, 30]}
+					/>
+				</TableContainer>
+			</Paper>
+		</Box>
 	);
 };
 

@@ -3,6 +3,7 @@
 		"signIn": "SIGN IN"
 	},
 	"general": {
+		"noData": "No Data Available",
 		"warning": "WARNING!",
 		"cancel": "Cancel",
 		"confirm": "Confirm"

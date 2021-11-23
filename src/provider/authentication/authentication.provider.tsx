@@ -2,8 +2,7 @@ import React, { createContext, useContext, useState, useEffect, useCallback } fr
 
 import clsx from 'clsx';
 
-import { makeStyles } from '@mui/styles';
-import CircularProgress from '@mui/material/CircularProgress';
+import { Box, CircularProgress } from '@mui/material';
 
 import { Helper } from '../../services/helper/helper.service';
 import { UserAPI } from '../../api/user.api';
@@ -44,21 +43,6 @@ const GetAuth = () => useContext(AuthContext);
 
 const AuthProvider = (props: any) => {
 	const { children } = props;
-
-	const classes: any = makeStyles(() => ({
-		root: {
-			paddingTop: '15%',
-			position: 'fixed',
-			width: '100%',
-			height: '100%',
-			top: 0,
-			left: 0,
-			right: 0,
-			bottom: 0,
-			zIndex: 9999,
-			backgroundColor: '#F4F6F8',
-		},
-	}))();
 
 	const authToken: string = helper.getCookie(process.env.REACT_APP_AUTH_COOKIE);
 
@@ -110,9 +94,23 @@ const AuthProvider = (props: any) => {
 			}}
 		>
 			{tokenState ? (
-				<div className={clsx({ [classes.root]: true, hidden: isLoginState })}>
+				<Box
+					position="fixed"
+					sx={{
+						paddingTop: '15%',
+						width: '100%',
+						height: '100%',
+						top: 0,
+						left: 0,
+						right: 0,
+						bottom: 0,
+						zIndex: 9999,
+						backgroundColor: '#F4F6F8',
+					}}
+					className={clsx({ hidden: isLoginState })}
+				>
 					<CircularProgress size={120} />
-				</div>
+				</Box>
 			) : (
 				''
 			)}

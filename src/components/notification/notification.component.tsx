@@ -4,6 +4,7 @@ import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 
 import { GetSiteInformation } from '../../provider/site-information/site-information.provider';
+import { Typography } from '@mui/material';
 
 const NotificationComponent = () => {
 	const { notificationData, setNotificationData } = GetSiteInformation();
@@ -40,7 +41,7 @@ const NotificationComponent = () => {
 				onClose={handleClose}
 				severity={notificationData['type'] || 'success'}
 			>
-				<span>{notificationData['message'] || ''}</span>
+				<Typography sx={{ color: '#F4F6F8' }}>{notificationData['message'] || ''}</Typography>
 			</Alert>
 		</Snackbar>
 	);

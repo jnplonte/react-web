@@ -6,7 +6,4 @@ export const mainStyle = {
 			paddingLeft: theme.spacing(0),
 		},
 	}),
-	content: {
-		height: '100%',
-	},
 };

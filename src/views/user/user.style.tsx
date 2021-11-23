@@ -1,16 +1,14 @@
-import { makeStyles } from '@mui/styles';
-
-export const userStyle = makeStyles((theme: any) => ({
-	root: {
-		padding: theme.spacing(3),
-	},
-	loading: {
+export const userStyle = {
+	root: (theme: any) => ({
+		padding: theme.spacing(2),
+	}),
+	loading: (theme: any) => ({
 		marginTop: theme.spacing(24),
-	},
-	content: {
+	}),
+	content: (theme: any) => ({
 		marginTop: theme.spacing(2),
-	},
-	noUser: {
+	}),
+	noUser: (theme: any) => ({
 		marginTop: theme.spacing(4),
-	},
-}));
+	}),
+};

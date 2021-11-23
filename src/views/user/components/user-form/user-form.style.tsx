@@ -1,8 +1,6 @@
-import { makeStyles } from '@mui/styles';
-
-export const userFormStyles = makeStyles((theme: any) => ({
+export const userFormStyles = {
 	root: {},
-	textField: {
+	textField: (theme: any) => ({
 		marginTop: theme.spacing(2),
-	},
-}));
+	}),
+};

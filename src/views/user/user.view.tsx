@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo, useCallback, Suspense } from 'react';
 
 import { withRouter } from 'react-router-dom';
-import { CircularProgress, Grid, Typography } from '@mui/material';
+import { Box, Grid, CircularProgress, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
 import { userStyle } from './user.style';
@@ -17,7 +17,6 @@ import { IQueryProps } from '../../interfaces/core.interface';
 const helper: Helper = new Helper();
 
 const User = (props: any) => {
-	const classes: any = userStyle();
 	const { t } = useTranslation();
 
 	const { token } = GetAuth();
@@ -68,12 +67,12 @@ const User = (props: any) => {
 	};
 
 	return (
-		<div className={classes.root}>
-			<Suspense fallback={<CircularProgress className={classes.loading} size={60} />}>
+		<Box sx={[userStyle.root]}>
+			<Suspense fallback={<CircularProgress sx={userStyle.loading} size={60} />}>
 				{loading ? (
-					<CircularProgress className={classes.loading} size={60} />
+					<CircularProgress sx={userStyle.loading} size={60} />
 				) : (
-					<div>
+					<Box>
 						<Grid container spacing={1}>
 							<Grid item xs={12} sm={4}>
 								<SearchInput refreshData={handleRefresh} placeholder={t('form.search')} />
@@ -82,7 +81,7 @@ const User = (props: any) => {
 								<UserToolbar refreshData={handleRefresh} />
 							</Grid>
 						</Grid>
-						<div className={classes.content}>
+						<Box sx={[userStyle.content]}>
 							{users.length >= 1 ? (
 								<UserTable
 									data={users}
@@ -91,15 +90,15 @@ const User = (props: any) => {
 									refreshData={handleRefresh}
 								/>
 							) : (
-								<Typography className={classes.noUser} variant="h4">
-									No data available
+								<Typography sx={userStyle.noUser} variant="h4">
+									{t('general.noData')}
 								</Typography>
 							)}
-						</div>
-					</div>
+						</Box>
+					</Box>
 				)}
 			</Suspense>
-		</div>
+		</Box>
 	);
 };
 

@@ -2,8 +2,7 @@ import { MouseEvent, KeyboardEvent, ChangeEvent, useState } from 'react';
 
 import * as PropTypes from 'prop-types';
 
-import clsx from 'clsx';
-import { Paper, Input, Button } from '@mui/material';
+import { Box, Grid, Input, Button } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
 import SearchIcon from '@mui/icons-material/Search';
@@ -17,7 +16,6 @@ const helper: Helper = new Helper();
 const SearchInput = (props: any) => {
 	const { className, placeholder, refreshData } = props;
 
-	const classes: any = searchInputStyles();
 	const { t } = useTranslation();
 
 	const [search, setSearch] = useState('');
@@ -50,19 +48,33 @@ const SearchInput = (props: any) => {
 	};
 
 	return (
-		<Paper className={clsx(classes.root, className)}>
-			<Input
-				onKeyDown={keyPress}
-				className={classes.input}
-				disableUnderline
-				placeholder={placeholder}
-				onChange={handleChange}
-				value={search || ''}
-			/>
-			<Button onClick={handleSearch} variant="contained" color="secondary" startIcon={<SearchIcon />}>
-				{t('user.search')}
-			</Button>
-		</Paper>
+		<Box sx={[searchInputStyles.root]} className={className}>
+			<Grid container spacing={1}>
+				<Grid item xs={8} sm={7}>
+					<Input
+						sx={searchInputStyles.input}
+						fullWidth
+						onKeyDown={keyPress}
+						placeholder={placeholder}
+						onChange={handleChange}
+						value={search || ''}
+						type="text"
+					/>
+				</Grid>
+				<Grid item xs={4} sm={5}>
+					<Button
+						sx={searchInputStyles.button}
+						fullWidth
+						onClick={handleSearch}
+						variant="contained"
+						color="secondary"
+						startIcon={<SearchIcon />}
+					>
+						{t('user.search')}
+					</Button>
+				</Grid>
+			</Grid>
+		</Box>
 	);
 };
 
