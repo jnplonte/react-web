@@ -1,6 +1,7 @@
 import * as PropTypes from 'prop-types';
 
-import { Pie } from 'react-chartjs-2';
+import 'chart.js/auto';
+import { Chart } from 'react-chartjs-2';
 import { Box, Card, CardHeader, CardContent, Divider, CardActions, Button } from '@mui/material';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 
@@ -18,7 +19,7 @@ const PieData = (props: any) => {
 				<Divider />
 				<CardContent>
 					<Box sx={pieStyle.chartContainer}>
-						<Pie data={pieData} options={options} />
+						<Chart type="pie" data={pieData} options={options} />
 					</Box>
 				</CardContent>
 				<Divider />

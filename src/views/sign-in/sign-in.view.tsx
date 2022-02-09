@@ -102,7 +102,7 @@ const SignIn = (props: any) => {
 								label={t('form.password')}
 								name="password"
 								onChange={handleChange}
-								type="text"
+								type="password"
 								value={formState.values['password'] || ''}
 								variant="outlined"
 							/>

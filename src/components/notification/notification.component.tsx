@@ -17,10 +17,7 @@ const NotificationComponent = () => {
 		}
 	}, [notificationData]);
 
-	const handleClose = (event?: SyntheticEvent, reason?: string) => {
-		if (reason === 'clickaway') {
-			return;
-		}
+	const handleClose = () => {
 		setIsOpen(false);
 		setTimeout(() => {
 			setNotificationData({});

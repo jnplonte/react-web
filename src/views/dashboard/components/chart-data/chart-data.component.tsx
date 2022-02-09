@@ -1,6 +1,7 @@
 import * as PropTypes from 'prop-types';
 
-import { Bar } from 'react-chartjs-2';
+import 'chart.js/auto';
+import { Chart } from 'react-chartjs-2';
 import { Box, Card, CardHeader, CardContent, CardActions, Divider, Button } from '@mui/material';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 
@@ -18,7 +19,7 @@ const ChartData = (props: any) => {
 				<Divider />
 				<CardContent>
 					<Box sx={chartStyle.chartContainer}>
-						<Bar data={barData} options={options} />
+						<Chart type="bar" data={barData} options={options} />
 					</Box>
 				</CardContent>
 				<Divider />
